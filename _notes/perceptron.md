@@ -293,17 +293,17 @@ where \\(y_{ij} \in {0,1}\\)
 
 
 So,
-#### $$ y_{ij} = g(h_{ij})=\begin{cases} 1 & \text{if } x_{i1}w_{1j}+x_{i2}w_{2j}+\cdots + x_{im}w_{mj} + (-1)w_{0j} > 0 \\ 0 & \text{if } x_{i1}w_{1j}+x_{i2}w_{2j}+\cdots + x_{im}w_{mj} + (-1)w_{0j} \leq 0 \\ \end{cases} \tag{8} $$
+$$ y_{ij} = g(h_{ij})=\begin{cases} 1 & \text{if } x_{i1}w_{1j}+x_{i2}w_{2j}+\cdots + x_{im}w_{mj} + (-1)w_{0j} > 0 \\ 0 & \text{if } x_{i1}w_{1j}+x_{i2}w_{2j}+\cdots + x_{im}w_{mj} + (-1)w_{0j} \leq 0 \\ \end{cases} \tag{8} $$
 
 if we replace all of it in the matrix,
 
-#### $$Y=g\Bigg( \begin{bmatrix} h_{11} & h_{12} & h_{13} & \cdots & h_{1n}\\ h_{21} & h_{22} & h_{23} & \cdots & h_{2n}\\ h_{31} & h_{32} & h_{33} & \cdots & h_{3n}\\ \vdots \\ h_{k1} & h_{k2} & h_{k3} & \cdots & h_{kn}\\ \end{bmatrix}\Bigg) \tag{9} $$
+$$Y=g\Bigg( \begin{bmatrix} h_{11} & h_{12} & h_{13} & \cdots & h_{1n}\\ h_{21} & h_{22} & h_{23} & \cdots & h_{2n}\\ h_{31} & h_{32} & h_{33} & \cdots & h_{3n}\\ \vdots \\ h_{k1} & h_{k2} & h_{k3} & \cdots & h_{kn}\\ \end{bmatrix}\Bigg) \tag{9} $$
 where \\(h_{ij} =(-1)w_{0j}+\sum_{a=1}^{m}x_{ia}w_{aj}\\)
 
 or if we keep
-#### $$x_{j0} = -1  \  \forall j \in [1,k] \tag{10}$$
+$$x_{j0} = -1  \  \forall j \in [1,k] \tag{10}$$
 
-#### $$ \implies Y=g\Bigg( \begin{bmatrix} \sum_{a=0}^{m}x_{1a}w_{a1} & \sum_{a=0}^{m}x_{1a}w_{a2} & \sum_{a=0}^{m}x_{1a}w_{a3} & \cdots & \sum_{a=0}^{m}x_{1a}w_{an}\\ \sum_{a=0}^{m}x_{2a}w_{a1} & \sum_{a=0}^{m}x_{2a}w_{a2} & \sum_{a=0}^{m}x_{2a}w_{a2} & \cdots & \sum_{a=0}^{m}x_{2a}w_{an}\\ \sum_{a=0}^{m}x_{3a}w_{a1} & \sum_{a=0}^{m}x_{3a}w_{a2} & \sum_{a=0}^{m}x_{3a}w_{a3} & \cdots & \sum_{a=0}^{m}x_{3a}w_{an}\\ \vdots & \vdots & \vdots & \vdots & \vdots\\ \sum_{a=0}^{m}x_{ka}w_{a1} & \sum_{a=0}^{m}x_{ka}w_{a2} & \sum_{a=0}^{m}x_{ka}w_{a3} & \cdots & \sum_{a=0}^{m}x_{ka}w_{an}\\ \end{bmatrix}\Bigg) \tag{11} $$
+$$ \implies Y=g\Bigg( \begin{bmatrix} \sum_{a=0}^{m}x_{1a}w_{a1} & \sum_{a=0}^{m}x_{1a}w_{a2} & \sum_{a=0}^{m}x_{1a}w_{a3} & \cdots & \sum_{a=0}^{m}x_{1a}w_{an}\\ \sum_{a=0}^{m}x_{2a}w_{a1} & \sum_{a=0}^{m}x_{2a}w_{a2} & \sum_{a=0}^{m}x_{2a}w_{a2} & \cdots & \sum_{a=0}^{m}x_{2a}w_{an}\\ \sum_{a=0}^{m}x_{3a}w_{a1} & \sum_{a=0}^{m}x_{3a}w_{a2} & \sum_{a=0}^{m}x_{3a}w_{a3} & \cdots & \sum_{a=0}^{m}x_{3a}w_{an}\\ \vdots & \vdots & \vdots & \vdots & \vdots\\ \sum_{a=0}^{m}x_{ka}w_{a1} & \sum_{a=0}^{m}x_{ka}w_{a2} & \sum_{a=0}^{m}x_{ka}w_{a3} & \cdots & \sum_{a=0}^{m}x_{ka}w_{an}\\ \end{bmatrix}\Bigg) \tag{11} $$
 
 The above matrix looks like a multiplication of two matrices. Let's open it up:
 #### $$Y=g\Bigg( \begin{bmatrix} x_{10} & x_{11} & x_{12} & \cdots & x_{1m}\\ x_{20} & x_{21} & x_{22} & \cdots & x_{2m}\\ x_{30} & x_{31} & x_{32} & \cdots & x_{3m}\\ \vdots \\ x_{k0} & x_{k1} & x_{k2} & \cdots & x_{km}\\ \end{bmatrix}\times \begin{bmatrix} w_{01} & w_{02} & w_{03} & \cdots & w_{0n}\\ w_{11} & w_{12} & x_{13} & \cdots & w_{1n}\\ w_{21} & w_{22} & x_{23} & \cdots & w_{2n}\\ \vdots \\ w_{m1} & w_{m2} & x_{m3} & \cdots & w_{mn}\\ \end{bmatrix} \Bigg) \tag{12} $$
