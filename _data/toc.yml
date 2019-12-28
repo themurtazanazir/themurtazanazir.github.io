@@ -1,0 +1,40 @@
+- title: Notes
+  url: notes
+  links:
+    - title: "Maths Behind Perceptron"
+      url: "notes/perceptron"
+      children:
+        - title: "Hebb's Rule"
+          url: "notes/perceptron/#hebbs-rule"
+        - title: "McCulloch and Pitts' Neuron"
+          url: "notes/perceptron/#mcculloch-and-pitts-neurons"
+        - title: "The Perceptron"
+          url: "notes/perceptron/#the-perceptron"
+        - title: "Implementation"
+          url: "notes/perceptron/#2-implementation"
+        - title: "Speeding Up Computations"
+          url: "notes/perceptron/#24-speeding-up-the-code"
+        - title: "Visualization"
+          url: "notes/perceptron#3-visualization"
+        - title: "Linear Separability"
+          url: "#4-linear-separabilitys"
+    # - title: "Getting Started"
+    #   url: "notes/getting-started"
+    #   children:
+    #     - title: Features
+    #       url: "notes/getting-started#getting-started"
+    #     - title: Development
+    #       url: "notes/getting-started#development"
+    #     - title: Customization
+    #       url: "notes/getting-started#customization"
+    - title: "Extras"
+      url: "notes/extras"
+      children:
+        # - title: Quizzes
+        #   url: "notes/extras/example-quiz"
+        - title: Tags Page
+          url: "tags"
+    - title: "About"
+      url: "about"
+    # - title: "News"
+    #   url: "news"
