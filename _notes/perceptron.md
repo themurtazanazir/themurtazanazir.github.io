@@ -10,7 +10,8 @@ tags:
  
 # Mathematics Behind Perceptron
 ## Introduction
-This is the introduction to this notebook. 
+This is actually a notebook made by me during the internet shutdown in Kashmir (since 5th Aug 2019). This notebook, and others, are heavily inspired by <a href="https://www.amazon.in/dp/1466583282/ref=cm_sw_r_cp_apa_i_TAKcEbNSD9Y57" target="_blank"> Machine Learning: An Algorithmic Perspective </a> . This notebook is essentially the notes of chapter 3 of this book. I highly recommend this book for the basic understanding of Machine Learning Algorithms. This post covers mathematics, implementation of the basic perceptron algorithm. I would suggest to practice on the code for perceptron. Although stay away from the visualization code, if that seems too complex.
+
 # Hebb's Rule
 
 It states that *"the changes in the strength of synaptic connections are proportional to the correlation in the firing of two connecting neurons"*
@@ -46,7 +47,7 @@ $$\sigma=g(h)=\begin{cases} 1&\text{if }h>\theta\\ 0&\text{if }h\leq\theta\\ \en
 
 ## 1. Introduction
 
-The perceptron is nothing more than a collection of [McCulloch and Pitts neurons](#McCulloch-and-Pitts-Neurons) together with a set of inputs and some weights to fasten the inputs to the neurons. The neurons in the Perceptron are completely independent of each other.
+The perceptron is nothing more than a collection of [McCulloch and Pitts neurons](#mcculloch-and-pitts-neurons) together with a set of inputs and some weights to fasten the inputs to the neurons. The neurons in the Perceptron are completely independent of each other.
 
 ![](perceptron_network.png)
 Figure 1: The Perceptron Network(the gray nodes are inputs, not neurons)
@@ -212,7 +213,7 @@ So the 4th feature of 6th training example will look like \\(x_{64}\\).
 
 So our input matrix \\(X\\) should look like:
  
-$$X= \begin{bmatrix} x_{11} & x_{12} & x_{13} & \cdots & x_{1m} \\ x_{21} & x_{22} & x_{23} & \cdots & x_{2m} \\ x_{31} & x_{32} & x_{33} & \cdots & x_{3m} \\ \vdots \\ x_{k1} & x_{k2} & x_{k3} & \cdots & x_{km} \\ \end{bmatrix} \tag{5} $$
+$$X= \begin{bmatrix} x_{11} & x_{12} & x_{13} & \cdots & x_{1m} \\ x_{21} & x_{22} & x_{23} & \cdots & x_{2m} \\ x_{31} & x_{32} & x_{33} & \cdots & x_{3m} \\ \vdots & \vdots & \vdots & & \vdots \\ x_{k1} & x_{k2} & x_{k3} & \cdots & x_{km} \\ \end{bmatrix} \tag{5} $$
 
 This matrix will be \\(k \times m\\).
 
@@ -255,7 +256,7 @@ now our input is ready, let's figure out how to store the target values. Each in
 So with \\(k\\) examples and \\(n\\) output neurons, the target matrix should be \\([t_{ij}]\\) which is the target for \\(i^{th}\\) example and \\(j^{th}\\) neuron.
 
 So,
-$$ T=\begin{bmatrix} t_{11} & t_{12} & t_{13} & \cdots & t_{1n}\\ t_{21} & t_{22} & t_{23} & \cdots & t_{2n}\\ t_{31} & t_{32} & t_{33} & \cdots & t_{3n}\\ \vdots \\ t_{k1} & t_{k2} & t_{k3} & \cdots & t_{kn}\\ \end{bmatrix}\\ \tag{6}$$
+$$ T=\begin{bmatrix} t_{11} & t_{12} & t_{13} & \cdots & t_{1n}\\ t_{21} & t_{22} & t_{23} & \cdots & t_{2n}\\ t_{31} & t_{32} & t_{33} & \cdots & t_{3n}\\ \vdots & \vdots & \vdots & & \vdots \\ t_{k1} & t_{k2} & t_{k3} & \cdots & t_{kn}\\ \end{bmatrix}\\ \tag{6}$$
 where \\(t_{ij} \in \{0,1\}\\) 
 
 For binary outputs, like in our example, we can just use one output neuron, which will fire for one output and not fire for other which means \\(n=1\\).
@@ -859,6 +860,8 @@ fig.show()
 ```
 {% include perceptron/plot_4.html %}
 
+As you can see, the decision boundary was initially in the right spot but with reversed thresholds, and with changing epochs it flipped.
+
 
 ## 4. Linear Separability
 
@@ -874,11 +877,11 @@ Figure 3: Multiclass Classification by a perceptron.
 
 Now it is evident that the data should be linearly separable among each class for a perceptron to work properly.
 
-<!-- ### 4.2 The Perceptron Convergence Theorem
+### 4.2 The Perceptron Convergence Theorem
 
 The Perceptron Convergence theorem proved by Rosenblatt in 1962, states that:
 
-**_"given a linearly separable data, the perceptron will converge to a solution within \\(1/ \gamma^2\\) iterations, where \\(\gamma\\) is the distance between the separating hyperplane and the closest datapoint to it."**_
+**_"given a linearly separable data, the perceptron will converge to a solution within \\(1/ \gamma^2\\) iterations, where \\(\gamma\\) is the distance between the separating hyperplane and the closest datapoint to it."_**
 
 However there are some assumptions about it:
 1. The data should be linearly separable.
@@ -887,7 +890,9 @@ However there are some assumptions about it:
 
 The point being, if the data is linearly separable, irrespective of the constant \\( \mid  \mid x \mid  \mid \\) is bound by or the value of learning rate, the perceptron will converge to the solution in finite iterations(i.e, it will find the solution).
 
-Now to the proof,
+You can see the proof of this theorem and visualize it in a better way [here](/notes/perceptron-convergence-theorem)
+
+<!-- Now to the proof,
 
 We know that the data is linearly separable, which means there exists a set of weights which represent the the seperating hyperplane. Let's say these weights are \\(w^*\\).
 
