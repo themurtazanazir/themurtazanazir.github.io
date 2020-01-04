@@ -892,7 +892,7 @@ However there are some assumptions about it:
 
 The point being, if the data is linearly separable, irrespective of the constant \\( \mid  \mid x \mid  \mid \\) is bound by or the value of learning rate, the perceptron will converge to the solution in finite iterations(i.e, it will find the solution).
 
-You can see the proof of this theorem and visualize it in a better way [here](/notes/perceptron-convergence-theorem)
+You can see the proof of this theorem [here](/notes/perceptron-convergence-theorem)
 
 <!-- Now to the proof,
 

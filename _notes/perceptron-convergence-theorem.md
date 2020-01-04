@@ -299,9 +299,7 @@ So,
 
 $$ \mathbf{w^*} \cdot \mathbf{w} = \lVert \mathbf{w^*}\rVert \   \lVert \mathbf{w}\rVert \cos\theta \tag{12}$$
 
-now if two vectors are parallel the angle is \\(0\\), and \\(\cos{0}=1\\) and so the inner product is maximum. **If we show that after each update \\(\mathbf{w^\*} \cdot \mathbf{w}\\) increases, we have shown that the perceptron converges.**
-
-However we need to be a bit more careful as \\(\mathbf{w^\*} \cdot \mathbf{w}\\) can also increase if \\(\lVert \mathbf{w} \rVert\\) increases, we also need to check the length of \\(\mathbf{w}\\) doesn't increase too much.
+now if two vectors are parallel the angle is \\(0\\), and \\(\cos{0}=1\\) and so the inner product is maximum. **If we show that after each update \\(\mathbf{w^\*} \cdot \mathbf{w}\\) increases, we have shown that the perceptron converges.** However we need to be a bit more careful as \\(\mathbf{w^\*} \cdot \mathbf{w}\\) can also increase if \\(\lVert \mathbf{w} \rVert\\) increases, we also need to check the length of \\(\mathbf{w}\\) doesn't increase too much.
 
 Keeping all that in mind, let's move on.
 
@@ -393,7 +391,7 @@ Here we have put a lower limit to \\(\lVert \mathbf{w^{(i)}}\rVert\\). Now we ha
 For that we will use the Equation 15 and square the norm on both sides and use the Vector addition rules:
 $$ \begin{align} \lVert \mathbf{w^{(i)}}\rVert ^2 &= \lVert \mathbf{w^{(i-1)}} + (t-y)\mathbf{x} \rVert ^2\\ &= \lVert \mathbf{w^{(i-1)}}\rVert ^2 + (t-y)^2 \lVert \mathbf{x}\rVert ^2 + 2(t-y)\mathbf{w^{(i-1)}} \cdot \mathbf{x}  \tag{24} \end{align} $$
 
-Now using Perceptron rule, assumption 2 and Equation 13 repectively, we have
+Now using Perceptron rule, assumption 2(i.e, \\( \lVert \mathbf{x} \rVert \\) is bound by some constant \\( R \\)) and Equation 13 repectively, we have
 
 $$\begin{align}(t-y)^2 = 1\\  \lVert \mathbf{x} \rVert \leq R\\  (t-y)(\mathbf{w^{(i-1)}} \cdot \mathbf{x}) < 0 \end{align} \tag{25}$$
 
