@@ -4,10 +4,6 @@
     - title: "Maths Behind Perceptron"
       url: "notes/perceptron"
       children:
-        - title: "Hebb's Rule"
-          url: "notes/perceptron#hebbs-rule"
-        - title: "McCulloch and Pitts' Neuron"
-          url: "notes/perceptron#mcculloch-and-pitts-neurons"
         - title: "The Perceptron"
           url: "notes/perceptron#the-perceptron"
         - title: "Implementation"
@@ -17,16 +13,16 @@
         - title: "Visualization"
           url: "notes/perceptron#3-visualization"
         - title: "Linear Separability"
-          url: "notes/perceptron#4-linear-separabilitys"
-    # - title: "Getting Started"
-    #   url: "notes/getting-started"
-    #   children:
-    #     - title: Features
-    #       url: "notes/getting-started#getting-started"
-    #     - title: Development
-    #       url: "notes/getting-started#development"
-    #     - title: Customization
-    #       url: "notes/getting-started#customization"
+          url: "notes/perceptron#4-linear-separability"
+    - title: "Perceptron Convergence Theorem"
+      url: "notes/perceptron-convergence-theorem"
+      children:
+        - title: "Planes"
+          url: "notes/perceptron-convergence-theorem#planes"
+        - title: "Planes with Perceptron"
+          url: "notes/perceptron-convergence-theorem#planes-with-perceptron"
+        - title: "The Proof"
+          url: "notes/perceptron-convergence-theorem#the-proof"
     - title: "Extras"
       url: "notes/extras"
       children:

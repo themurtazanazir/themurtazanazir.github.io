@@ -28,7 +28,9 @@ It is modelled as:
 3. **an activation function**(usually a threshold function), that decides whether the neuron fires(spikes!) for the current inputs.
 
 So,
+
  $$h=\sum_{i=1}^m{w_ix_i}\tag{1}$$
+ 
 where \\(w_i\\) is the weight at the synapse for \\(i^{th}\\) input and \\(x_i\\) is the input from \\(i^{th}\\) neuron into synapse. 
 
 Now to decide if the neuron fires or not, we need a threshold (\\(\theta\\)). If the weighted sum of the inputs(\\(h\\)) is greater than the threshold, the neuron fires(i.e output is 1).
