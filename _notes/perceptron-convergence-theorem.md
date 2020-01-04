@@ -60,7 +60,7 @@ In this form, we need a unit vector perpendicular to plane and the distance of t
 
 ### Planes with Perceptron
 
-The Perceptron prediction rule is:
+The Perceptron prediction rule is as follows:
 
 $$\sigma=g(h)=\begin{cases}1&\text{if }h>0 \\ 0&\text{if }h\leq0 \\ \end{cases}\tag{6}$$
 
