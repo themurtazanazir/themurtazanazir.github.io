@@ -291,17 +291,17 @@ However there are some assumptions about it:
 
 Now to the proof,
 
-We know that the data is linearly separable, which means there exists a set of weights which represent the the seperating hyperplane. Let's say these weights are \\(\mathbf{w}^*\\).
+We know that the data is linearly separable, which means there exists a set of weights which represent the the seperating hyperplane. Let's say these weights are \\(\mathbf{w^\*}\\).
 
-Our learning algorithm tries to find some vector \\(\mathbf{w}\\) that is parallel to \\(\mathbf{w^*}\\). To see if the vectors are parallel we use the inner product (also called the dot product) \\(\mathbf{w^*} \cdot \mathbf{w}\\).
+Our learning algorithm tries to find some vector \\( \mathbf{w} \\) that is parallel to \\( \mathbf{w^\*} \\). To see if the vectors are parallel we use the inner product (also called the dot product) \\( \mathbf{w^\*} \cdot \mathbf{w} \\).
 
 So,
 
 $$ \mathbf{w^*} \cdot \mathbf{w} = \lVert \mathbf{w^*}\rVert \   \lVert \mathbf{w}\rVert \cos\theta \tag{12}$$
 
-now if two vectors are parallel the angle is \\(0\\), and \\(\cos{0}=1\\) and so the inner product is maximum. **If we show that after each update \\(\mathbf{w^*} \cdot \mathbf{w}\\) increases, we have shown that the perceptron converges.**
+now if two vectors are parallel the angle is \\(0\\), and \\(\cos{0}=1\\) and so the inner product is maximum. **If we show that after each update \\(\mathbf{w^\*} \cdot \mathbf{w}\\) increases, we have shown that the perceptron converges.**
 
-However we need to be a bit more careful as \\(\mathbf{w^*} \cdot \mathbf{w}\\) can also increase if \\(\lVert \mathbf{w} \rVert\\) increases, we also need to check the length of \\(\mathbf{w}\\) doesn't increase too much.
+However we need to be a bit more careful as \\(\mathbf{w^\*} \cdot \mathbf{w}\\) can also increase if \\(\lVert \mathbf{w} \rVert\\) increases, we also need to check the length of \\(\mathbf{w}\\) doesn't increase too much.
 
 Keeping all that in mind, let's move on.
 
@@ -339,21 +339,21 @@ Coming back to above equation, our proof assumes the learning rate of 1 and let'
 
 $$\implies \mathbf{w^{(i)}} = \mathbf{w^{(i-1)}} + (t-y)\mathbf{x} \tag{15}$$
 
-Now to show that \\(w^* \cdot w\\) increases with iterations, using Equation 15,
+Now to show that \\(w^\* \cdot w\\) increases with iterations, using Equation 15,
 
 $$ \begin{align} \mathbf{w^*} \cdot \mathbf{w^{(i)}} &= \mathbf{w^*} \cdot (\mathbf{w^{(i-1)}} + (t-y)\mathbf{x})\\ &= \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + \mathbf{w^*} \cdot (t-y)\mathbf{x}\\ &= \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + (t-y)(\mathbf{w^*} \cdot \mathbf{x})\\ \end{align} \tag{16} $$
 
-This is where we take a break  and think what \\(\mathbf{w^*} \cdot \mathbf{x}\\) represents.
+This is where we take a break  and think what \\(\mathbf{w^\*} \cdot \mathbf{x}\\) represents.
 
 If you have any idea about the signed distance of a point \\(\mathbf{x}\\) from a hyper-plane(which passes through origin) with coefficient vector \\(\mathbf{a}\\) is:
 
 $$\begin{align} D = \frac{\mathbf{a} \cdot \mathbf{x}}{\lVert \mathbf{a} \rVert} \\ \implies D \lVert \mathbf{a} \rVert = \mathbf{a} \cdot \mathbf{x} \end{align} \tag{17}$$
 
-Similarly \\(\mathbf{w^*} \cdot \mathbf{x}\\) represents \\(\lVert \mathbf{w^*} \rVert\\) times the *signed* distance between the point \\(\mathbf{x}\\) and the plane represented by our vector \\(\mathbf{w^*}\\) (which is the correct decision boundary)
+Similarly \\(\mathbf{w^\*} \cdot \mathbf{x}\\) represents \\(\lVert \mathbf{w^\*} \rVert\\) times the *signed* distance between the point \\(\mathbf{x}\\) and the plane represented by our vector \\(\mathbf{w^\*}\\) (which is the correct decision boundary)
 
 By signed distance, I mean the sign regarding to what side of the plane the data point lies. Now if we have made an error and misclassified the point, then \\((t-y)\\) will be the opposite the sign of the sign of the distance given by the correct boundary. Give it a little thought, work out on different cases, you'll get it.
 
-So \\((t-y)(\mathbf{w^*} \cdot \mathbf{x})\\) represents \\(\lVert \mathbf{w^*} \rVert\\) times the *magnitude* of distance between the point \\(\mathbf{x}\\) and the plane represented by our vector \\(\mathbf{w^*}\\) (which is the correct decision boundary). And the smallest distance between the correct decision boundary and any datapoint is \\(\gamma\\).
+So \\((t-y)(\mathbf{w^\*} \cdot \mathbf{x})\\) represents \\(\lVert \mathbf{w^\*} \rVert\\) times the *magnitude* of distance between the point \\(\mathbf{x}\\) and the plane represented by our vector \\(\mathbf{w^\*}\\) (which is the correct decision boundary). And the smallest distance between the correct decision boundary and any datapoint is \\(\gamma\\).
 
 So,
 
@@ -363,13 +363,13 @@ Using the above equation in Equation 16,
 
 $$ \mathbf{w^*} \cdot \mathbf{w^{(i)}} \geq \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + \gamma \lVert \mathbf{w^*} \rVert \tag{19} $$
 
-where \\(\gamma\\) is the minimum distance between the optimal hyperplane defined by \\(\mathbf{w^*}\\) and the closest datapoint to it.
+where \\(\gamma\\) is the minimum distance between the optimal hyperplane defined by \\(\mathbf{w^\*}\\) and the closest datapoint to it.
 
-Now according to above equation, \\(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\\) always increases by at least \\(\gamma\\) and we initialize the weights to be small random numbers(positive and negative), so after \\(i\\) iterations
+Now according to above equation, \\(\mathbf{w^\*} \cdot \mathbf{w^{(i)}}\\) always increases by at least \\(\gamma\\) and we initialize the weights to be small random numbers(positive and negative), so after \\(i\\) iterations
 
 $$\mathbf{w^*} \cdot \mathbf{w^{(i)}} \geq i\gamma \lVert \mathbf{w^*} \rVert \tag{20}$$
 
-So we have proved that \\(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\\) increases as iterations increase.
+So we have proved that \\(\mathbf{w^\*} \cdot \mathbf{w^{(i)}}\\) increases as iterations increase.
 
 Since the R.H.S of the above equation is positive,
 
@@ -384,7 +384,7 @@ Using Equations 21 and 22,
 
 $$\begin{align} & i\gamma \lVert \mathbf{w^*} \rVert \leq \lvert \mathbf{w^*} \cdot \mathbf{w^{(i)}} \rvert \leq \lVert \mathbf{w^*} \rVert \ \lVert \mathbf{w^{(i)}} \rVert \\ \implies & i\gamma \lVert \mathbf{w^*} \rVert \leq \lVert \mathbf{w^*} \rVert \ \lVert \mathbf{w^{(i)}} \rVert \end{align} \tag{22}$$
 
-\\(\lVert \mathbf{w^*} \rVert\\) is positive and can be cancelled without affecting the inequality.
+\\(\lVert \mathbf{w^\*} \rVert\\) is positive and can be cancelled without affecting the inequality.
 
 $$ i\gamma \leq \lVert \mathbf{w^{(i)}} \rVert \tag{23} $$
 
@@ -415,7 +415,7 @@ $$ \lVert \mathbf{w^{(i)}}\rVert ^2 \leq iR \tag{27} $$
 
 Here we have put an upper limit on \\(\lVert \mathbf{w^{(i)}}\rVert\\).
 
-We have shown that \\(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\\) increases by atleast \\(i\gamma \lVert \mathbf{w^*}\rVert\\) and \\(\lVert \mathbf{w^{(i)}}\rVert\\) does not increase more than \\(iR\\). Which means the angle between the vectors is decreasing and so the predicting decision boundary is getting close to the actual decision boundary, and after certain weight updates, the algorithm will converge to the actual boundary.
+We have shown that \\(\mathbf{w^\*} \cdot \mathbf{w^{(i)}}\\) increases by atleast \\(i\gamma \lVert \mathbf{w^\*}\rVert\\) and \\(\lVert \mathbf{w^{(i)}}\rVert\\) does not increase more than \\(iR\\). Which means the angle between the vectors is decreasing and so the predicting decision boundary is getting close to the actual decision boundary, and after certain weight updates, the algorithm will converge to the actual boundary.
 
 Using Equation 23 and 27,
 
