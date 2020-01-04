@@ -60,13 +60,15 @@ In this form, we need a unit vector perpendicular to plane and the distance of t
 
 ### Planes with Perceptron
 
+The Perceptron prediction rule is:
+
 $$\sigma=g(h)=\begin{cases}1&\text{if }h>0 \\ 0&\text{if }h\leq0 \\ \end{cases}\tag{6}$$
 
 and,
 
 $$h=\sum_{i=0}^m{w_ix_i}\tag{7}$$
 
-where \\(w_0\\) is the threshold of the neuron and \\(x_0\\) can be any constant (we use -1). 
+where \\(w_0\\) is the threshold of the neuron and \\(x_0\\) can be any constant, except Zero (we use -1). 
 
 The decison boundary is formed, when \\(h=0\\), so the equation of the decision hyper plane is:
 
