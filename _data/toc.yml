@@ -10,6 +10,8 @@
           url : "notes/multi-layer-perceptron#232-the-backpropagation-algorithm"
         - title: "Speeding Up Code"
           url: "notes/multi-layer-perceptron#25-speeding-up-the-code"
+        - title: "Network Improvements"
+          url: "notes/multi-layer-perceptron#3-improvements-for-the-network"
     - title: "Maths Behind Perceptron"
       url: "notes/perceptron"
       children:
