@@ -1,6 +1,6 @@
 ---
 title: The Multi Layer Perceptron
-description: A complete description of mathematics that go in making a perceptron work.
+description: A complete description of mathematics that go in making a multi layered perceptron work.
 tags: 
  - neural networks
  - perceptron
@@ -2008,7 +2008,7 @@ This technique is called **early stopping**.
 
 Let's see some examples how MLP can be used. 
 
-### 3.6.1 A Regression Problem
+### 4.1 A Regression Problem
 
 Let's try fitting a sine wave with a small noise as well.
 
@@ -2397,7 +2397,7 @@ class MLP:
 
 Let's save this model in our <a href="/downloads/utils.py">utils.py</a> file.
 
-### 3.6.2 A Classification Problem
+### 4.2 A Classification Problem
 
 There are multiple ways to approach a classification problem. The inputs are the features normalized and there are a couple of choices for outputs.
 
@@ -2541,7 +2541,7 @@ m.confmat(test,testt)
 
 The confusion matrices reveal great results, on test set as well. You may even choose to change the activation of output nodes. (try softmax!)
 
-### 3.6.3 Time Series Problem
+### 4.3 Time Series Problem
 
 Time Series data has a few problems:
 
