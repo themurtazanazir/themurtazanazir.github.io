@@ -1,6 +1,17 @@
 - title: Notes
   url: notes
   links:
+    - title: "The Multi-Layer Perceptron"
+      url: "notes/multi-layer-perceptron"
+      children:
+        - title: "Training the MLP"
+          url: "notes/multi-layer-perceptron#2-training-the-mlp"
+        - title: "The Backpropagation Algorithm"
+          url : "notes/multi-layer-perceptron#232-the-backpropagation-algorithm"
+        - title: "Speeding Up Code"
+          url: "notes/multi-layer-perceptron#25-speeding-up-the-code"
+        - title: "Network Improvements"
+          url: "notes/multi-layer-perceptron#3-improvements-for-the-network"
     - title: "Maths Behind Perceptron"
       url: "notes/perceptron"
       children:
@@ -10,10 +21,6 @@
           url: "notes/perceptron#2-implementation"
         - title: "Speeding Up Computations"
           url: "notes/perceptron#24-speeding-up-the-code"
-        - title: "Visualization"
-          url: "notes/perceptron#3-visualization"
-        - title: "Linear Separability"
-          url: "notes/perceptron#4-linear-separability"
     - title: "Perceptron Convergence Theorem"
       url: "notes/perceptron-convergence-theorem"
       children:
