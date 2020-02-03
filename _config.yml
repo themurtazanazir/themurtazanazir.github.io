@@ -51,6 +51,8 @@ color: "#30638e"
 
 # Build settings
 # markdown: kramdown
+# kramdown:
+  #  math_engine: mathjax
 # mathjax: true
 use_math: true
 
@@ -64,7 +66,7 @@ themeColor: red # purple, green, blue, orange, purple, grey
 fixedNav: 'true' # true or false
 
 permalink: /:year/:title/
-markdown: kramdown
+# markdown: kramdown
 exclude: [_site, CHANGELOG.md, LICENSE, README.md, vendor]
 
 # Collections

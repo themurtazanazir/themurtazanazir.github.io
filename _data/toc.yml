@@ -1,6 +1,15 @@
 - title: Notes
   url: notes
   links:
+    - title: "Vectors, Linear Combinations, Eliminations"
+      url: "notes/vectors-linear-combinations"
+      children:
+        - title: "Vectors"
+          url : "notes/vectors-linear-combinations#vectors"
+        - title: "Linear Equations"
+          url: "notes/vectors-linear-combinations#linear-equations"
+        - title: "Solving Linear Equations"
+          url: "notes/vectors-linear-combinations#solving-linear-equations"
     - title: "The Multi-Layer Perceptron"
       url: "notes/multi-layer-perceptron"
       children:

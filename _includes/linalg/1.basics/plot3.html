@@ -1,0 +1,9 @@
+<script>
+  var plot_json = {"layout":{"xaxis":{"scaleanchor":"y","scaleratio":1},"margin":{"l":50,"b":50,"r":50,"t":60},"width":800},"data":[{"mode":"lines","y":[0,2],"type":"scatter","name":"vector 2","x":[0,-1]},{"mode":"lines","y":[0,3],"type":"scatter","name":"vector 1","x":[0,4]},{"mode":"lines","line":{"color":"red"},"y":[0,4],"type":"scatter","name":"b","x":[0,9]},{"mode":"lines","line":{"color":"green"},"y":[0,6],"type":"scatter","name":"2 x vector 1","opacity":0.5,"x":[0,8]},{"mode":"lines","line":{"color":"blue"},"y":[0,-2],"type":"scatter","name":"-1 x vector 2","x":[0,1]},{"mode":"lines","line":{"color":"blue","dash":"dash"},"y":[6,4],"type":"scatter","name":"-1 x vector 2","x":[8,9]},{"mode":"lines","line":{"color":"green","dash":"dash"},"y":[-2,4],"type":"scatter","name":"2 x vector 1","x":[1,9]}]};
+  var data = plot_json.data;
+  var layout = plot_json.layout;
+  Plotly.newPlot("plot3", data, layout);
+  window.onresize = function() {
+    Plotly.Plots.resize("plot3");
+  };
+</script>
