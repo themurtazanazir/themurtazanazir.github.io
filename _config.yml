@@ -50,8 +50,9 @@ color: "#30638e"
 # color: "#8c1515" # primary color for header, buttons
 
 # Build settings
-markdown: kramdown
-mathjax: true
+# markdown: kramdown
+# mathjax: true
+use_math: true
 
 # If you add tags to pages, define this variable to link them to some external search
 # If you want to link to tags locally on the site, leave this commented out
