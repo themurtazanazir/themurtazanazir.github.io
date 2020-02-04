@@ -180,9 +180,9 @@ dot(v1,v2)
 
 It can be also calculated as:
 
-$$ \mathbf{v_1} \cdot \mathbf{v2} = \mathbf{v_1}^T \mathbf{v2}$$  
+$$ \mathbf{v_1} \cdot \mathbf{v_2} = \mathbf{v_1}^T \mathbf{v_2}$$  
 
-$$\mathbf{v_1}^T \mathbf{v2}$$ is also called the **inner product** and the $$\mathbf{v_1} \mathbf{v2}^T$$ is called the **outer product**. The outer product produces a matrix.
+$$\mathbf{v_1}^T \mathbf{v_2}$$ is also called the **inner product** and the $$\mathbf{v_1} \mathbf{v2}^T$$ is called the **outer product**. The outer product produces a matrix.
 
 
 
