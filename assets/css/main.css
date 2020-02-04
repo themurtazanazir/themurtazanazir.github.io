@@ -122,7 +122,21 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+    --primary-color: #302AE6;
+    --secondary-color: #536390;
+    --font-color: #424242;
+    --bg-color: #fff;
+    --heading-color: #30638e;
 }
+
+[data-theme="dark"] {
+    --primary-color: #9A97F3;
+    --secondary-color: #818cab;
+    --font-color: #e1e1ff;
+    --bg-color: #1A1A1D;
+    --heading-color: #000;
+}
+
 
 *,
 *::before,
@@ -164,9 +178,9 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #222;
+    color: var(--font-color);
     text-align: left;
-    background-color: #fff
+    background-color: var(--bg-color);
 }
 
 [tabindex="-1"]:focus {
@@ -269,7 +283,7 @@ sup {
 }
 
 a {
-    color: #3176d9;
+    color: var(--primary-color);
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects
@@ -17902,7 +17916,7 @@ a.text-dark:focus {
 }
 
 .td-navbar-cover {
-    background: #30638e
+    background: var(--heading-color);
 }
 
 @media(min-width:768px) {
@@ -17919,12 +17933,12 @@ a.text-dark:focus {
 }
 
 .navbar-bg-onscroll {
-    background: #30638e!important;
+    background: var(--heading-color);
     opacity: inherit
 }
 
 .td-navbar {
-    background: #30638e;
+    background: var(--heading-color);
     min-height: 4rem;
     margin: 0;
     z-index: 32
@@ -18086,7 +18100,7 @@ html body .md-typeset .headerlink {
 }
 
 .td-sidebar-nav__section-title a {
-    color: #222
+    color: var(--font-color)
 }
 
 .td-sidebar-nav .td-sidebar-link {
@@ -18095,7 +18109,7 @@ html body .md-typeset .headerlink {
 }
 
 .td-sidebar-nav .td-sidebar-link__page {
-    color: #495057;
+    color: var(--primary-color);
     font-weight: 300
 }
 
@@ -18596,4 +18610,64 @@ footer {
         height: 5rem;
         visibility: hidden
     }
+}
+
+
+
+
+/* Toogle of dark mode switch */
+/*Simple css to style it like a toggle switch*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+
+}
+.theme-switch {
+  display: inline-block;
+  height: 17px;
+  position: relative;
+  width: 30px;
+  padding-top: 10px;
+}
+
+.theme-switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 2px;
+  content: "";
+  height: 13px;
+  left: 2px;
+  position: absolute;
+  transition: .4s;
+  width: 13px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(13px);
+}
+
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

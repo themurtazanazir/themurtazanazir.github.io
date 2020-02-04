@@ -66,15 +66,29 @@ config=TeX-AMS-MML_HTMLorMML"></script>
 			</li>
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
                             <a class="nav-link" href="/about" ><span>About</span></a>
-			</li>
+      </li>
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
                             <a class="nav-link" href="/notes" ><span>Notes</span></a>
-			</li>
+      </li>
+      
+      <li class="nav-item mr-4 mb-2 mb-lg-0">
+        <div class="theme-switch-wrapper nav-link">
+             <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+        <span style="padding-left: 10px;">Dark Mode</span>
+        </div>
+      </li>
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
  <input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
         </div>
+
+        
+
+  
 </nav>
 </header>
 
@@ -1109,6 +1123,35 @@ $('h1').first().append('<div><span style="font-size:12px" class="badge badge-pri
       </div>
     </div>
   </div>
+
+
+<script>
+
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+    }
+}
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    else {        document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+    }    
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
+
+
+</script>
 
 </footer>
 
