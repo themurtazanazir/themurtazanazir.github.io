@@ -5,7 +5,8 @@ tags:
  - vectors
  - elimination matrix
  - permutation matrix
- - linear combinations 
+ - linear combinations
+hasplot: true
 ---
 
 

@@ -9,6 +9,7 @@ tags:
  - backpropagation
  - momentum
  - multiple layers
+hasplot: true
 ---
 # The Multi Layer Perceptron
 

@@ -8,6 +8,7 @@ tags:
  - feedforward networks
  - proof
  - mathematics
+hasplot: true
 ---
 
 # Perceptron Convergence Theorem
