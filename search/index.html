@@ -40,6 +40,8 @@
 
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/palette.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -52,6 +54,9 @@ config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- for plotly graphs -->
 
 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
 </head>
 
   
@@ -113,6 +118,33 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+    }
+}
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    else {        document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+    }    
+}
+
+toggleSwitch.addEventListener('change', switchTheme, false);
+
+
+</script>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
@@ -131,28 +163,28 @@ $(document).ready(function() {
     <li class="collapse show" id="notes">
         <ul class="td-sidebar-nav__section pr-md-3">
           <li class="td-sidebar-nav__section-title">
-            <a href="/notes/vectors-linear-combinations" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Vectors, Linear Combinations, Eliminations</a>
+            <a href="/notes/linear_algebra/vectors-linear-combinations" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Vectors, Linear Combinations, Eliminations</a>
           </li>
           <ul><li class="collapse show" id="">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-vectors" href="/notes/vectors-linear-combinations#vectors">Vectors</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-linear-equations" href="/notes/vectors-linear-combinations#linear-equations">Linear Equations</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-solving-linear-equations" href="/notes/vectors-linear-combinations#solving-linear-equations">Solving Linear Equations</a>
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-vectors" href="/notes/linear_algebra/vectors-linear-combinations#vectors">Vectors</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-linear-equations" href="/notes/linear_algebra/vectors-linear-combinations#linear-equations">Linear Equations</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-vectors-linear-combinations-eliminations-solving-linear-equations" href="/notes/linear_algebra/vectors-linear-combinations#solving-linear-equations">Solving Linear Equations</a>
               </li></ul>
           <li class="td-sidebar-nav__section-title">
-            <a href="/notes/multi-layer-perceptron" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">The Multi-Layer Perceptron</a>
+            <a href="/notes/neural_networks/multi-layer-perceptron" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">The Multi-Layer Perceptron</a>
           </li>
           <ul><li class="collapse show" id="">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-training-the-mlp" href="/notes/multi-layer-perceptron#2-training-the-mlp">Training the MLP</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-the-backpropagation-algorithm" href="/notes/multi-layer-perceptron#232-the-backpropagation-algorithm">The Backpropagation Algorithm</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-speeding-up-code" href="/notes/multi-layer-perceptron#25-speeding-up-the-code">Speeding Up Code</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-network-improvements" href="/notes/multi-layer-perceptron#3-improvements-for-the-network">Network Improvements</a>
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-training-the-mlp" href="/notes/neural_networks/multi-layer-perceptron#2-training-the-mlp">Training the MLP</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-the-backpropagation-algorithm" href="/notes/neural_networks/multi-layer-perceptron#232-the-backpropagation-algorithm">The Backpropagation Algorithm</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-speeding-up-code" href="/notes/neural_networks/multi-layer-perceptron#25-speeding-up-the-code">Speeding Up Code</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-the-multi-layer-perceptron-network-improvements" href="/notes/neural_networks/multi-layer-perceptron#3-improvements-for-the-network">Network Improvements</a>
               </li></ul>
           <li class="td-sidebar-nav__section-title">
-            <a href="/notes/perceptron" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Maths Behind Perceptron</a>
+            <a href="/notes/neural_networks/perceptron" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Maths Behind Perceptron</a>
           </li>
           <ul><li class="collapse show" id="">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-the-perceptron" href="/notes/perceptron#the-perceptron">The Perceptron</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-implementation" href="/notes/perceptron#2-implementation">Implementation</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-speeding-up-computations" href="/notes/perceptron#24-speeding-up-the-code">Speeding Up Computations</a>
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-the-perceptron" href="/notes/neural_networks/perceptron#the-perceptron">The Perceptron</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-implementation" href="/notes/neural_networks/perceptron#2-implementation">Implementation</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-maths-behind-perceptron-speeding-up-computations" href="/notes/neural_networks/perceptron#24-speeding-up-the-code">Speeding Up Computations</a>
               </li></ul>
           <li class="td-sidebar-nav__section-title">
-            <a href="/notes/perceptron-convergence-theorem" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Perceptron Convergence Theorem</a>
+            <a href="/notes/neural_networks/perceptron-convergence-theorem" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Perceptron Convergence Theorem</a>
           </li>
           <ul><li class="collapse show" id="">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-planes" href="/notes/perceptron-convergence-theorem#planes">Planes</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-planes-with-perceptron" href="/notes/perceptron-convergence-theorem#planes-with-perceptron">Planes with Perceptron</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-the-proof" href="/notes/perceptron-convergence-theorem#the-proof">The Proof</a>
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-planes" href="/notes/neural_networks/perceptron-convergence-theorem#planes">Planes</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-planes-with-perceptron" href="/notes/neural_networks/perceptron-convergence-theorem#planes-with-perceptron">Planes with Perceptron</a><a class="td-sidebar-link td-sidebar-link__page " id="m-notes-perceptron-convergence-theorem-the-proof" href="/notes/neural_networks/perceptron-convergence-theorem#the-proof">The Proof</a>
               </li></ul>
           <li class="td-sidebar-nav__section-title">
             <a href="/notes/extras" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">Extras</a>
@@ -206,7 +238,7 @@ $(document).ready(function() {
 						"title": "About",
 						"categories": "",
 						"url": " /about/",
-						"content": "Murtaza Nazir\n\nI am a student based in the conflicted zone of Kashmir currently pursuing Bachelors in Computer Science at National Institute of Technology, Srinagar.\n\nContact\nEmail Me"
+						"content": "About Me\n\n\n    \n        \n             \n          \n      \n        \n          Murtaza Nazir\n          I am a student based in the conflicted zone of Kashmir currently pursuing Bachelors in Computer Science at National Institute of Technology, Srinagar.\n        \n        \n      \n      \n        \n            \n                themurtazanazir\n                themurtazanazir\n                 murtazanazir\n                 themurtazanazir@gmail.com"
 					}
 					
 				
@@ -232,7 +264,7 @@ $(document).ready(function() {
 						"title": "",
 						"categories": "",
 						"url": " /feed.xml",
-						"content": "Murtaza Nazir\n    Awesome Description of this site.\n\n    https://themurtazanazir.github.io/\n    \n    Thu, 06 Feb 2020 23:31:19 +0530\n    Thu, 06 Feb 2020 23:31:19 +0530\n    Jekyll v3.8.5"
+						"content": "Murtaza Nazir\n    Awesome Description of this site.\n\n    https://themurtazanazir.github.io/\n    \n    Tue, 11 Feb 2020 17:40:08 +0530\n    Tue, 11 Feb 2020 17:40:08 +0530\n    Jekyll v3.8.5"
 					}
 					
 				
@@ -245,7 +277,7 @@ $(document).ready(function() {
 						"title": "Murtaza Nazir",
 						"categories": "",
 						"url": " /",
-						"content": "Welcome\n\n\n  Notes"
+						"content": "Welcome\n\n\n  \n    \n        \n    \n      \n      \n        \n        Linear Algebra \n        The Linear Algebra Part\n      \n      \n        Show more \n      \n    \n        \n\n\n    \n        \n    \n      \n      \n        \n        Neural Networks \n        The neural network part\n      \n      \n        Show more"
 					}
 					
 				
@@ -273,7 +305,7 @@ $(document).ready(function() {
 						"title": "Notes",
 						"categories": "",
 						"url": " /notes/",
-						"content": "Notes\n\nWelcome to the Murtaza Nazir Notes pages! Here you can quickly jump to a \nparticular page.\n\n\n    \n            \n    \n    The Multi Layer Perceptron\n    A complete description of mathematics that go in making a multi layered perceptron work.\n            \n    \n    Perceptron Convergence Theorem\n    A Mathematical proof of perceptron convergence theorem\n            \n    \n    Maths Behind Perceptron\n    A complete description of mathematics that go in making a perceptron work.\n            \n    \n    Vectors, Linear Combinations, Eliminations\n    Basics of Linear Algebra"
+						"content": "Notes\n\nWelcome to the Murtaza Nazir Notes pages! Here you can quickly jump to a \nparticular page.\n\n\n    \n    \n            \n    \n    Linear Algebra\n    The Linear Algebra Part\n            \n    \n    Neural Networks\n    The neural network part"
 					}
 					
 				
@@ -429,33 +461,7 @@ $.each(headers, function(i, header){
   </div>
 
 
-<script>
 
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-    }
-}
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
-}
-
-toggleSwitch.addEventListener('change', switchTheme, false);
-
-
-</script>
 
 </footer>
 
