@@ -1,0 +1,105 @@
+{% assign posts = site.notes | where: "coll","notes" %}
+
+<div class="row">
+  {% for post in posts %}
+    <div class="col-sm-4">
+        <a href="{{ post.url | prepend: site.baseurl }}" class="custom-card">
+    <div class="hover-card card bg-light mb-3" >
+      <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/{{post.img}}" alt="Card image cap" >
+      <div class="card-body">
+        <!-- <div class="mr-4" style="position: absolute; right: 0;">
+        <i class="fas fa-share-alt"></i>
+      </div> -->
+        <h5 class="card-title">{{ post.title }} </h5>
+        <p class="card-text">{{ post.description  | truncate: 50 }}</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+        </a>
+</div>
+{% endfor %}
+</div>
+
+
+
+<!-- <div class="col-sm-4">
+    <a href="notes/linear_algebra" class="custom-card">
+
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/linalg.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Linear Algebra</h5>
+        <p class="card-text">{{ "This card has supporting text below as a natural lead-in to additional content."  | truncate: 50 }}</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+    </a>
+</div>
+
+<div class="col-sm-4">
+    <a href="notes/neural_networks" class="custom-card">
+<div class="card bg-light mb-3">
+  <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/nn.png" alt="Card image cap" >
+  <div class="card-body">
+    <h5 class="card-title">Neural Networks </h5>
+    <p class="card-text">{{ "This card has supporting text below as a natural lead-in to additional content."  | truncate: 50 }}</p>
+  </div>
+  <div class="card-footer">
+    <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+  </div>
+</div>
+    </a>
+</div>
+<div class="col-sm-4">
+<a href="notes/linear_algebra" class="custom-card">
+
+<div class="card bg-light mb-3">
+  <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/linalg.png" alt="Card image cap" >
+  <div class="card-body">
+    <h5 class="card-title">Linear Algebra</h5>
+    <p class="card-text">{{ "This card has supporting text below as a natural lead-in to additional content."  | truncate: 50 }}</p>
+  </div>
+  <div class="card-footer">
+    <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+  </div>
+</div>
+</a>
+</div>
+
+    <div class="col-sm-4">
+        <a href="notes/neural_networks" class="custom-card">
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/nn.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Neural Networks </h5>
+        <p class="card-text">{{ "This card has supporting text below as a natural lead-in to additional content."  | truncate: 50 }}</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+        </a>
+</div>
+<div class="col-sm-4">
+    <a href="notes/linear_algebra" class="custom-card">
+
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="{{site.baseurl}}/assets/img/linalg.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Linear Algebra</h5>
+        <p class="card-text">{{ "This card has supporting text below as a natural lead-in to additional content."  | truncate: 50 }}</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+    </a>
+</div>
+
+</div>
+
+ -->

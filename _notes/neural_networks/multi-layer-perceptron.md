@@ -10,6 +10,7 @@ tags:
  - momentum
  - multiple layers
 hasplot: true
+coll: neural_network
 ---
 # The Multi Layer Perceptron
 

@@ -6,6 +6,8 @@ tags:
  - perceptron
  - deep learning
  - feedforward networks
+hasplot: true
+coll: neural_network
 ---
  
 # Mathematics Behind Perceptron

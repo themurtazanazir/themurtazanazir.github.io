@@ -129,9 +129,10 @@ excluded_in_search: true
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
     --primary-color: #302AE6;
     --secondary-color: #536390;
-    --font-color: #424242;
+    --font-color: #222;
     --bg-color: #fff;
     --heading-color: #30638e;
+    --bgcard: #d3f3ee;
 }
 
 [data-theme="dark"] {
@@ -140,6 +141,7 @@ excluded_in_search: true
     --font-color: #e1e1ff;
     --bg-color: #1A1A1D;
     --heading-color: #000;
+    --bgcard: #403f4c;
 }
 
 
@@ -197,7 +199,9 @@ hr {
     -moz-box-sizing: content-box;
     box-sizing: content-box;
     height: 0;
-    overflow: visible
+    overflow: visible;
+    border-color: var(--font-color);
+    background-color: var(--font-color);
 }
 
 h1,
@@ -7471,7 +7475,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-    background-color: #d3f3ee!important
+    background-color: var(--bgcard);
 }
 
 a.bg-light:hover,

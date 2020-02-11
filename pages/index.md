@@ -2,8 +2,10 @@
 layout: page
 title: Murtaza Nazir
 permalink: /
+ishome: true
 ---
 
 # Welcome
 
-1. [Notes](notes)
+
+{% include home/cards.html %}

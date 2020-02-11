@@ -1,12 +1,14 @@
 ---
 title:  Vectors, Linear Combinations, Eliminations 
 description: Basics of Linear Algebra
+coll: Linear Algebra
 tags: 
  - vectors
  - elimination matrix
  - permutation matrix
  - linear combinations
 hasplot: true
+coll: lin_alg
 ---
 
 

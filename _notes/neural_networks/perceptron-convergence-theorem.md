@@ -9,6 +9,7 @@ tags:
  - proof
  - mathematics
 hasplot: true
+coll: neural_network
 ---
 
 # Perceptron Convergence Theorem
