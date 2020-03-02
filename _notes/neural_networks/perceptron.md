@@ -111,7 +111,7 @@ the weights \\(w_{ij}\\) will be changed by \\( \Delta w_{ij}\\)
 where,
 
  
-$$\Delta w_{ij}  = \begin{cases} > 0 & \text{if } y_j - t_j <0\\ < 0 & \text{if } y_j - t_j >0\\ = 0 & \text{if } y_j - t_j =0\\ \end{cases}\\ \implies \Delta w_{ij} = - y_j-t_j)k $$
+$$\Delta w_{ij}  = \begin{cases} > 0 & \text{if } y_j - t_j <0\\ < 0 & \text{if } y_j - t_j >0\\ = 0 & \text{if } y_j - t_j =0\\ \end{cases}\\ \implies \Delta w_{ij} = - (y_j-t_j)k $$
 
 where \\(k\\) is the constant which gives the *amount by which each weight needs to be changed*.
 
@@ -396,7 +396,7 @@ $$ w_{ja} \leftarrow w_{ja} - \eta(y_{2a} - t_{2a})  x_{2j} \tag{for ex. 2}\\ $$
 
 
  
-$$ w_{ja} \leftarrow w_{ja} - \eta(y_{3a} - t_{3a})  x_{3j} \tag{for ex. 2} $$
+$$ w_{ja} \leftarrow w_{ja} - \eta(y_{3a} - t_{3a})  x_{3j} \tag{for ex. 3} $$
 
 each of the above change will occur to each weight one after the another. so these can be summed as:
 

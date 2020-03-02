@@ -53,8 +53,8 @@ color: "#30638e"
 # markdown: kramdown
 # kramdown:
   #  math_engine: mathjax
-# mathjax: true
-use_math: true
+mathjax: true
+# use_math: true
 
 # If you add tags to pages, define this variable to link them to some external search
 # If you want to link to tags locally on the site, leave this commented out
