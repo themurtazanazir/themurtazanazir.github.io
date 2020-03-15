@@ -50,7 +50,7 @@ color: "#30638e"
 # color: "#8c1515" # primary color for header, buttons
 
 # Build settings
-# markdown: kramdown
+markdown: kramdown
 # kramdown:
   #  math_engine: mathjax
 mathjax: true
