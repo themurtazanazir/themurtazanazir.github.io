@@ -133,6 +133,7 @@ excluded_in_search: true
     --bg-color: #fff;
     --heading-color: #30638e;
     --bgcard: #d3f3ee;
+    --code-bg: #f8f9fa;
 }
 
 [data-theme="dark"] {
@@ -142,6 +143,7 @@ excluded_in_search: true
     --bg-color: #1A1A1D;
     --heading-color: #000;
     --bgcard: #403f4c;
+    --code-bg: #9baecf;
 }
 
 
@@ -323,7 +325,8 @@ code,
 kbd,
 samp {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, liberation mono, courier new, monospace;
-    font-size: 1em
+    font-size: 1em;
+    
 }
 
 pre {
@@ -662,7 +665,8 @@ mark,
 code {
     font-size: 87.5%;
     color: #952a1e;
-    word-break: break-word
+    word-break: break-word;
+    background-color: var(--code-bg);
 }
 
 a>code {
@@ -17878,7 +17882,8 @@ a.text-dark:focus {
 .td-content .highlight {
     margin: 2rem 0;
     padding: 1rem;
-    background-color: #f8f9fa
+    background-color: var(--code-bg); 
+    /* #f8f9fa */
 }
 
 .td-content .highlight pre,
