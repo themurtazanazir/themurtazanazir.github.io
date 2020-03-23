@@ -385,25 +385,33 @@ Now instead of just columns we can have a set of vectors \(V\) and their linear 
   <li>If \(\mathbf{x_1}\) is a solution, then so is \(c_1\mathbf{x_1}\), \(c_1\) being a scalar.</li>
 </ol>
 
-<p>If
-<script type="math/tex">A\mathbf{x_1} = 0</script>
-then
-<script type="math/tex">Ac_1\mathbf{x_1} = c_1A\mathbf{x_1} = 0</script></p>
+<p>If</p>
+
+<p><script type="math/tex">A\mathbf{x_1} = 0</script>
+then</p>
+
+<script type="math/tex; mode=display">Ac_1\mathbf{x_1} = c_1A\mathbf{x_1} = 0</script>
 
 <ol>
   <li>If \(\mathbf{x_1}\) and \(\mathbf{x_2}\) are two solutions, then \(x_1 + x_2\) is also a solution. It can be shown as:</li>
 </ol>
 
-<p>If \(\mathbf{x_1}\) and \(\mathbf{x_1}\) are solutions, then:
-<script type="math/tex">A\mathbf{x_1} = 0</script>
-and
-<script type="math/tex">A\mathbf{x_2} = 0</script>
-and so,
-<script type="math/tex">\begin{align}A\mathbf{x_2} + A\mathbf{x_2} = 0 \\ \implies A \left(\mathbf{x_1} + \mathbf{x_2}\right) = 0\end{align}</script>
-so \(\mathbf{x_1} + \mathbf{x_2}\) is also a solution.</p>
+<p>If \(\mathbf{x_1}\) and \(\mathbf{x_2}\) are solutions, then:</p>
+
+<script type="math/tex; mode=display">A\mathbf{x_1} = 0</script>
+
+<p>and</p>
+
+<script type="math/tex; mode=display">A\mathbf{x_2} = 0</script>
+
+<p>and so,</p>
+
+<script type="math/tex; mode=display">\begin{align}A\mathbf{x_1} + A\mathbf{x_2} = 0 \\ \implies A \left(\mathbf{x_1} + \mathbf{x_2}\right) = 0\end{align}</script>
+
+<p>so \(\mathbf{x_1} + \mathbf{x_2}\) is also a solution.</p>
 
 <ol>
-  <li>By the above two points we can show that __all the linear combinations of the solutions are also solutions to \(A\mathbf{x} = 0\).</li>
+  <li>By the above two points we can show that <em>all</em> the linear combinations of the solutions are also solutions to \(A\mathbf{x} = 0\).</li>
 </ol>
 
 <p>So we can conclude the solutions of \(A\mathbf{x} = 0\) form a subspace. This subspace is called the Null Space of matrix \(A\). It is denoted by \(N(A)\).</p>
@@ -746,7 +754,7 @@ R = \begin{bmatrix} \mathbf{1} & \frac{4}{3} & 0 & \frac{17}{3} & \frac{-20}{3} 
 
 <p>The last row turned to be zero. It is because it did not add anything new to the system. It was a linear combination of the rows above it. Actually,</p>
 
-<script type="math/tex; mode=display">\text{row}_3 \text{ of \\(A\\)} = 2(\text{row}_1 \text{ of \\(A\\)}) + \text{row}_2 \text{ of \\(A\\)}</script>
+<script type="math/tex; mode=display">\text{row}_3 \text{ of }A = 2(\text{row}_1 \text{ of }A) + \text{row}_2 \text{ of }A</script>
 
 <p>So the true size of this matrix from the row size is actually 2 not 3.</p>
 
@@ -755,7 +763,7 @@ R = \begin{bmatrix} \mathbf{1} & \frac{4}{3} & 0 & \frac{17}{3} & \frac{-20}{3} 
 <p>Every free column is a linear combination of the pivot columns before them. The special solutions tell us these combinations.</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{align}\text{col}_2 \text{ of \\(A\\)} &= \frac{4}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) ; & s_1 = \left(\frac{-4}{3}, 1 , 0, 0, 0\right) \\ \text{col}_4 \text{ of \\(A\\)} &= \frac{17}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) + (-10)\left(\text{col}_3 \text{ of \\(A\\)}\right) ; & s_2 = \left(\frac{-17}{3}, 0 , 10, 1, 0\right) \\ \text{col}_5 \text{ of \\(A\\)} &= \frac{-20}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) + 14\left(\text{col}_3 \text{ of \\(A\\)}\right) ; & s_2 = \left(\frac{20}{3}, 0 , -14, 0, 1\right) \end{align} %]]></script>
+\begin{align}\text{col}_2 \text{ of }A &= \frac{4}{3}\left(\text{col}_1 \text{ of }A\right) ; & s_1 = \left(\frac{-4}{3}, 1 , 0, 0, 0\right) \\ \text{col}_4 \text{ of }A &= \frac{17}{3}\left(\text{col}_1 \text{ of }A\right) + (-10)\left(\text{col}_3 \text{ of }A\right) ; & s_2 = \left(\frac{-17}{3}, 0 , 10, 1, 0\right) \\ \text{col}_5 \text{ of }A &= \frac{-20}{3}\left(\text{col}_1 \text{ of }A\right) + 14\left(\text{col}_3 \text{ of }A\right) ; & s_2 = \left(\frac{20}{3}, 0 , -14, 0, 1\right) \end{align} %]]></script>
 
 <p>So these three columns also don’t provide any new information to the linear system. So the <em>true</em> size of this matrix from the column size is actually 2 not 5.</p>
 
