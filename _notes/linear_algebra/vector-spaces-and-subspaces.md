@@ -151,6 +151,8 @@ p = plot([trace1,trace2,trace3], Layout(scene_camera=attr(eye=attr(x=1.5, y=1.2,
 <div id="plot1">
 </div>
 
+
+
 The plane represents all the linear combinations of these two vectors lie on that plane which also passes through the origin. It is the column space of the matrix. It is a subspace of the whole \\(\mathbb{R}^3\\) space. For all the vectors \\(\mathbf{b}\\) lying in that plane, \\(A\mathbf{x} = \mathbf{b}\\) has solution. But for those \\(\mathbf{b}\\) which do not lie in that plane (i.e are not in the column space), have no solution.
 
 > **Span:** 
@@ -173,21 +175,29 @@ Let's look at the possible solutions of \\(A\mathbf{x} = 0\\):
 
 
 If
+
 $$A\mathbf{x_1} = 0$$
 then
+
 $$Ac_1\mathbf{x_1} = c_1A\mathbf{x_1} = 0$$
 
 3. If \\(\mathbf{x_1}\\) and \\(\mathbf{x_2}\\) are two solutions, then \\(x_1 + x_2\\) is also a solution. It can be shown as:
 
-If \\(\mathbf{x_1}\\) and \\(\mathbf{x_1}\\) are solutions, then:
+If \\(\mathbf{x_1}\\) and \\(\mathbf{x_2}\\) are solutions, then:
+
 $$A\mathbf{x_1} = 0$$
+
 and
+
 $$A\mathbf{x_2} = 0$$
+
 and so,
-$$\begin{align}A\mathbf{x_2} + A\mathbf{x_2} = 0 \\ \implies A \left(\mathbf{x_1} + \mathbf{x_2}\right) = 0\end{align}$$
+
+$$\begin{align}A\mathbf{x_1} + A\mathbf{x_2} = 0 \\ \implies A \left(\mathbf{x_1} + \mathbf{x_2}\right) = 0\end{align}$$
+
 so \\(\mathbf{x_1} + \mathbf{x_2}\\) is also a solution.
 
-4. By the above two points we can show that __all the linear combinations of the solutions are also solutions to \\(A\mathbf{x} = 0\\).
+4. By the above two points we can show that _all_ the linear combinations of the solutions are also solutions to \\(A\mathbf{x} = 0\\).
 
 So we can conclude the solutions of \\(A\mathbf{x} = 0\\) form a subspace. This subspace is called the Null Space of matrix \\(A\\). It is denoted by \\(N(A)\\).
 
@@ -484,7 +494,7 @@ The size of \\(A\\) is \\(3 \times 5\\).
 
 The last row turned to be zero. It is because it did not add anything new to the system. It was a linear combination of the rows above it. Actually,
 
-$$\text{row}_3 \text{ of \\(A\\)} = 2(\text{row}_1 \text{ of \\(A\\)}) + \text{row}_2 \text{ of \\(A\\)}$$
+$$\text{row}_3 \text{ of }A = 2(\text{row}_1 \text{ of }A) + \text{row}_2 \text{ of }A$$
 
 So the true size of this matrix from the row size is actually 2 not 3.
 
@@ -492,7 +502,7 @@ Now let's look at pivot columns and free columns. Why was the second column decl
 
 Every free column is a linear combination of the pivot columns before them. The special solutions tell us these combinations.
 
-$$\begin{align}\text{col}_2 \text{ of \\(A\\)} &= \frac{4}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) ; & s_1 = \left(\frac{-4}{3}, 1 , 0, 0, 0\right) \\ \text{col}_4 \text{ of \\(A\\)} &= \frac{17}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) + (-10)\left(\text{col}_3 \text{ of \\(A\\)}\right) ; & s_2 = \left(\frac{-17}{3}, 0 , 10, 1, 0\right) \\ \text{col}_5 \text{ of \\(A\\)} &= \frac{-20}{3}\left(\text{col}_1 \text{ of \\(A\\)}\right) + 14\left(\text{col}_3 \text{ of \\(A\\)}\right) ; & s_2 = \left(\frac{20}{3}, 0 , -14, 0, 1\right) \end{align}$$
+$$\begin{align}\text{col}_2 \text{ of }A &= \frac{4}{3}\left(\text{col}_1 \text{ of }A\right) ; & s_1 = \left(\frac{-4}{3}, 1 , 0, 0, 0\right) \\ \text{col}_4 \text{ of }A &= \frac{17}{3}\left(\text{col}_1 \text{ of }A\right) + (-10)\left(\text{col}_3 \text{ of }A\right) ; & s_2 = \left(\frac{-17}{3}, 0 , 10, 1, 0\right) \\ \text{col}_5 \text{ of }A &= \frac{-20}{3}\left(\text{col}_1 \text{ of }A\right) + 14\left(\text{col}_3 \text{ of }A\right) ; & s_2 = \left(\frac{20}{3}, 0 , -14, 0, 1\right) \end{align}$$
 
 So these three columns also don't provide any new information to the linear system. So the _true_ size of this matrix from the column size is actually 2 not 5.
 
