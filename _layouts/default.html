@@ -7,16 +7,18 @@
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-          {% include sidebar.html %}
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
-              <nav id="TableOfContents"><ul>
+          <div class="col-12 col-md-3 d-none d-xl-block col-xl-2 td-toc d-print-none">
+              <nav id="TableOfContents">
+                Table Of Contents
+                <ul>
               <li><ul id="TOC">
                 <!-- Links will be appended here-->
               </ul></li>
               </ul></nav>
           </div>
+          <div class="col-xl-2 td-sidebar d-print-none">
+            {% include sidebar.html %}
+            </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 
