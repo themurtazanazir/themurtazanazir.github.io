@@ -15,7 +15,7 @@ excluded_in_search: true
 
 <script>
 	window.data = {
-		{% for post in site.docs %}
+		{% for post in site.notes %}
 				{% unless post.excluded_in_search %}
 					{% if added %},{% endif %}
 					{% assign added = false %}
@@ -29,20 +29,20 @@ excluded_in_search: true
 					{% assign added = true %}
 				{% endunless %}
 		{% endfor %}
-		{% for post in site.pages %}
-				{% unless post.excluded_in_search %}
-					{% if added %},{% endif %}
-					{% assign added = false %}
-					"{{ post.url | slugify }}": {
-						"id": "{{ post.url | slugify }}",
-						"title": "{{ post.title | xml_escape }}",
-						"categories": "{{ post.categories | join: ", " | xml_escape }}",
-						"url": " {{ post.url | xml_escape }}",
-						"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
-					}
-					{% assign added = true %}
-				{% endunless %}
-		{% endfor %}
+		// {% for post in site.pages %}
+		// 		{% unless post.excluded_in_search %}
+		// 			{% if added %},{% endif %}
+		// 			{% assign added = false %}
+		// 			"{{ post.url | slugify }}": {
+		// 				"id": "{{ post.url | slugify }}",
+		// 				"title": "{{ post.title | xml_escape }}",
+		// 				"categories": "{{ post.categories | join: ", " | xml_escape }}",
+		// 				"url": " {{ post.url | xml_escape }}",
+		// 				"content": {{ post.content | strip_html | replace_regex: "[\s/\n]+"," " | strip | jsonify }}
+		// 			}
+		// 			{% assign added = true %}
+		// 		{% endunless %}
+		// {% endfor %}
 	};
 </script>
 <script src="{{ site.baseurl }}/assets/js/lunr.min.js"></script>
