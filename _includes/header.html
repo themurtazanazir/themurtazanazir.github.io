@@ -12,7 +12,7 @@
                             <a class="nav-link" href="{% if link.url %}{{ site.baseurl }}/{{ link.url }}{% else %}{{ link.external_url }}{% endif %}" ><span>{{ link.title }}</span></a>
       </li>{% endfor %}
       
-      <li class="nav-item mr-4 mb-2 mb-lg-0">
+      <!-- <li class="nav-item mr-4 mb-2 mb-lg-0">
         <div class="theme-switch-wrapper nav-link">
              <label class="theme-switch" for="checkbox">
           <input type="checkbox" id="checkbox" />
@@ -20,7 +20,9 @@
         </label>
         <span style="padding-left: 10px;">Dark Mode</span>
         </div>
-      </li>
+      </li> -->
+
+
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
@@ -49,5 +51,3 @@ $(document).ready(function() {
   });
 });
 </script>
-
-{% include darktoggle.html %}
