@@ -5,7 +5,7 @@ tags:
  - neural networks
  - momentum
 hasplot: true
-coll: neural_network
+coll: mlp
 ---
 # 3 Improvements for the network
 

@@ -7,7 +7,7 @@ tags:
  - deep learning
  - feedforward networks
 hasplot: true
-coll: neural_network
+coll: mlp
 ---
  
 # Mathematics Behind Perceptron
@@ -54,7 +54,7 @@ $$\sigma=g(h)=\begin{cases} 1&\text{if }h>\theta\\ 0&\text{if }h\leq\theta\\ \en
 The perceptron is nothing more than a collection of [McCulloch and Pitts neurons](#mcculloch-and-pitts-neurons) together with a set of inputs and some weights to fasten the inputs to the neurons. The neurons in the Perceptron are completely independent of each other.
 
 ![](perceptron_network.png)
-Figure 1: The Perceptron Network(the gray nodes are inputs, not neurons)
+Figure 1: The Perceptron Network(the orange nodes are inputs, not neurons)
 
 Each neuron has its own weights which it multiplies with its input and adds them to decide whether to fire or not depending on its own threshold. The inputs are the number of features(usually columns) our data has. The number of neurons can be varied and is usually the total unique classifying target values.
 

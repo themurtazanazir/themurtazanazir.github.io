@@ -10,7 +10,7 @@ tags:
  - momentum
  - multiple layers
 hasplot: true
-coll: neural_network
+coll: mlp
 ---
 # The Multi Layer Perceptron
 
@@ -46,6 +46,7 @@ It is note here that it is not necessary to have just have one intermediate laye
 The intermediate layers are called **hidden layers**. As we had seen in the simple Perceptron that an additional input bias node was required. So while using the outputs of a hidden layer as inputs for a next layer we again add a bias node of constant value(-1,say) to the layer but while computing the outputs of any hidden layer from it's previous layer, we ignore the bias unit, as it is always constant.
 
 ![](./Files/Pictures/MLP_structure.png)
+
 
 Figure 1
 

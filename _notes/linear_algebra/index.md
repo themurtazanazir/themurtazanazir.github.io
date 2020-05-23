@@ -7,4 +7,4 @@ img: linalg.png
 ---
 
 
-{% include lists.html %}
+{% include lists.md %}
