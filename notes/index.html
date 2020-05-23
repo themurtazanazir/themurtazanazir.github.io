@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/palette.css">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/dark-codes.css">
+
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -84,15 +86,8 @@ config=TeX-AMS-MML_HTMLorMML"></script>
                             <a class="nav-link" href="/notes" ><span>Notes</span></a>
       </li>
       
-      <li class="nav-item mr-4 mb-2 mb-lg-0">
-        <div class="theme-switch-wrapper nav-link">
-             <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-        </label>
-        <span style="padding-left: 10px;">Dark Mode</span>
-        </div>
-      </li>
+
+
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
@@ -121,39 +116,20 @@ $(document).ready(function() {
   });
 });
 </script>
-
-<script>
-
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-    }
-}
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
-}
-
-toggleSwitch.addEventListener('change', switchTheme, false);
-
-
-</script>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-          <div id="td-sidebar-menu" class="td-sidebar__inner">  
+          <div class="col-12 col-md-3 d-none d-xl-block col-xl-2 td-toc d-print-none">
+              <nav id="TableOfContents">
+                Table Of Contents
+                <ul>
+              <li><ul id="TOC">
+                <!-- Links will be appended here-->
+              </ul></li>
+              </ul></nav>
+          </div>
+          <div class="col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">  
   <form class="td-sidebar__search d-flex align-items-center">
  <input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
@@ -204,14 +180,7 @@ toggleSwitch.addEventListener('change', switchTheme, false);
   </nav>
 </div>
 
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
-              <nav id="TableOfContents"><ul>
-              <li><ul id="TOC">
-                <!-- Links will be appended here-->
-              </ul></li>
-              </ul></nav>
-          </div>
+            </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 

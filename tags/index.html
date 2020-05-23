@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/palette.css">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/dark-codes.css">
+
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -84,15 +86,8 @@ config=TeX-AMS-MML_HTMLorMML"></script>
                             <a class="nav-link" href="/notes" ><span>Notes</span></a>
       </li>
       
-      <li class="nav-item mr-4 mb-2 mb-lg-0">
-        <div class="theme-switch-wrapper nav-link">
-             <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-        </label>
-        <span style="padding-left: 10px;">Dark Mode</span>
-        </div>
-      </li>
+
+
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
@@ -121,39 +116,20 @@ $(document).ready(function() {
   });
 });
 </script>
-
-<script>
-
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-    }
-}
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
-}
-
-toggleSwitch.addEventListener('change', switchTheme, false);
-
-
-</script>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-          <div id="td-sidebar-menu" class="td-sidebar__inner">  
+          <div class="col-12 col-md-3 d-none d-xl-block col-xl-2 td-toc d-print-none">
+              <nav id="TableOfContents">
+                Table Of Contents
+                <ul>
+              <li><ul id="TOC">
+                <!-- Links will be appended here-->
+              </ul></li>
+              </ul></nav>
+          </div>
+          <div class="col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">  
   <form class="td-sidebar__search d-flex align-items-center">
  <input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
@@ -204,14 +180,7 @@ toggleSwitch.addEventListener('change', switchTheme, false);
   </nav>
 </div>
 
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
-              <nav id="TableOfContents"><ul>
-              <li><ul id="TOC">
-                <!-- Links will be appended here-->
-              </ul></li>
-              </ul></nav>
-          </div>
+            </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 
@@ -235,173 +204,232 @@ toggleSwitch.addEventListener('change', switchTheme, false);
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="Invetibility" class="linked-section">Invetibility</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="Null Space" class="linked-section">Null Space</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="Rank" class="linked-section">Rank</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="Reduced Roe Echelon Form" class="linked-section">Reduced Roe Echelon Form</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="Vector Space" class="linked-section">Vector Space</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vector-spaces-and-subspaces">Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="backpropagation" class="linked-section">backpropagation</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/index">Multi-Layer Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+</div><h3 id="convolution" class="linked-section">convolution</h3>
+<div class="post-list" style="margin-bottom:40px">
+    
+<div class="tag-entry">
+    <a href="/notes/neural_networks/convolutional_neural_networks/index">Convolutional Neural Networks</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="deep learning" class="linked-section">deep learning</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron">Maths Behind Perceptron</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron">Maths Behind Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+</div><h3 id="deep networks" class="linked-section">deep networks</h3>
+<div class="post-list" style="margin-bottom:40px">
+    
+<div class="tag-entry">
+    <a href="/notes/neural_networks/convolutional_neural_networks/index">Convolutional Neural Networks</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="elimination matrix" class="linked-section">elimination matrix</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vectors-linear-combinations">Vectors, Linear Combinations, Eliminations</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="feedforward networks" class="linked-section">feedforward networks</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron">Maths Behind Perceptron</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron">Maths Behind Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+</div><h3 id="image recognition" class="linked-section">image recognition</h3>
+<div class="post-list" style="margin-bottom:40px">
+    
+<div class="tag-entry">
+    <a href="/notes/neural_networks/convolutional_neural_networks/index">Convolutional Neural Networks</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="linear combinations" class="linked-section">linear combinations</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vectors-linear-combinations">Vectors, Linear Combinations, Eliminations</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="mathematics" class="linked-section">mathematics</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="momentum" class="linked-section">momentum</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/improvements-to-mlp">The Multi Layer Perceptron Part  II</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/convolutional_neural_networks/convolutions">Convolutions</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/improvements-to-mlp">The Multi Layer Perceptron Part  II</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="multiple layers" class="linked-section">multiple layers</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="neural networks" class="linked-section">neural networks</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/improvements-to-mlp">The Multi Layer Perceptron Part  II</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/convolutional_neural_networks/convolutions">Convolutions</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/convolutional_neural_networks/index">Convolutional Neural Networks</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/improvements-to-mlp">The Multi Layer Perceptron Part  II</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron">Maths Behind Perceptron</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/index">Multi-Layer Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron">Maths Behind Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+</div><h3 id="pattern recognition" class="linked-section">pattern recognition</h3>
+<div class="post-list" style="margin-bottom:40px">
+    
+<div class="tag-entry">
+    <a href="/notes/neural_networks/convolutional_neural_networks/index">Convolutional Neural Networks</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="perceptron" class="linked-section">perceptron</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/index">Multi-Layer Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron">Maths Behind Perceptron</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron">Maths Behind Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
+    </div>
+</div><h3 id="perceptron convergence theorem" class="linked-section">perceptron convergence theorem</h3>
+<div class="post-list" style="margin-bottom:40px">
+    
+<div class="tag-entry">
+    <a href="/notes/neural_networks/multiayer-perceptron/index">Multi-Layer Perceptron</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="permutation matrix" class="linked-section">permutation matrix</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vectors-linear-combinations">Vectors, Linear Combinations, Eliminations</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="proof" class="linked-section">proof</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
-    <a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+    <a href="/notes/neural_networks/multiayer-perceptron/perceptron-convergence-theorem">Perceptron Convergence Theorem</a>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div><h3 id="vectors" class="linked-section">vectors</h3>
 <div class="post-list" style="margin-bottom:40px">
     
 <div class="tag-entry">
     <a href="/notes/linear_algebra/vectors-linear-combinations">Vectors, Linear Combinations, Eliminations</a>
-        <time style="font-style:italic; float:right" datetime="2020-03-23T16:03:06+05:30">March 23, 2020</time>
+        <time style="font-style:italic; float:right" datetime="2020-05-23T10:38:23+05:30">May 23, 2020</time>
     </div>
 </div>
 <script

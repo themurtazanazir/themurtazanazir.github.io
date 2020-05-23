@@ -38,6 +38,8 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/palette.css">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/dark-codes.css">
+
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -81,15 +83,8 @@ config=TeX-AMS-MML_HTMLorMML"></script>
                             <a class="nav-link" href="/notes" ><span>Notes</span></a>
       </li>
       
-      <li class="nav-item mr-4 mb-2 mb-lg-0">
-        <div class="theme-switch-wrapper nav-link">
-             <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-        </label>
-        <span style="padding-left: 10px;">Dark Mode</span>
-        </div>
-      </li>
+
+
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
@@ -118,39 +113,20 @@ $(document).ready(function() {
   });
 });
 </script>
-
-<script>
-
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-    }
-}
-
-function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
-}
-
-toggleSwitch.addEventListener('change', switchTheme, false);
-
-
-</script>
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <div class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
-          <div id="td-sidebar-menu" class="td-sidebar__inner">  
+          <div class="col-12 col-md-3 d-none d-xl-block col-xl-2 td-toc d-print-none">
+              <nav id="TableOfContents">
+                Table Of Contents
+                <ul>
+              <li><ul id="TOC">
+                <!-- Links will be appended here-->
+              </ul></li>
+              </ul></nav>
+          </div>
+          <div class="col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">  
   <form class="td-sidebar__search d-flex align-items-center">
  <input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
@@ -201,14 +177,7 @@ toggleSwitch.addEventListener('change', switchTheme, false);
   </nav>
 </div>
 
-          </div>
-          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
-              <nav id="TableOfContents"><ul>
-              <li><ul id="TOC">
-                <!-- Links will be appended here-->
-              </ul></li>
-              </ul></nav>
-          </div>
+            </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
 
@@ -220,32 +189,130 @@ toggleSwitch.addEventListener('change', switchTheme, false);
 	      </ol> -->
            </nav>
            <div class="td-content">
-	      <h1>Neural Networks</h1>
-<div class="section-index">
-<hr class="panel-line">
+	      
 
-
-<div class="entry">
-<h5><a href="/notes/neural_networks/improvements-to-mlp">The Multi Layer Perceptron Part  II</a></h5>
-<p>A complete description of mathematics that go in making a multi layered perceptron work.</p>
+<div class="row">
+  
+    <div class="col-sm-4">
+        <a href="/notes/neural_networks/convolutional_neural_networks/index" class="custom-card">
+    <div class="hover-card card bg-light mb-3" >
+      <img class="card-img-top" style="height: 12rem;" src="/assets/img/conv.png" alt="Card image cap" >
+      <div class="card-body">
+        <!-- <div class="mr-4" style="position: absolute; right: 0;">
+        <i class="fas fa-share-alt"></i>
+      </div> -->
+        <h5 class="card-title">Convolutional Neural Networks </h5>
+        <p class="card-text">A Series of posts on the famous convNets.</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+        </a>
 </div>
 
-<div class="entry">
-<h5><a href="/notes/neural_networks/multi-layer-perceptron">The Multi Layer Perceptron - Part I</a></h5>
-<p>A complete description of mathematics that go in making a multi layered perceptron work.</p>
+    <div class="col-sm-4">
+        <a href="/notes/neural_networks/multiayer-perceptron/index" class="custom-card">
+    <div class="hover-card card bg-light mb-3" >
+      <img class="card-img-top" style="height: 12rem;" src="/assets/img/nn.png" alt="Card image cap" >
+      <div class="card-body">
+        <!-- <div class="mr-4" style="position: absolute; right: 0;">
+        <i class="fas fa-share-alt"></i>
+      </div> -->
+        <h5 class="card-title">Multi-Layer Perceptron </h5>
+        <p class="card-text">A Series of posts on the Multi-Layer Perceptron...</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+        </a>
 </div>
 
-<div class="entry">
-<h5><a href="/notes/neural_networks/perceptron-convergence-theorem">Perceptron Convergence Theorem</a></h5>
-<p>A Mathematical proof of perceptron convergence theorem</p>
 </div>
 
-<div class="entry">
-<h5><a href="/notes/neural_networks/perceptron">Maths Behind Perceptron</a></h5>
-<p>A complete description of mathematics that go in making a perceptron work.</p>
+
+
+<!-- <div class="col-sm-4">
+    <a href="notes/linear_algebra" class="custom-card">
+
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="/assets/img/linalg.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Linear Algebra</h5>
+        <p class="card-text">This card has supporting text below as a natura...</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+    </a>
+</div>
+
+<div class="col-sm-4">
+    <a href="notes/neural_networks" class="custom-card">
+<div class="card bg-light mb-3">
+  <img class="card-img-top" style="height: 12rem;" src="/assets/img/nn.png" alt="Card image cap" >
+  <div class="card-body">
+    <h5 class="card-title">Neural Networks </h5>
+    <p class="card-text">This card has supporting text below as a natura...</p>
+  </div>
+  <div class="card-footer">
+    <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+  </div>
+</div>
+    </a>
+</div>
+<div class="col-sm-4">
+<a href="notes/linear_algebra" class="custom-card">
+
+<div class="card bg-light mb-3">
+  <img class="card-img-top" style="height: 12rem;" src="/assets/img/linalg.png" alt="Card image cap" >
+  <div class="card-body">
+    <h5 class="card-title">Linear Algebra</h5>
+    <p class="card-text">This card has supporting text below as a natura...</p>
+  </div>
+  <div class="card-footer">
+    <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+  </div>
+</div>
+</a>
+</div>
+
+    <div class="col-sm-4">
+        <a href="notes/neural_networks" class="custom-card">
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="/assets/img/nn.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Neural Networks </h5>
+        <p class="card-text">This card has supporting text below as a natura...</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+        </a>
+</div>
+<div class="col-sm-4">
+    <a href="notes/linear_algebra" class="custom-card">
+
+    <div class="card bg-light mb-3">
+      <img class="card-img-top" style="height: 12rem;" src="/assets/img/linalg.png" alt="Card image cap" >
+      <div class="card-body">
+        <h5 class="card-title">Linear Algebra</h5>
+        <p class="card-text">This card has supporting text below as a natura...</p>
+      </div>
+      <div class="card-footer">
+        <h5>Show more <i class="fas fa-angle-double-right ml-2"></i></h5>
+      </div>
+    </div>
+    </a>
 </div>
 
 </div>
+
+ -->
+
 
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
