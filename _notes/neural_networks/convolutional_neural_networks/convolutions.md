@@ -75,7 +75,7 @@ The output is shifted and scaled by the same amount as the delta function is to 
 
 So if we know the impulse response of any system, we know the output of any impulse.
 
-With the information of how outputs to impulses are produced, let's revisit how do we prouce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.
+With the information of how outputs to impulses are produced, let's revisit how do we produce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.
 
 First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally sunthesized(added) to produce the final output.
 
@@ -235,7 +235,7 @@ So basically, for signal processing, it does not have any special meaning. It is
 
 ## The formula?
 
-Now we have implemented convolution, but it what if we need to know just what the, say, 8th element of the convolved output signal is? Our current implementation will calculate that by computing the whole output signal and then giving us the output. This method is slow and if the input signal is hundreds of thousands(or even millions) of points, it will take a huge amount of time to do that, only to return one element.
+Now we have implemented convolution, but what if we need to know just what the, say, 8th element of the convolved output signal is? Our current implementation will calculate that by computing the whole output signal and then giving us the output. This method is slow and if the input signal is hundreds of thousands(or even millions) of points, it will take a huge amount of time to do that, only to return one element.
 
 So what we need is a mathematical formula of what convolution is.
 
@@ -597,7 +597,7 @@ $$ x[n] * \delta[n] = x[n] \tag{7}$$
 $$x[n] * k\delta [n] = kx[n] \tag{8}$$
 
 
-So it can be used as an amplifier ar as an attenuator. We can even invert a signal like we did above by setting $$k=-1$$ and can do much more with this simple property.
+So it can be used as an amplifier or as an attenuator. We can even invert a signal like we did above by setting $$k=-1$$ and can do much more with this simple property.
 
 - If the delta function is shifted by an amount, the output function is also shifted by the same amount:
 
@@ -658,13 +658,13 @@ Correlation is another operation that is somewhat similar to convolution. Correl
 
 The main difference between calculating the output of correlation from that of convolution is that the **kernel is not flipped**.
 
-If convolution, $$y[n]$$ of $$a[n]$$ and $$b[n]$$ is:
+If convolution, $$y[n]$$, of $$a[n]$$ and $$b[n]$$ is:
 
 
 $$y[n] = a[n] * b[n]$$
 
 
-then the correlation, $$c[n]$$ of $$a[n]$$ and $$b[n]$$ is:
+then the correlation, $$c[n]$$, of $$a[n]$$ and $$b[n]$$ is:
 
 
 $$c[n] = a[n] * b[-n]$$
