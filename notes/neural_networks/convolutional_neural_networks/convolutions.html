@@ -291,7 +291,7 @@ b[n] = \begin{cases}u & n=p\\0 & \text{otherwise} \end{cases} %]]></script>
 
 <p>So if we know the impulse response of any system, we know the output of any impulse.</p>
 
-<p>With the information of how outputs to impulses are produced, let’s revisit how do we prouce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.</p>
+<p>With the information of how outputs to impulses are produced, let’s revisit how do we produce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.</p>
 
 <p>First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally sunthesized(added) to produce the final output.</p>
 
@@ -431,7 +431,7 @@ It means we can exchange the impulse response and the input signal to generate t
 
 <h2 id="the-formula">The formula?</h2>
 
-<p>Now we have implemented convolution, but it what if we need to know just what the, say, 8th element of the convolved output signal is? Our current implementation will calculate that by computing the whole output signal and then giving us the output. This method is slow and if the input signal is hundreds of thousands(or even millions) of points, it will take a huge amount of time to do that, only to return one element.</p>
+<p>Now we have implemented convolution, but what if we need to know just what the, say, 8th element of the convolved output signal is? Our current implementation will calculate that by computing the whole output signal and then giving us the output. This method is slow and if the input signal is hundreds of thousands(or even millions) of points, it will take a huge amount of time to do that, only to return one element.</p>
 
 <p>So what we need is a mathematical formula of what convolution is.</p>
 
@@ -733,7 +733,7 @@ It means we can exchange the impulse response and the input signal to generate t
 
 <script type="math/tex; mode=display">x[n] * k\delta [n] = kx[n] \tag{8}</script>
 
-<p>So it can be used as an amplifier ar as an attenuator. We can even invert a signal like we did above by setting <script type="math/tex">k=-1</script> and can do much more with this simple property.</p>
+<p>So it can be used as an amplifier or as an attenuator. We can even invert a signal like we did above by setting <script type="math/tex">k=-1</script> and can do much more with this simple property.</p>
 
 <ul>
   <li>If the delta function is shifted by an amount, the output function is also shifted by the same amount:</li>
@@ -779,11 +779,11 @@ It means we can exchange the impulse response and the input signal to generate t
 
 <p>The main difference between calculating the output of correlation from that of convolution is that the <strong>kernel is not flipped</strong>.</p>
 
-<p>If convolution, <script type="math/tex">y[n]</script> of <script type="math/tex">a[n]</script> and <script type="math/tex">b[n]</script> is:</p>
+<p>If convolution, <script type="math/tex">y[n]</script>, of <script type="math/tex">a[n]</script> and <script type="math/tex">b[n]</script> is:</p>
 
 <script type="math/tex; mode=display">y[n] = a[n] * b[n]</script>
 
-<p>then the correlation, <script type="math/tex">c[n]</script> of <script type="math/tex">a[n]</script> and <script type="math/tex">b[n]</script> is:</p>
+<p>then the correlation, <script type="math/tex">c[n]</script>, of <script type="math/tex">a[n]</script> and <script type="math/tex">b[n]</script> is:</p>
 
 <script type="math/tex; mode=display">c[n] = a[n] * b[-n]</script>
 
