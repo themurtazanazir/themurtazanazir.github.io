@@ -77,7 +77,7 @@ So if we know the impulse response of any system, we know the output of any impu
 
 With the information of how outputs to impulses are produced, let's revisit how do we produce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.
 
-First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally sunthesized(added) to produce the final output.
+First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally synthesized(added) to produce the final output.
 
 This whole operation is called convolution of impulse response $$h[n]$$ and input signal $$x[n]$$ and is denoted as:
 
@@ -97,11 +97,11 @@ Let's say our input signal has $$m$$ number of samples and the kernel has $$k$$ 
 
 **Note: When we say a signal has $$s$$ samples, it means we _know_ these $$s$$ samples. The signal actually continues from $$-\infty$$ to $$+\infty$$. We assume every signal(be that input, kernel or output) has values of zero anywhere outside of those $$s$$ samples.**
 
-If an input signal has, say, $$200$$ samples, and a kernel is $$20$$ samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at $$m^{th}$$ impulse of input(i.e at sample no. $$m-1$$), the kernel will be shifted $$m-1$$ places (and scaled as well) and thus will contribute to output signal from  sample no. $$m-1$$ to sample no. $$m+20-1$$ i.e $$m+k-1$$. 
+If an input signal has, say, $$200$$ samples, and a kernel is $$20$$ samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because kernel is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at $$m^{th}$$ impulse of input(i.e at sample no. $$m-1$$), the kernel will be shifted $$m-1$$ places (and scaled as well) and thus will contribute to output signal from  sample no. $$m-1$$ to sample no. $$m+20-1$$ i.e $$m+k-1$$. 
 
 ## Example
 
-Let's see an example to make things more clear. Let's say we have an input of 9 samples a kernel of 4 samples. We will store these in `numpy` arrays.
+Let's see an example to make things more clear. Let's say we have an input of 9 samples and a kernel of 4 samples. We will store these in `numpy` arrays.
 
 
 ```python
@@ -112,7 +112,6 @@ kernel = np.array([1,0.5,-0.3,0.2])
 
 Now input is 9 samples long($$m=9$$) and kernel is 4 samples long ($$k=4$$) so output will be $$m+k-1 = 9+4-1 = 12$$ samples long.
 
-> Note: The size of each signal does not mean these signals are just restricted to these samples. These run to infinity(on both sides) just that the value everywhere else is 0, e.g: sample number 5 onwards and before sample number 0 of kernel are all Zero.
 
 1. Let's start with creating an output array of 12 values with each element equal to zero.
 2. We will then extend our kernels to be of the same size as our outputs and then shift and scale the kernels. 
@@ -330,7 +329,7 @@ Actually the input signal (as well as output and kernel), all are present at all
 
 <center><video src="Figures/1.conv/Anim2.mp4" width="95%" type="video/mp4" controls></video></center>
 
-The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and the that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. **Remember, the kernel is flipped.** 
+The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. **Remember, the kernel is flipped.** 
 
 The <font color="cyan">cyan</font> points in the input signal in above animation are the _padding_ of that signal. The far left and far right data points of the output signal are based on incomplete information, because some of the inputs are padded. We say that the kernel is not fully immersed in the input signal while computing these points. If the kernel is $$n_k$$ samples long, then the $$n_k-1$$ samples of the ouput signal on both sides are based on less information. The farther elements of these $$n_k-1$$ elements (on both sides) are based on lesser information than the closer ones to the center. So the extreme points in the output signal are usually not used. Another way to do this is to control the padding. If we intitially pad the the signal less than $$n_k-1$$ points on both sides, it is equivalent of ignoring the outputs that would have formed because of these points.
 
@@ -540,7 +539,7 @@ For same padding, $$o=m$$,
 $$ m = m + 2p - k +1 \\ \implies p_{same} = \frac{k-1}{2} \tag{7}$$
 
 
-Let's try another kernel. A known high pass filter. Since out input signal consists of a sine function and a linear function, we would like to just keep the higher frequency part(i.e the sine part). The linear part should be removed.
+Let's try another kernel. A known high pass filter. Since our input signal consists of a sine function and a linear function, we would like to just keep the higher frequency part(i.e the sine part). The linear part should be removed.
 
 
 ```python
