@@ -293,7 +293,7 @@ b[n] = \begin{cases}u & n=p\\0 & \text{otherwise} \end{cases} %]]></script>
 
 <p>With the information of how outputs to impulses are produced, let’s revisit how do we produce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.</p>
 
-<p>First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally sunthesized(added) to produce the final output.</p>
+<p>First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally synthesized(added) to produce the final output.</p>
 
 <p>This whole operation is called convolution of impulse response <script type="math/tex">h[n]</script> and input signal <script type="math/tex">x[n]</script> and is denoted as:</p>
 
@@ -313,11 +313,11 @@ b[n] = \begin{cases}u & n=p\\0 & \text{otherwise} \end{cases} %]]></script>
 
 <p><strong>Note: When we say a signal has <script type="math/tex">s</script> samples, it means we <em>know</em> these <script type="math/tex">s</script> samples. The signal actually continues from <script type="math/tex">-\infty</script> to <script type="math/tex">+\infty</script>. We assume every signal(be that input, kernel or output) has values of zero anywhere outside of those <script type="math/tex">s</script> samples.</strong></p>
 
-<p>If an input signal has, say, <script type="math/tex">200</script> samples, and a kernel is <script type="math/tex">20</script> samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at <script type="math/tex">m^{th}</script> impulse of input(i.e at sample no. <script type="math/tex">m-1</script>), the kernel will be shifted <script type="math/tex">m-1</script> places (and scaled as well) and thus will contribute to output signal from  sample no. <script type="math/tex">m-1</script> to sample no. <script type="math/tex">m+20-1</script> i.e <script type="math/tex">m+k-1</script>.</p>
+<p>If an input signal has, say, <script type="math/tex">200</script> samples, and a kernel is <script type="math/tex">20</script> samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because kernel is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at <script type="math/tex">m^{th}</script> impulse of input(i.e at sample no. <script type="math/tex">m-1</script>), the kernel will be shifted <script type="math/tex">m-1</script> places (and scaled as well) and thus will contribute to output signal from  sample no. <script type="math/tex">m-1</script> to sample no. <script type="math/tex">m+20-1</script> i.e <script type="math/tex">m+k-1</script>.</p>
 
 <h2 id="example">Example</h2>
 
-<p>Let’s see an example to make things more clear. Let’s say we have an input of 9 samples a kernel of 4 samples. We will store these in <code class="language-plaintext highlighter-rouge">numpy</code> arrays.</p>
+<p>Let’s see an example to make things more clear. Let’s say we have an input of 9 samples and a kernel of 4 samples. We will store these in <code class="language-plaintext highlighter-rouge">numpy</code> arrays.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="n">input_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.05</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">])</span>
@@ -325,10 +325,6 @@ b[n] = \begin{cases}u & n=p\\0 & \text{otherwise} \end{cases} %]]></script>
 </code></pre></div></div>
 
 <p>Now input is 9 samples long(<script type="math/tex">m=9</script>) and kernel is 4 samples long (<script type="math/tex">k=4</script>) so output will be <script type="math/tex">m+k-1 = 9+4-1 = 12</script> samples long.</p>
-
-<blockquote>
-  <p>Note: The size of each signal does not mean these signals are just restricted to these samples. These run to infinity(on both sides) just that the value everywhere else is 0, e.g: sample number 5 onwards and before sample number 0 of kernel are all Zero.</p>
-</blockquote>
 
 <ol>
   <li>Let’s start with creating an output array of 12 values with each element equal to zero.</li>
@@ -507,7 +503,7 @@ It means we can exchange the impulse response and the input signal to generate t
 
 <center><video src="Figures/1.conv/Anim2.mp4" width="95%" type="video/mp4" controls=""></video></center>
 
-<p>The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and the that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. <strong>Remember, the kernel is flipped.</strong></p>
+<p>The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. <strong>Remember, the kernel is flipped.</strong></p>
 
 <p>The <font color="cyan">cyan</font> points in the input signal in above animation are the <em>padding</em> of that signal. The far left and far right data points of the output signal are based on incomplete information, because some of the inputs are padded. We say that the kernel is not fully immersed in the input signal while computing these points. If the kernel is <script type="math/tex">n_k</script> samples long, then the <script type="math/tex">n_k-1</script> samples of the ouput signal on both sides are based on less information. The farther elements of these <script type="math/tex">n_k-1</script> elements (on both sides) are based on lesser information than the closer ones to the center. So the extreme points in the output signal are usually not used. Another way to do this is to control the padding. If we intitially pad the the signal less than <script type="math/tex">n_k-1</script> points on both sides, it is equivalent of ignoring the outputs that would have formed because of these points.</p>
 
@@ -684,7 +680,7 @@ It means we can exchange the impulse response and the input signal to generate t
 
 <script type="math/tex; mode=display">m = m + 2p - k +1 \\ \implies p_{same} = \frac{k-1}{2} \tag{7}</script>
 
-<p>Let’s try another kernel. A known high pass filter. Since out input signal consists of a sine function and a linear function, we would like to just keep the higher frequency part(i.e the sine part). The linear part should be removed.</p>
+<p>Let’s try another kernel. A known high pass filter. Since our input signal consists of a sine function and a linear function, we would like to just keep the higher frequency part(i.e the sine part). The linear part should be removed.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">highpass_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.23</span><span class="p">,</span><span class="mf">0.23</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="mf">0.23</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">highpass_filter</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
