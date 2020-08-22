@@ -129,16 +129,8 @@ class MLP_batch:
 
                 if save_weights:
                     self.saved_weights.append(self.weights.copy())
-             ---
-title: The Multi Layer Perceptron Part  II
-description: A complete description of mathematics that go in making a multi layered perceptron work.
-tags: 
- - neural networks
- - momentum
-hasplot: true
-coll: neural_network
----
-   b=b+batch_size
+
+                b=b+batch_size
         print(f"Error: {np.sum((A_L-T)**2)/T.shape[0]}")
         
     def predict(self,input_data,weights=None):
