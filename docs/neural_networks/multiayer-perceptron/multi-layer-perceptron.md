@@ -33,7 +33,7 @@ It is the same as with the simple perceptron. We predict the outputs on a given 
 
 The prediction phase is quite simple. We compute the outputs of intermediate layer and use that as input for the final output layer.
 
-But the updation of weights is what makes it a bit tricky. If an error has occured, we don't know which weights to change(or more specifically, in which layer). The error might be in the weights of the first layer or in the final output layer. Since the updation of weights is more complex(or lengthy!) we divide the training into two parts:
+But the updation of weights is what makes it a bit tricky. If an error has occured, we don't know which weights to change. The error might be in the weights of the first layer or in the final output layer. Since the updation of weights is more complex(or lengthy!) we divide the training into two parts:
 1. Forward Process, where we compute the outputs for the data to spot errors. It is also used in the Prediction Phase.
 2. Backward Process, or updation of weights. We will know why it is called _"Backward"_.
 
