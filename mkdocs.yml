@@ -2,13 +2,13 @@ site_name: murtaza
 
 theme:
     name: 'material'
+    logo: 'img/logo.svg'
     palette:
 
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: teal
-      accent: indigo
+      primary: white
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
@@ -16,8 +16,7 @@ theme:
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: teal
-      accent: blue
+      primary: black
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode

@@ -1,2 +1,8 @@
 .vscode/settings.json
 .obsidian
+
+## blog in docs not to be used yet
+docs/blog
+
+## built site
+site

@@ -6,10 +6,6 @@ tags:
  - perceptron
  - perceptron convergence theorem
  - backpropagation
-hasplot: false
-coll_name: "mlp"
-coll: neural_network
-img: nn.png
 ---
 
 {% include lists.md %}

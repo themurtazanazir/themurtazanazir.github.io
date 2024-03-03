@@ -1,19 +1,21 @@
 ---
 title: Convolutional Neural Networks
-description: A Series of posts on the famous convNets.
-tags: 
- - neural networks
- - convolution
- - image recognition
- - pattern recognition
- - deep networks
+description: A Series of posts on the famous ConvNets.
+tags:
+  - neural
+  - networks
+  - convolution
+  - image
+  - recognition
+  - pattern
+  - recognition
+  - deep
+  - networks
 hasplot: false
-coll_name: "conv_net"
+coll_name: conv_net
 coll: neural_network
 img: conv.png
 ---
-
-# {{page.title}}
 
 ## Introduction
 
@@ -23,4 +25,4 @@ This series will be devoted to learn about the Convolutional Neural Networks -  
 
 We will first start with convolutions, more precisely, _discrete_ convolutions. We will try to understand what a convolution is. Why do we do convolutions at all? What does it mean to do a convolution? and the mathematics and other parts around it.
 
-{% include lists.md %}
+Check out [[convolutions]]

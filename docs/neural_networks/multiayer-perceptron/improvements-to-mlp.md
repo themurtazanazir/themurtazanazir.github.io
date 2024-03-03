@@ -4,8 +4,6 @@ description: A complete description of mathematics that go in making a multi lay
 tags: 
  - neural networks
  - momentum
-hasplot: true
-coll: mlp
 ---
 # 3 Improvements for the network
 
