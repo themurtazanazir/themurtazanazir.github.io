@@ -1,13 +1,14 @@
 ---
 title: Maths Behind Perceptron
 description: A complete description of mathematics that go in making a perceptron work.
-tags: 
- - neural networks
- - perceptron
- - deep learning
- - feedforward networks
-hasplot: true
-coll: mlp
+tags:
+  - neural
+  - networks
+  - perceptron
+  - deep
+  - learning
+  - feedforward
+  - networks
 ---
  
 # Mathematics Behind Perceptron

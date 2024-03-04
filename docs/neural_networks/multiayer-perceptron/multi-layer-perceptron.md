@@ -17,8 +17,6 @@ hasplot: true
 ---
 # The Multi Layer Perceptron
 
-
-
 # 1. Introduction
 
 As we have seen, in the Basic [[perceptron]], that a perceptron can only classify the *Linearly Separable* Data. We had two different approaches to get around this problem:
