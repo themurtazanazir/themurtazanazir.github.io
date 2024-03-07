@@ -25,4 +25,4 @@ This series will be devoted to learn about the Convolutional Neural Networks -  
 
 We will first start with convolutions, more precisely, _discrete_ convolutions. We will try to understand what a convolution is. Why do we do convolutions at all? What does it mean to do a convolution? and the mathematics and other parts around it.
 
-Check out [[convolutions]]
+Check out [[convolutions|Convolutions]]

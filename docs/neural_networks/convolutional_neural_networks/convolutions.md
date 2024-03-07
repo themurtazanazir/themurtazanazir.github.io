@@ -10,23 +10,21 @@ coll: conv_net
 
 # Convolutions
 
-* Toc
-{:toc}
 
 ## Introduction
 
-Convolution operation(denoted by $$*$$) is one of the most important, if not the most important technique in Signal Processing. It gives us the idea of how a linear invariant system converts an input signal to an output signal. From now on, we will refer to _digital_ signal as simply signal.
+Convolution operation(denoted by $*$) is one of the most important, if not the most important technique in Signal Processing. It gives us the idea of how a linear invariant system converts an input signal to an output signal. From now on, we will refer to _digital_ signal as simply signal.
 
 Let's first introduce some terminology:
 
-1. **Input Signal$$(x[n])$$:** As the name suggests, it is a signal that acts as an input to a system.
-2. **Output System$$(y[n])$$:** The output that the system generates by acting over the input signal.
+1. **Input Signal$(x[n])$:** As the name suggests, it is a signal that acts as an input to a system.
+2. **Output System$(y[n])$:** The output that the system generates by acting over the input signal.
 3. **Impulse:** An impulse is a signal that is zero everywhere except at a single point.
-4. **Delta function$$(\delta [n])$$:** It is an impulse with value unity at sample number 0 and zero at every other sample number. It is a _normalized_ impulse, also called **unit impulse**.
+4. **Delta function$(\delta [n])$:** It is an impulse with value unity at sample number 0 and zero at every other sample number. It is a _normalized_ impulse, also called **unit impulse**.
 
 $$\delta [n] = \begin{cases} 1 & n=0\\ 0 & \text{otherwise}\end{cases} \tag{1}$$
 
-5. **Impulse response$$(h[n])$$:** The output of a system when a delta function$$(\delta [n])$$ is give as input.
+5. **Impulse response$(h[n])$:** The output of a system when a delta function$(\delta [n])$ is give as input.
 
 The impulse response of a system defines the system. Different systems will have different impulse responces.
 
@@ -34,26 +32,26 @@ Now, how to obtain an output from a system for an input signal? We use what is c
 
 **Decomposition:** Break the input signal into smaller units. Pass those units through the system to get corresponding outputs. Add those outputs to get the final output signal.
 
-There are two main decompositions in signal processing: Fourier Decomposition and Impulse Decomposition. When impulse decomposition is done, it can be described by a mathematical operation called __convolutions__(denoted $$*$$).
+There are two main decompositions in signal processing: Fourier Decomposition and Impulse Decomposition. When impulse decomposition is done, it can be described by a mathematical operation called __convolutions__(denoted $*$).
 
 
 We do an _impulse decomposition_, i.e we decompose our input signal in multiple impulses and then pass those impulses through the system to produce corresponding outputs. The outputs are added to generate the final output signal.
 
 ## Impulse as a delta function
 
-Any impulse function can be represented as a _shifted and scaled_ delta function. e.g: An impulse, say $$a[n]$$ with zeroes everywhere except at sample no. 2, has a value of -1.3. This impulse can be represented as
+Any impulse function can be represented as a _shifted and scaled_ delta function. e.g: An impulse, say $a[n]$ with zeroes everywhere except at sample no. 2, has a value of -1.3. This impulse can be represented as
 
 ![Fig 1](Figures/1.conv/Fig1.png)
 
-In the abpve figure, the LHS is an impulse $$a[n]$$ of -1.3 at sample number 2 and the RHS is a standard delta $$\delta [n]$$ i.e impulse of unity at sample number 0.
+In the abpve figure, the LHS is an impulse $a[n]$ of -1.3 at sample number 2 and the RHS is a standard delta $\delta [n]$ i.e impulse of unity at sample number 0.
 
-Now, we can represent this impulse $$a[n]$$ as a scaled and shifted $$\delta [n]$$ as:
+Now, we can represent this impulse $a[n]$ as a scaled and shifted $\delta [n]$ as:
 
 
 $$a[n] = -1.3\ \delta[n-2]$$
 
 
-Similarly any impulse $$b[n]$$ which has value $$u$$ and sample number $$p$$, i.e
+Similarly any impulse $b[n]$ which has value $u$ and sample number $p$, i.e
 
 
 $$b[n] = \begin{cases}u & n=p\\0 & \text{otherwise} \end{cases}$$
@@ -67,7 +65,7 @@ $$b[n] = u\ \delta[n-p] \tag{2}$$
 
 ## Output of an Impulse
 
-Now if $$a[n]$$ is passed through a system with impulse response $$h[n]$$, what will be the output? Well $$h[n]$$ is the output when the input is $$\delta [n]$$. What could be output when input is $$-1.3 \delta[n-2]$$?
+Now if $a[n]$ is passed through a system with impulse response $h[n]$, what will be the output? Well $h[n]$ is the output when the input is $\delta [n]$. What could be output when input is $-1.3 \delta[n-2]$?
 
 ![](Figures/1.conv/Fig2.png)
 
@@ -79,13 +77,13 @@ With the information of how outputs to impulses are produced, let's revisit how 
 
 First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally synthesized(added) to produce the final output.
 
-This whole operation is called convolution of impulse response $$h[n]$$ and input signal $$x[n]$$ and is denoted as:
+This whole operation is called convolution of impulse response $h[n]$ and input signal $x[n]$ and is denoted as:
 
 
 $$y[n] = x[n] * h[n] \tag{3}$$
 
 
-> **Note:** $$*$$ is not multiplication, it is convolution. 
+> **Note:** $*$ is not multiplication, it is convolution. 
 
 So, to know impulse response of a system, we know output of _any_ input signal. It is something that _defines_ the system.
 
@@ -93,11 +91,11 @@ This impulse response is sometimes called a _kernel_. And the output as _feature
 
 ## Dimensions
 
-Let's say our input signal has $$m$$ number of samples and the kernel has $$k$$ number of samples, then output signal(the convolution of input signal and the kernel, will be $$m+k-1$$.
+Let's say our input signal has $m$ number of samples and the kernel has $k$ number of samples, then output signal(the convolution of input signal and the kernel, will be $m+k-1$.
 
-**Note: When we say a signal has $$s$$ samples, it means we _know_ these $$s$$ samples. The signal actually continues from $$-\infty$$ to $$+\infty$$. We assume every signal(be that input, kernel or output) has values of zero anywhere outside of those $$s$$ samples.**
+**Note: When we say a signal has $s$ samples, it means we _know_ these $s$ samples. The signal actually continues from $-\infty$ to $+\infty$. We assume every signal(be that input, kernel or output) has values of zero anywhere outside of those $s$ samples.**
 
-If an input signal has, say, $$200$$ samples, and a kernel is $$20$$ samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because kernel is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at $$m^{th}$$ impulse of input(i.e at sample no. $$m-1$$), the kernel will be shifted $$m-1$$ places (and scaled as well) and thus will contribute to output signal from  sample no. $$m-1$$ to sample no. $$m+20-1$$ i.e $$m+k-1$$. 
+If an input signal has, say, $200$ samples, and a kernel is $20$ samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because kernel is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at $m^{th}$ impulse of input(i.e at sample no. $m-1$), the kernel will be shifted $m-1$ places (and scaled as well) and thus will contribute to output signal from  sample no. $m-1$ to sample no. $m+20-1$ i.e $m+k-1$. 
 
 ## Example
 
@@ -110,7 +108,7 @@ input_signal = np.array([1.1,0,-1.05,1.4,-1.2,-1.4,-1,0,0.7])
 kernel = np.array([1,0.5,-0.3,0.2])
 ```
 
-Now input is 9 samples long($$m=9$$) and kernel is 4 samples long ($$k=4$$) so output will be $$m+k-1 = 9+4-1 = 12$$ samples long.
+Now input is 9 samples long($m=9$) and kernel is 4 samples long ($k=4$) so output will be $m+k-1 = 9+4-1 = 12$ samples long.
 
 
 1. Let's start with creating an output array of 12 values with each element equal to zero.
@@ -250,7 +248,7 @@ Now the output signal is the sum of all these signals. These signals are added a
 
 Now, after observations, you can tell that the 8th elements of most of these signals is zero (in <font color="cyan">cyan</font>). These were the extensions to make the kernel longer. And these zeros don't contribute anything to the final sum. This is how our calculation gets fast, we only only sum values from those signals, which were not extensions.
 
-So, for element 8, only $$x[5]h[n-5], x[6]h[n-6], x[7]h[n-7] \text{ and  }x[8]h[n-8]$$ contributes (because only these signals are <font color="orange"> orange </font> at sample number 8).
+So, for element 8, only $x[5]h[n-5], x[6]h[n-6], x[7]h[n-7] \text{ and  }x[8]h[n-8]$ contributes (because only these signals are <font color="orange"> orange </font> at sample number 8).
 
 So we can say,
 
@@ -258,7 +256,7 @@ So we can say,
 $$y[8] = x[5]h[n-5] + x[6]h[n-6] + x[7]h[n-7] + x[8]h[n-8]; \qquad \text{for }n=8$$
 
 
-Substituting $$n=8$$,
+Substituting $n=8$,
 
 
 $$y[8] = x[5]h[3] + x[6]h[2] + x[7]h[1] + x[8]h[0]$$
@@ -289,13 +287,13 @@ Again, it can be written as:
 $$\begin{align} y[6] &= x[6-3]h[3] + x[6-2]h[2] + x[6-1]h[1] + x[6-0]h[0] \\ \implies y[6] &= \sum_{k=0}^3 x[6-k]h[k]\end{align}$$
 
 
-Generalizing, for a kernel of size $$n_k$$, running from $$0$$ to $$n_k-1$$
+Generalizing, for a kernel of size $n_k$, running from $0$ to $n_k-1$
 
 
 $$y[i] = (x*h)[i] = \sum_{k=0}^{n_k-1}x[i-k]h[k] \tag{5}$$
 
 
-This equation is called **convolution sum**. It let's us calculate the output at any point independent of other output points. As $$k$$ runs from $$0$$ to $$n_k-1$$, each sample from the kernel, $$h[k]$$ is multiplied with corresponding input samples $$x[i-k]$$ and then summed up to form the output at sample $$i$$.
+This equation is called **convolution sum**. It let's us calculate the output at any point independent of other output points. As $k$ runs from $0$ to $n_k-1$, each sample from the kernel, $h[k]$ is multiplied with corresponding input samples $x[i-k]$ and then summed up to form the output at sample $i$.
 
 ![](Figures/1.conv/Fig6.png)
 
@@ -303,35 +301,35 @@ As you can see in the above figure, the kernel is flipped and multiplied with th
 
 ## Padding
 
-Coming back to Eq. 5, let's see how we can generate, $$y[0]$$ and $$y[11]$$.
+Coming back to Eq. 5, let's see how we can generate, $y[0]$ and $y[11]$.
 
 
 $$y[i] = (x*h)[i] = \sum_{j=0}^{n_k-1}x[i-j]h[j] \tag{5}$$
 
 
-For $$i=0$$ and $$n_k=4$$,
+For $i=0$ and $n_k=4$,
 
 
 $$\begin{align}y[0] = (x*h)[0] &= \sum_{j=0}^{3}x[0-j]h[j] \\ &=x[0]h[0] + x[-1]h[1] + x[-2]h[2] + x[-3]h[3] \end{align}$$
 
 
 
-For $$i=11$$ and $$n_k=4$$,
+For $i=11$ and $n_k=4$,
 
 
 $$\begin{align}y[11] = (x*h)[11] &= \sum_{j=0}^{3}x[11-j]h[j] \\ &=x[11]h[0] + x[10]h[1] + x[9]h[2] + x[8]h[3] \end{align}$$
 
 
 
-In both these equations, we have some inputs, which are not part of our original input signal. Our original signal has sample number 0 to 8. So what would $$x[-3]$$, $$x[2]$$, $$x[-1]$$ and $$x[9]$$, $$x[10]$$, $$x[11]$$ mean?
+In both these equations, we have some inputs, which are not part of our original input signal. Our original signal has sample number 0 to 8. So what would $x[-3]$, $x[2]$, $x[-1]$ and $x[9]$, $x[10]$, $x[11]$ mean?
 
-Actually the input signal (as well as output and kernel), all are present at all samples. It is just they are zero (i.e no signal). And they don't contribute to the convolution and hence are not saved. (Besides, we cannot save infinite numbers in a computer, can we?). But, as it turns out we need some of these zero points, for our outputs. Specifically, we need $$n_k-1$$ points on both sides of an input signal. So we just extend our signal with zeros for these samples. This is what we call **padding**. Padding is a technique where we add a bunch of zeros to a signal where the signal does not exist.
+Actually the input signal (as well as output and kernel), all are present at all samples. It is just they are zero (i.e no signal). And they don't contribute to the convolution and hence are not saved. (Besides, we cannot save infinite numbers in a computer, can we?). But, as it turns out we need some of these zero points, for our outputs. Specifically, we need $n_k-1$ points on both sides of an input signal. So we just extend our signal with zeros for these samples. This is what we call **padding**. Padding is a technique where we add a bunch of zeros to a signal where the signal does not exist.
 
 <center><video src="Figures/1.conv/Anim2.mp4" width="95%" type="video/mp4" controls></video></center>
 
 The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. **Remember, the kernel is flipped.** 
 
-The <font color="cyan">cyan</font> points in the input signal in above animation are the _padding_ of that signal. The far left and far right data points of the output signal are based on incomplete information, because some of the inputs are padded. We say that the kernel is not fully immersed in the input signal while computing these points. If the kernel is $$n_k$$ samples long, then the $$n_k-1$$ samples of the ouput signal on both sides are based on less information. The farther elements of these $$n_k-1$$ elements (on both sides) are based on lesser information than the closer ones to the center. So the extreme points in the output signal are usually not used. Another way to do this is to control the padding. If we intitially pad the the signal less than $$n_k-1$$ points on both sides, it is equivalent of ignoring the outputs that would have formed because of these points.
+The <font color="cyan">cyan</font> points in the input signal in above animation are the _padding_ of that signal. The far left and far right data points of the output signal are based on incomplete information, because some of the inputs are padded. We say that the kernel is not fully immersed in the input signal while computing these points. If the kernel is $n_k$ samples long, then the $n_k-1$ samples of the ouput signal on both sides are based on less information. The farther elements of these $n_k-1$ elements (on both sides) are based on lesser information than the closer ones to the center. So the extreme points in the output signal are usually not used. Another way to do this is to control the padding. If we intitially pad the the signal less than $n_k-1$ points on both sides, it is equivalent of ignoring the outputs that would have formed because of these points.
 
 With that in mind, let's write the code for simple convolution using this method. We will control the padding as well.
 
@@ -442,12 +440,12 @@ def plot_signals(input_signal, kernel, input_name=None, kernel_name=None, output
     if axes is None:
         f, axes = plt.subplots(1,3,figsize=fig_size, facecolor=back_color, gridspec_kw=dict(width_ratios=[len(input_signal),len(kernel),len(output_signal)]))
     
-    input_name = rf"Input Signal $$x[n]$$ ({input_name})" if input_name is not None else r"Input Signal $$x[n]$$"
-    kernel_name = rf"Kernel $$h[n]$$ ({kernel_name})" if kernel_name is not None else r"Kernel $$h[n]$$"
+    input_name = rf"Input Signal $x[n]$ ({input_name})" if input_name is not None else r"Input Signal $x[n]$"
+    kernel_name = rf"Kernel $h[n]$ ({kernel_name})" if kernel_name is not None else r"Kernel $h[n]$"
     
     
     if output_name is None:
-        output_name = rf"Output Signal $$y[n] = x[n] * h[n]$$"+f"\nPadding: {f'full({len(kernel)-1})' if p_flag else padding}"
+        output_name = rf"Output Signal $y[n] = x[n] * h[n]$"+f"\nPadding: {f'full({len(kernel)-1})' if p_flag else padding}"
     
     for ax, data, name, color,label_color in zip(axes, (input_signal, kernel, output_signal), (input_name, kernel_name, output_name), 
                                                  (input_color, kernel_color, list(reversed(unusable_colors)) +\
@@ -492,7 +490,7 @@ inverter[15] = -1
 
 
 ```python
-plot_signals(input_signal, inverter, fig_size=(30,4), input_name=r"$$\sin {\left({}^n/_3\right)} - 0.3 n$$", kernel_name="Inverter");
+plot_signals(input_signal, inverter, fig_size=(30,4), input_name=r"$\sin {\left({}^n/_3\right)} - 0.3 n$", kernel_name="Inverter");
 ```
 
 ![](Figures/1.conv/Fig7.png)
@@ -502,7 +500,7 @@ Look at the output. The signal has been inverted but not at the end points. This
 
 ```python
 plot_signals(input_signal, inverter, fig_size=(30,4), padding = 15, 
-             input_name=r"$$\sin {\left({}^n/_3\right)} - 0.3 n$$", kernel_name="Inverter");
+             input_name=r"$\sin {\left({}^n/_3\right)} - 0.3 n$", kernel_name="Inverter");
 ```
 
 ![](Figures/1.conv/Fig8.png)
@@ -512,20 +510,20 @@ Much better. But remember there are still extreme points which are based on less
 
 ```python
 plot_signals(input_signal, inverter, fig_size=(30,4), padding = 0, 
-             input_name=r"$$\sin {\left({}^n/_3\right)} - 0.3 n$$", kernel_name="Inverter");
+             input_name=r"$\sin {\left({}^n/_3\right)} - 0.3 n$", kernel_name="Inverter");
 ```
 
 ![](Figures/1.conv/Fig9.png)
 
-Notice the difference in sizes of output signal for each padding. We had mentioned earlier that if an input signal is $$m$$ samples long and a kernel is $$k$$ sampes long then the output signal will be $$m+k-1$$ signals long. This is actually true for full padding.
+Notice the difference in sizes of output signal for each padding. We had mentioned earlier that if an input signal is $m$ samples long and a kernel is $k$ sampes long then the output signal will be $m+k-1$ signals long. This is actually true for full padding.
 
-For padding $$p$$,
+For padding $p$,
 
 
 $$o =  m + 2p - k + 1 \tag{6}$$
 
 
-For full padding, $$p=k-1$$,
+For full padding, $p=k-1$,
 
 
 $$\begin{align}o_{full} &= m + 2(k-1) -k +1 \\ &= m + k -1 \end{align}$$
@@ -533,7 +531,7 @@ $$\begin{align}o_{full} &= m + 2(k-1) -k +1 \\ &= m + k -1 \end{align}$$
 
 There is another padding, called _same_ padding. It keeps the input and output size the same.
 
-For same padding, $$o=m$$,
+For same padding, $o=m$,
 
 
 $$ m = m + 2p - k +1 \\ \implies p_{same} = \frac{k-1}{2} \tag{7}$$
@@ -580,9 +578,9 @@ plot_all(input_signal, highpass_filter, input_name=r"$$\sin {\left({}^n/_3\right
 
 ## Properties of Convolution
 
-### 1. Delta Function $$\delta [n]$$
+### 1. Delta Function $\delta [n]$
 
-- It is the identity function for convolution. Just like $$0$$ is for addition ($$a+0=a$$) or like $$1$$ is for multiplication ($$a \times 1 = a$$), similarly:
+- It is the identity function for convolution. Just like $0$ is for addition ($a+0=a$) or like $1$ is for multiplication ($a \times 1 = a$), similarly:
 
 
 $$ x[n] * \delta[n] = x[n] \tag{7}$$
@@ -596,7 +594,7 @@ $$ x[n] * \delta[n] = x[n] \tag{7}$$
 $$x[n] * k\delta [n] = kx[n] \tag{8}$$
 
 
-So it can be used as an amplifier or as an attenuator. We can even invert a signal like we did above by setting $$k=-1$$ and can do much more with this simple property.
+So it can be used as an amplifier or as an attenuator. We can even invert a signal like we did above by setting $k=-1$ and can do much more with this simple property.
 
 - If the delta function is shifted by an amount, the output function is also shifted by the same amount:
 
@@ -623,7 +621,7 @@ This property doesn't mean anything in the signal processing physically. It is j
 $$ (a[n] * b[n]) * c[n] = a[n] * (b[n] * c[n]) \tag{11}$$
 
 
-It provides idea how cascaded systems work. Suppose, we have two kernels, $$h_1[n]$$ and $$h_2[n]$$, and we apply them respectively:
+It provides idea how cascaded systems work. Suppose, we have two kernels, $h_1[n]$ and $h_2[n]$, and we apply them respectively:
 
 
 $$y[n] = (x[n]*h_1[n])*h_2[n]$$
@@ -635,13 +633,13 @@ Now by associative property,
 $$y[n] = x[n] * (h_1[n]*h_2[n])$$
 
 
-Let's say $$h_1[n]* h_2[n] = H[n]$$, then:
+Let's say $h_1[n]* h_2[n] = H[n]$, then:
 
 
 $$y[n] = x[n] * H[n]$$
 
 
-So if we are convolving a signal with $$n$$ kernels one after another, we can equivalently convolve the signal with the convolution of all these kernels with each other. It means a cascaded system can be replaced by a single system. The impulse response is the convolution of all the impulse responses of individual systems.
+So if we are convolving a signal with $n$ kernels one after another, we can equivalently convolve the signal with the convolution of all these kernels with each other. It means a cascaded system can be replaced by a single system. The impulse response is the convolution of all the impulse responses of individual systems.
 
 ### 4. Distributive Property
 
@@ -649,7 +647,7 @@ So if we are convolving a signal with $$n$$ kernels one after another, we can eq
 $$ a[n] * b[n] + a[n] * c[n] = a[n] * (b[n] + c[n]) \tag{12}$$
 
 
-It provides idea of how parallel systems work. If $$n$$ systems share the common input and their outputs are finally added (or subtracted), we can repalce it with a single system with impulse response being the addition (or subtraction) of individual impulse responses  of the systems.
+It provides idea of how parallel systems work. If $n$ systems share the common input and their outputs are finally added (or subtracted), we can repalce it with a single system with impulse response being the addition (or subtraction) of individual impulse responses  of the systems.
 
 ## Correlation
 
@@ -657,13 +655,13 @@ Correlation is another operation that is somewhat similar to convolution. Correl
 
 The main difference between calculating the output of correlation from that of convolution is that the **kernel is not flipped**.
 
-If convolution, $$y[n]$$, of $$a[n]$$ and $$b[n]$$ is:
+If convolution, $y[n]$, of $a[n]$ and $b[n]$ is:
 
 
 $$y[n] = a[n] * b[n]$$
 
 
-then the correlation, $$c[n]$$, of $$a[n]$$ and $$b[n]$$ is:
+then the correlation, $c[n]$, of $a[n]$ and $b[n]$ is:
 
 
 $$c[n] = a[n] * b[-n]$$
@@ -675,9 +673,9 @@ The formula for correlation will be:
 $$c[i] = \sum_{j=0}^{n_k-1}a[i+j]b[j] \tag{13}$$
 
 
-for a kernel that runs from sample number $$0$$ to $$n_k-1$$.
+for a kernel that runs from sample number $0$ to $n_k-1$.
 
-Correlation, unlike convolution, is not commutative. The order matters. We cannot interchange the signals and expect the same cross-correlation. The second signal, which is moved along the first signal is called a target signal, $$t[n]$$. It is called so because correlation is a technique of _pattern recognition_. The amplitude of the output signal at any point is a measure of how much the input signal resembles the target signal at that point.
+Correlation, unlike convolution, is not commutative. The order matters. We cannot interchange the signals and expect the same cross-correlation. The second signal, which is moved along the first signal is called a target signal, $t[n]$. It is called so because correlation is a technique of _pattern recognition_. The amplitude of the output signal at any point is a measure of how much the input signal resembles the target signal at that point.
 
 It means a peak in the cross-correlation will mean a high resemblance, while a negative peak means the opposite.
 
