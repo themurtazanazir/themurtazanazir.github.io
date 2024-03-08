@@ -787,8 +787,9 @@ transformer(input_seq, shifted_target_seq).shape
 
 
 
-Resources:
-1. https://lilianweng.github.io/posts/2018-06-24-attention/ Great post for different types of attentions.
-2. https://www.tensorflow.org/text/tutorials/transformer Official TensorFlow post on transformer information.
-3. https://nlp.seas.harvard.edu/2018/04/03/attention.html The Annotated Transformer (although i think Add and Norm, is implemented a bit differently)
-4. https://mfaizan.github.io/2023/04/02/sines.html Interesting blog developing intuition of positional encoding by using, _complex numbers_, of all numbers. 
+## Resources:
+
+1. <https://lilianweng.github.io/posts/2018-06-24-attention/> Great post for different types of attentions.
+2. <https://www.tensorflow.org/text/tutorials/transformer> Official TensorFlow post on transformer information.
+3. <https://nlp.seas.harvard.edu/2018/04/03/attention.html> The Annotated Transformer (although i think Add and Norm, is implemented a bit differently)
+4. <https://mfaizan.github.io/2023/04/02/sines.html> Interesting blog developing intuition of positional encoding by using, _complex numbers_, of all numbers. 
