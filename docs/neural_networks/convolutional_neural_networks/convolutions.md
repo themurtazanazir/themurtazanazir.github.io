@@ -66,8 +66,8 @@ $$b[n] = u\ \delta[n-p] \tag{2}$$
 ## Output of an Impulse
 
 Now if $a[n]$ is passed through a system with impulse response $h[n]$, what will be the output? Well $h[n]$ is the output when the input is $\delta [n]$. What could be output when input is $-1.3 \delta[n-2]$?
-
-![](Figures/1.conv/Fig2.png)
+%% this is an image here which is white colored. try to replace it with latex or change bg to black%%
+![Fig 2](Figures/1.conv/Fig2.png)
 
 The output is shifted and scaled by the same amount as the delta function is to form the input impulse. These are the properties of _homogeneity_ and _shift invariance_.
 
@@ -175,7 +175,7 @@ f.tight_layout()
 
 The process can be shown graphically as:
 
-<center><video src="Figures/1.conv/Anim1.mp4" width="95%" type="video/mp4" controls></video></center>
+![](Figures/1.conv/Anim1.mp4) 
 
 The key take away from the above graphic is this frame:
 
@@ -325,7 +325,7 @@ In both these equations, we have some inputs, which are not part of our original
 
 Actually the input signal (as well as output and kernel), all are present at all samples. It is just they are zero (i.e no signal). And they don't contribute to the convolution and hence are not saved. (Besides, we cannot save infinite numbers in a computer, can we?). But, as it turns out we need some of these zero points, for our outputs. Specifically, we need $n_k-1$ points on both sides of an input signal. So we just extend our signal with zeros for these samples. This is what we call **padding**. Padding is a technique where we add a bunch of zeros to a signal where the signal does not exist.
 
-<center><video src="Figures/1.conv/Anim2.mp4" width="95%" type="video/mp4" controls></video></center>
+![](Figures/1.conv/Anim2.mp4)
 
 The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. **Remember, the kernel is flipped.** 
 
