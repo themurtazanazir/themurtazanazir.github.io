@@ -300,7 +300,7 @@ An Encoder comprises of multiple encoder layers (similar to satcking of RNNs etc
 
 Residual Skip Connections are added around the two sublayers, followed by a Layer Normalization. Dropout is added to the output of sublayer before adding.  That is,  $\text{LayerNorm}(x + \text{Dropout}(\text{Sublayer}(x)))$, where sublayer can be an MHA or FeedForward Network.
 
-![](files/transformer_encoder_layer.jpg)
+![[files/transformer_encoder_layer.jpg]]
 
 These Encoder layers are stacked together to consume previous layers output to form an encoder. The original transformer Encoder has 6 such layers. 
 
@@ -379,7 +379,7 @@ enc(input_seq).shape
 
 The Transformer encoder is a stack of these layers and some other parts. Let's look at the complete figure of encoder.
 
-![](files/transformer_encoder.jpg)
+![[files/transformer_encoder.jpg]]
 
 As we can see, it is comprised of $N$ encoder layers and has inputs and something called a Positional Encoding System. What is that?
 
@@ -607,7 +607,7 @@ Another benefit of replacing recurrence with attention is that we can use teache
 
 We have to be careful that a timestep does not attend into future timesteps. That is where the attention mask comes in handy. This is called Masked Self Attention or Causal Self Attention.
 
-![[files/CausalSelfAttention-new.png|500]]
+![[files/CausalSelfAttention-new.png|400]]
 Figure: Causal Self attention or masked self attention
 
 
@@ -685,7 +685,7 @@ dec(input_seq, enc_out).shape
 
 Now the complete Decoder.
 
-![](files/transformer_decoder.jpg)
+![[files/transformer_decoder.jpg|200]]
 
 We know the drill, add positinal encodings and a few more layers at the top. We will transform final outputs to be the same dims as out vocab size.
 
@@ -731,7 +731,7 @@ out.shape
 
 Let's put the transformer together now.
 
-![](files/transformer.jpg)
+![[files/transformer.jpg|500]]
 
 We will have some tokenized inputs and tokenized targets. Inputs will go into an embedding layer and then passed onto the encoder to produce some encodings. Target embeddings will be passed onto decoder along with encoder output to produce next timestep sequence.
 
