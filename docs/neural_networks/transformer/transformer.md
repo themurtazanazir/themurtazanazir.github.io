@@ -46,11 +46,13 @@ The decoder is trained to predict the next timestep $y_{t'}$ given the previous 
 the translation $\mathbf{y}$ by decomposing the joint probability into the ordered conditionals:
 
 $$p(\mathbf{y}) = \prod_{t=1}^T p(y_t \mid \{y_1, \dots, y_{t-1}\}, c)$$
+
 where $\mathbf{y} = \begin{pmatrix}y_1 & y_2 & \cdots & y_{T_y}\end{pmatrix}$.
 
 With a Recurrent Network, it can be modelled as:
 
 $$p(y_t \mid \{y_1, \dots, y_{t-1}\}, c) = g(y_{t-1}, s_t, c)$$
+
 where $g$ is a non-linear funtion, $s_t$ is the hidden state of RNN.
 
 ### Introduction
@@ -94,6 +96,7 @@ $$a(s_{i-1}, h_j) = s_{i-1}^\intercal h_j$$
 Vaswani et. al2017, introduced the _scaled dot product attention_, which is defined as
 
 $$a(s_{i-1}, h_j) = \frac{s_{i-1}^\intercal h_j}{\sqrt{n}}$$
+
 where $n$ is the dimension of $h_j$.
 
 The idea behind this scaling was that for very large $n$ dimenional vectors, the dot-product can be huge pushing the softmax into regions with very small gradients. So, the scaling is required.
@@ -209,6 +212,7 @@ It is illustrated in image below:
 So,
 
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1,\dots, \text{head}_h)W^O$$
+
 where
 
 $$\text{head}_i = \text{Attention}(QW^Q_i, KW^K_i, VW^V_i)$$
@@ -300,7 +304,7 @@ An Encoder comprises of multiple encoder layers (similar to satcking of RNNs etc
 
 Residual Skip Connections are added around the two sublayers, followed by a Layer Normalization. Dropout is added to the output of sublayer before adding.  That is,  $\text{LayerNorm}(x + \text{Dropout}(\text{Sublayer}(x)))$, where sublayer can be an MHA or FeedForward Network.
 
-![[files/transformer_encoder_layer.jpg]]
+![](files/transformer_encoder_layer.jpg)
 
 These Encoder layers are stacked together to consume previous layers output to form an encoder. The original transformer Encoder has 6 such layers. 
 
@@ -379,7 +383,7 @@ enc(input_seq).shape
 
 The Transformer encoder is a stack of these layers and some other parts. Let's look at the complete figure of encoder.
 
-![[files/transformer_encoder.jpg]]
+![](files/transformer_encoder.jpg)
 
 As we can see, it is comprised of $N$ encoder layers and has inputs and something called a Positional Encoding System. What is that?
 
@@ -432,7 +436,7 @@ plt.show()
 ```
 
 
-![png](files/notes_40_0.png)
+![](files/notes_40_0.png)
 
 
 One natural question is why this? There are multiple reasons. One it is not learnable. Values are between -1 and 1. Unique for each position. And it can extrapolate to longer sequences than present in training.
@@ -607,7 +611,7 @@ Another benefit of replacing recurrence with attention is that we can use teache
 
 We have to be careful that a timestep does not attend into future timesteps. That is where the attention mask comes in handy. This is called Masked Self Attention or Causal Self Attention.
 
-![[files/CausalSelfAttention-new.png|400]]
+![](files/CausalSelfAttention-new.png)
 Figure: Causal Self attention or masked self attention
 
 
@@ -627,7 +631,7 @@ class CausalSelfAttention(MultiHeadAttention):
 
 Let's look at the complete Decoder Layer Architecture.
 
-![[files/transformer_decoder_layer.jpg|200]]
+![](files/transformer_decoder_layer.jpg)
 
 The Masked Attention was just explained. Now the cross attention, where the key and Values are from the encoder outputs and the queries are from decoder. This is the original concept of encoder-decoder attention by Bhadanau.
 
@@ -685,7 +689,7 @@ dec(input_seq, enc_out).shape
 
 Now the complete Decoder.
 
-![[files/transformer_decoder.jpg|200]]
+![](files/transformer_decoder.jpg)
 
 We know the drill, add positinal encodings and a few more layers at the top. We will transform final outputs to be the same dims as out vocab size.
 
@@ -731,7 +735,7 @@ out.shape
 
 Let's put the transformer together now.
 
-![[files/transformer.jpg|500]]
+![](files/transformer.jpg)
 
 We will have some tokenized inputs and tokenized targets. Inputs will go into an embedding layer and then passed onto the encoder to produce some encodings. Target embeddings will be passed onto decoder along with encoder output to produce next timestep sequence.
 
