@@ -26,7 +26,7 @@ $$\delta [n] = \begin{cases} 1 & n=0\\ 0 & \text{otherwise}\end{cases} \tag{1}$$
 
 5. **Impulse response$(h[n])$:** The output of a system when a delta function$(\delta [n])$ is give as input.
 
-The impulse response of a system defines the system. Different systems will have different impulse responces.
+The impulse response of a system defines the system. Different systems will have different impulse responses.
 
 Now, how to obtain an output from a system for an input signal? We use what is called a Decomposition technique.
 
@@ -66,7 +66,6 @@ $$b[n] = u\ \delta[n-p] \tag{2}$$
 ## Output of an Impulse
 
 Now if $a[n]$ is passed through a system with impulse response $h[n]$, what will be the output? Well $h[n]$ is the output when the input is $\delta [n]$. What could be output when input is $-1.3 \delta[n-2]$?
-%% this is an image here which is white colored. try to replace it with latex or change bg to black%%
 ![Fig 2](Figures/1.conv/Fig2.png)
 
 The output is shifted and scaled by the same amount as the delta function is to form the input impulse. These are the properties of _homogeneity_ and _shift invariance_.
