@@ -1,5 +1,6 @@
-## Attention Is All You Need
+![](files/transformer_poster.jpg)
 
+## Attention Is All You Need
 
 ```python
 import torch
