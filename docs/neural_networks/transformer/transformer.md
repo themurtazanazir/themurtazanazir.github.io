@@ -230,8 +230,9 @@ from torch import nn
 class MultiHeadAttention(nn.Module):
     def __init__(self, num_heads, d_model):
         super(MultiHeadAttention, self).__init__()
-        ## instead of having h layers from d_model to d_k, we can have one layer from d_model to h*d_k
-        ## h*d_k = d_model
+        # instead of having h layers from d_model to d_k, 
+        # we can have one layer from d_model to h*d_k
+        # h*d_k = d_model
         assert d_model%num_heads == 0, "model dim should be divisible by num_heads"
         self.num_heads = num_heads
         self.d_model = d_model
@@ -253,18 +254,25 @@ class MultiHeadAttention(nn.Module):
         v_proj = self.v_layer(v)
 
         # q_proj_heads: batch,T_q, n_heads, d_q
-        q_proj_heads = q_proj.view(bsize, -1,  self.num_heads, int(self.d_model/self.num_heads))
-        k_proj_heads = k_proj.view(bsize, -1,  self.num_heads, int(self.d_model/self.num_heads))
-        v_proj_heads = v_proj.view(bsize, -1,  self.num_heads, int(self.d_model/self.num_heads))
+        q_proj_heads = q_proj.view(bsize, -1,  self.num_heads, 
+                                    int(self.d_model/self.num_heads))
+        k_proj_heads = k_proj.view(bsize, -1,  self.num_heads, 
+                                    int(self.d_model/self.num_heads))
+        v_proj_heads = v_proj.view(bsize, -1,  self.num_heads, 
+                                    int(self.d_model/self.num_heads))
         
         ##put all heads in batch dim since scaled_dot_product_attn already handles batch
         # q_proj_batched: batch*n_heads, T_q, dq
-        q_proj_batched = q_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, -1, int(self.d_model/self.num_heads) )
-        k_proj_batched = k_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, -1, int(self.d_model/self.num_heads) )
-        v_proj_batched = v_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, -1, int(self.d_model/self.num_heads) )
+        q_proj_batched = q_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, 
+                                -1, int(self.d_model/self.num_heads) )
+        k_proj_batched = k_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, 
+                                -1, int(self.d_model/self.num_heads) )
+        v_proj_batched = v_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, 
+                                -1, int(self.d_model/self.num_heads) )
         
         ##attn_out: batch*n_heads, T_q, dq
-        attn_out = scaled_dot_product_attn(q_proj_batched, k_proj_batched, v_proj_batched, mask)
+        attn_out = scaled_dot_product_attn(q_proj_batched, k_proj_batched, v_proj_batched, 
+                                            mask)
         ## batch, n_heads, Tq, dq
         attn_out = attn_out.view(bsize, self.num_heads, -1, int(self.d_model/self.num_heads))
         ##batch, Tq, n_heads, dq
