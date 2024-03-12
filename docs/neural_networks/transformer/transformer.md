@@ -261,7 +261,9 @@ class MultiHeadAttention(nn.Module):
         v_proj_heads = v_proj.view(bsize, -1,  self.num_heads, 
                                     int(self.d_model/self.num_heads))
         
-        ##put all heads in batch dim since scaled_dot_product_attn already handles batch
+        # put all heads in batch dim since scaled_dot_product_attn 
+        # already handles batch
+        
         # q_proj_batched: batch*n_heads, T_q, dq
         q_proj_batched = q_proj_heads.transpose(1,2).reshape(bsize*self.num_heads, 
                                 -1, int(self.d_model/self.num_heads) )
@@ -271,20 +273,18 @@ class MultiHeadAttention(nn.Module):
                                 -1, int(self.d_model/self.num_heads) )
         
         ##attn_out: batch*n_heads, T_q, dq
-        attn_out = scaled_dot_product_attn(q_proj_batched, k_proj_batched, v_proj_batched, 
-                                            mask)
+        attn_out = scaled_dot_product_attn(q_proj_batched, k_proj_batched, 
+                                            v_proj_batched, mask)
         ## batch, n_heads, Tq, dq
-        attn_out = attn_out.view(bsize, self.num_heads, -1, int(self.d_model/self.num_heads))
+        attn_out = attn_out.view(bsize, self.num_heads, 
+                                -1, int(self.d_model/self.num_heads))
         ##batch, Tq, n_heads, dq
         attn_out = attn_out.transpose(1, 2)
         ##batch, Tq, n_heads, h*dq(d_model)
         concat_out = attn_out.reshape(bsize, -1, self.d_model)
 #         concat_out = torch.cat(attns_outs, dim=-1)
         mha_out = self.o_layer(concat_out)
-        return mha_out      
-        
-        
-        
+        return mha_out          
 ```
 
 
