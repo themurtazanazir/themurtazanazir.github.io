@@ -626,7 +626,6 @@ Figure: Causal Self attention or masked self attention
 class CausalSelfAttention(MultiHeadAttention):
     
     def forward(self, x):
-        global mask
         seq_length = x.shape[1]
         batch_size = x.shape[0]
         num_heads = self.num_heads
