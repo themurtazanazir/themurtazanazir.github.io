@@ -551,12 +551,6 @@ Let's complete the code
 
 
 ```python
-torch.tensor([1,2,3])*torch.sqrt(torch.tensor(4))
-```
-
-    tensor([2., 4., 6.])
-
-```python
 class PositionalEmbedding(nn.Module):
     def __init__(self, vocab_size, d_model):
         super(PositionalEmbedding, self).__init__()
@@ -576,9 +570,13 @@ In the paper these embedding weights are shared, but we will keep them separate 
 
 ```python
 class Encoder(nn.Module):
-    def __init__(self, n_layers, d_model, d_ff, num_heads, vocab_size, dropout=0.2):
+    def __init__(self, n_layers, d_model, d_ff, 
+                    num_heads, vocab_size, dropout=0.2):
         super(Encoder, self).__init__()
-        self.encoder_layers = nn.Sequential(*[EncoderLayer(num_heads, d_model, d_ff, dropout)])
+        self.encoder_layers = nn.Sequential(
+                        *[EncoderLayer(num_heads, 
+                                        d_model, d_ff, dropout)]
+                                        )
         self.pos_emb = PositionalEmbedding(vocab_size, d_model)
         
     def forward(self, seq):
@@ -705,9 +703,12 @@ We know the drill, add positinal encodings and a few more layers at the top. We 
 
 ```python
 class Decoder(nn.Module):
-    def __init__(self, n_layers, d_model, d_ff, num_heads, vocab_dim, dropout=0.2):
+    def __init__(self, n_layers, d_model, 
+                    d_ff, num_heads, vocab_dim, dropout=0.2):
         super(Decoder, self).__init__()
-        self.decoder_layers = nn.ModuleList([DecoderLayer(num_heads, d_model, d_ff, dropout)])
+        self.decoder_layers = nn.ModuleList(
+                    [DecoderLayer(num_heads, d_model, 
+                                    d_ff, dropout)])
         self.fc = nn.Linear(d_model, vocab_dim)
         self.softmax = nn.Softmax(dim=-1)
         self.pos_emb = PositionalEmbedding(vocab_dim, d_model)
@@ -757,16 +758,15 @@ class Transformer(nn.Module):
                  inp_vocab_dim, out_vocab_dim, dropout=0.2):
         super(Transformer, self).__init__()
         
-        self.encoder = Encoder(enc_layers, d_model, enc_d_ff, enc_num_heads, inp_vocab_dim)
-        self.decoder = Decoder(dec_layers, d_model, dec_d_ff, dec_num_heads, out_vocab_dim)
+        self.encoder = Encoder(enc_layers, d_model, 
+                                enc_d_ff, enc_num_heads, inp_vocab_dim)
+        self.decoder = Decoder(dec_layers, d_model, 
+                                dec_d_ff, dec_num_heads, out_vocab_dim)
     
     def forward(self, inp_seq, shifted_target):
         encoder_out = self.encoder(inp_seq)
         decoder_out = self.decoder(shifted_target, encoder_out)
-        return decoder_out
-        
-        
-        
+        return decoder_out     
 ```
 
 
