@@ -2,7 +2,7 @@
 
 :root {
   /* Very simple, clean colors */
-  --warm-bg: #ffffff;
+  --warm-bg: #fefcf8;
   --warm-text: #333333;
   --warm-link: #0066cc;
   --warm-link-hover: #0052a3;
@@ -131,6 +131,15 @@ body {
 .md-typeset p {
   margin-bottom: 1em;
   text-align: left;
+}
+
+/* Reduce spacing between consecutive paragraphs starting with strong (for News section) */
+.md-typeset p strong:first-child {
+  display: block;
+}
+
+.md-typeset p + p {
+  margin-top: -0.5em;
 }
 
 /* Drop cap - manual class you can apply in HTML */

@@ -6,11 +6,11 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 ## News
 
-**October 2025** - Our paper "[Better Language Model Inversion by Compactly Representing Next-Token Distributions](https://arxiv.org/abs/2506.17090)" has been accepted at NeurIPS 2025.
+**October 2025** - Our paper [Better Language Model Inversion by Compactly Representing Next-Token Distributions](https://arxiv.org/abs/2506.17090) has been accepted at NeurIPS 2025.
 
-**June 2025** - Joined [Pibit.ai](https://pibit.ai) as a Machine Learning Engineer in Bengaluru.
+**June 2025** - Joined [Pibit.ai](https://pibit.ai) as a Machine Learning Engineer.
 
-**May 2024** - Won IdeaFest innovation competition at Perfios for LLM document parsing innovation.
+**May 2024** - Won IdeaFest innovation competition at Perfios.
 
 **April 2024** - Promoted to Lead Data Scientist at Perfios.
 
@@ -20,17 +20,17 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 **August 2021** - Started as Data Scientist at Karza Technologies in Mumbai.
 
-**July 2021** - Graduated with B.Tech in Computer Science from National Institute of Technology, Srinagar.
+**July 2021** - Graduated with B.Tech in Computer Science from NIT Srinagar.
 
-**January 2021** - Started as Data Science Intern at Subex Limited in Bengaluru.
+**January 2021** - Started as Data Science Intern at Subex Limited.
 
-**September 2020** - Organized competitive coding and mathematics competitions at NIT Srinagar with 30+ participants.
+**September 2020** - Organized competitive coding and mathematics competitions at NIT Srinagar.
 
 **May 2019** - Organized first robotics competition on campus at NIT Srinagar.
 
-**March 2018** - Founded WeByte technical club at NIT Srinagar.
+**March 2018** - Founded WeByte - the technical club at NIT Srinagar.
 
-**August 2017** - Started B.Tech in Computer Science at National Institute of Technology, Srinagar.
+**August 2017** - Started B.Tech in Computer Science at NIT Srinagar.
 
 ## Notes
 
