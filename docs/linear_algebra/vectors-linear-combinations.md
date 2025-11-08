@@ -873,7 +873,10 @@ $$ PA = LU$$
 
 This is a good stopping point in basics. We will next see what does the infinite solutions mean, how we represent them. What are vector spaces and subspaces, rank, invertibility and more.
 
+{% include linalg/1.basics/plot1.html %}
 
 
+{% include linalg/1.basics/plot2.html %}
 
 
+{% include linalg/1.basics/plot3.html %}

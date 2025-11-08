@@ -153,6 +153,7 @@ fig.show()
 ```
 
 
+{% include perceptron-convergence-theorem/fig1.html %}
 
 So we can represent the decision boundary with the weight vector and the bias term. 
 
@@ -272,6 +273,7 @@ fig.update_layout(
 fig.show()
 ```
 
+{% include perceptron-convergence-theorem/fig2.html %}
 
 If you look through the top of the bias axis, you can see the data points are same as they were in the 2D figure, and the weight vector looks the same as well. And the moment you rotate the above figure you can see this new higher dimensional decision boundary also classifies the data and infact passes through the previous decision boundary(the lower dimensional). Further more, you can also see that this plane has also passed through the origin of the coordinate axis. 
 

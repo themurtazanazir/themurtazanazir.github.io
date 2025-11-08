@@ -317,6 +317,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot8.html %}
 
 
 As you can see, this surface has a minimum. A 3D graph looks clumsy, let's use contours of this 3D plot. However plotly doesn't support uneven labels, we will use the logarithm of error to make the plots have regular contours.
@@ -342,6 +343,7 @@ fig.add_trace(go.Scatter(x=[25],y=[-7.8],marker=dict(symbol="x", size=10)))
 fig.show()
 ```
 
+{% include mlp/plot9.html %}
 
 
 These are the contour lines and the cross(x) sign is the minimum of the error, we want our models to descend to that point. Let's see how each model does it. Each line has zero gradient(i.e they lie on the same level) and the perpendicular direction at each line is the steepest gradient.
@@ -402,6 +404,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot10.html %}
 
 
 As you can see, the bigger the batch size, the better the weight updates are. Also look the full batch version took steps which were perpendicular to the contour line at every point(i.e the steepest gradient). But we cannot always afford to use full dataset at one time. And besides, this random-looking update might help us to deviate from local minima. Still we can use a few more tricks to make it faster and better.
@@ -628,6 +631,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot11.html %}
 
 
 As you can see, the updates are much more smooth for SGD. This also makes it possible to use smaller learning rate and thus making it more stable. Let's now see for a complete batch and see something different.
@@ -685,6 +689,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot12.html %}
 
 
 Here are a few important points to note:
@@ -767,6 +772,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot13.html %}
 
 
 Let's now train an MLP on this data. But before that we will normalize the data and split it into training validation and test data in the ratio 4:1:1.
@@ -802,6 +808,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot14.html %}
 
 
 To start with, we will use one hidden layer, with 3 nodes and learning rate of 0.25 for 101 epochs and see what the output is.
@@ -896,6 +903,7 @@ fig.show()
 ```
 
 
+{% include mlp/plot15.html %}
 
 
 As you can see there is not much change in the error after the early stopping point. We have found the for how long the network to be run but now let's figure how many hidden nodes to be used.
