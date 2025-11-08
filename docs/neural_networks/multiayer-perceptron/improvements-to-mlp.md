@@ -1,10 +1,13 @@
 ---
 title: The Multi Layer Perceptron Part  II
 description: A complete description of mathematics that go in making a multi layered perceptron work.
-tags: 
+tags:
  - neural networks
  - momentum
 ---
+
+[← Multi-Layer Perceptron](index.md)
+
 # 3 Improvements for the network
 
 ## 3.1 Introduction

@@ -12,6 +12,8 @@ hasplot: true
 coll: mlp
 ---
 
+[← Multi-Layer Perceptron](index.md)
+
 # Perceptron Convergence Theorem
 
 ## Introduction

@@ -15,6 +15,9 @@ tags:
   - layers
 hasplot: true
 ---
+
+[← Multi-Layer Perceptron](index.md)
+
 # The Multi Layer Perceptron
 
 # 1. Introduction
