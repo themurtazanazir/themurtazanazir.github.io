@@ -2,12 +2,12 @@
 
 :root {
   /* Very simple, clean colors */
-  --warm-bg: #fefcf8;
-  --warm-text: #333333;
+  --warm-bg: #fff8f0;
+  --warm-text: #3d3530;
   --warm-link: #0066cc;
   --warm-link-hover: #0052a3;
-  --warm-border: #e0e0e0;
-  --warm-code-bg: #f5f5f5;
+  --warm-border: #e8dfd6;
+  --warm-code-bg: #f9f6f2;
 
   /* Times New Roman for classic academic look */
   --md-text-font-family: "Times New Roman", Times, serif;
