@@ -67,6 +67,7 @@ body {
 
 /* Typography - simple and small */
 .md-typeset {
+  font-family: "Times New Roman", Times, serif !important;
   font-size: 15px;
   line-height: 1.6;
   color: var(--warm-text);
@@ -131,15 +132,15 @@ body {
   text-align: left;
 }
 
-/* Drop cap - first letter of first paragraph after heading */
-.md-typeset h1 + p::first-letter,
-.md-typeset h2 + p::first-letter {
-  font-size: 3em;
-  line-height: 0.9;
+/* Drop cap - manual class you can apply in HTML */
+.drop-cap::first-letter {
+  font-size: 3.5em;
+  line-height: 0.85;
   float: left;
-  margin-right: 0.1em;
-  margin-top: 0.05em;
+  margin-right: 0.08em;
+  margin-top: 0.08em;
   font-weight: 400;
+  font-family: "Times New Roman", Times, serif;
 }
 
 /* Code blocks */

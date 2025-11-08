@@ -1,6 +1,6 @@
 # Murtaza Nazir
 
-I'm interested in artificial intelligence and deep learning. This site contains my notes on various topics.
+<p class="drop-cap">I'm interested in artificial intelligence and deep learning. This site contains my notes on various topics.</p>
 
 ## Notes
 
