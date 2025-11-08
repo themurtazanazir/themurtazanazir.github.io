@@ -37,3 +37,6 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 **[Linear Algebra](linear_algebra/introduction.md)** - Comprehensive coverage from fundamentals to advanced topics including Gaussian elimination, vector spaces, null spaces, rank, and invertibility. Features interactive visualizations and code examples in Julia.
 
 **[Neural Networks](neural_networks/multiayer-perceptron/index.md)** - In-depth exploration of neural architectures from perceptrons to transformers, covering convergence theorems, backpropagation, CNNs, and attention mechanisms.
+
+- [Transformers](neural_networks/transformer/transformer.md) - Attention-based architecture
+- [Convolutional Neural Networks](neural_networks/convolutional_neural_networks/introduction.md) - Image processing networks
