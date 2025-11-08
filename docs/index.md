@@ -4,7 +4,7 @@
 
 ## News
 
-**October 2025** - Our paper "[Better Language Model Inversion by Compactly Representing Next-Token Distributions](https://arxiv.org/abs/2506.17090)" has been accepted at NeurIPS 2025! The work introduces PILS (Prompt Inversion from Logprob Sequences), achieving 2-3.5× higher exact recovery rates over previous state-of-the-art methods for recovering hidden prompts from language models.
+**October 2025** - Our paper "[Better Language Model Inversion by Compactly Representing Next-Token Distributions](https://arxiv.org/abs/2506.17090)" has been accepted at NeurIPS 2025.
 
 **June 2025** - Joined [Pibit.ai](https://pibit.ai) as a Machine Learning Engineer in Bengaluru.
 
