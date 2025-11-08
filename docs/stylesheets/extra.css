@@ -2,16 +2,16 @@
 
 :root {
   /* Very simple, clean colors */
-  --warm-bg: #ffffff;
-  --warm-text: #333333;
+  --warm-bg: #fef6ec;
+  --warm-text: #4a3f35;
   --warm-link: #0066cc;
   --warm-link-hover: #0052a3;
-  --warm-border: #e0e0e0;
-  --warm-code-bg: #f5f5f5;
+  --warm-border: #e6d5c3;
+  --warm-code-bg: #f7f0e8;
 
-  /* Times New Roman for classic academic look */
-  --md-text-font-family: "Times New Roman", Times, serif;
-  --md-code-font-family: "Courier New", Courier, monospace;
+  /* Claude-style serif font stack */
+  --md-text-font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --md-code-font-family: ui-monospace, "Courier New", Courier, monospace;
 }
 
 /* Override Material theme */
@@ -47,7 +47,7 @@ body {
 /* Main content - simple and centered */
 .md-content {
   margin-left: 0;
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
   background-color: var(--warm-bg);
 }
@@ -61,14 +61,15 @@ body {
 }
 
 .md-main {
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
 }
 
 /* Typography - simple and small */
 .md-typeset {
-  font-family: "Times New Roman", Times, serif !important;
-  font-size: 15px;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
+  font-size: 17px;
+  font-weight: 400;
   line-height: 1.6;
   color: var(--warm-text);
 }
@@ -128,19 +129,19 @@ body {
 
 /* Paragraphs */
 .md-typeset p {
-  margin-bottom: 1em;
-  text-align: left;
+  margin-bottom: 0.3em;
+  text-align: justify;
 }
 
 /* Drop cap - manual class you can apply in HTML */
 .drop-cap::first-letter {
-  font-size: 3.5em;
-  line-height: 0.85;
+  font-size: 3.0em;
+  line-height: 1;
   float: left;
   margin-right: 0.08em;
-  margin-top: 0.08em;
+  margin-top: 0.02em;
   font-weight: 400;
-  font-family: "Times New Roman", Times, serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /* Code blocks */
@@ -225,7 +226,7 @@ body {
 /* Content padding */
 .md-content__inner {
   padding: 2.5em 1em;
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
 }
 
