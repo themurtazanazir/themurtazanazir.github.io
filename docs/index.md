@@ -24,11 +24,11 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 **January 2021** - Started as Data Science Intern at Subex Limited.
 
-**September 2020** - Organized competitive coding and mathematics competitions at NIT Srinagar.
+**September 2020** - Organized competitive coding and mathematics competitions.
 
-**May 2019** - Organized first robotics competition on campus at NIT Srinagar.
+**May 2019** - Organized first robotics competition on campus.
 
-**March 2018** - Founded WeByte - the technical club at NIT Srinagar.
+**March 2018** - Founded WeByte - the technical club.
 
 **August 2017** - Started B.Tech in Computer Science at NIT Srinagar.
 
