@@ -834,4 +834,3 @@ We got a row of zeros for the matrix, which means this matrix is not full row ra
 I think this is a good stopping point. I would recommend practicing for everything that we have covered here. Next up we will try to explain Independence, basis and dimensions of subspaces.
 
 
-{% include linalg/2.spaces/plot1.html %}
