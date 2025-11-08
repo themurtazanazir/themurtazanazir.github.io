@@ -129,17 +129,8 @@ body {
 
 /* Paragraphs */
 .md-typeset p {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   text-align: left;
-}
-
-/* Reduce spacing between consecutive paragraphs starting with strong (for News section) */
-.md-typeset p strong:first-child {
-  display: block;
-}
-
-.md-typeset p + p {
-  margin-top: -0.5em;
 }
 
 /* Drop cap - manual class you can apply in HTML */
