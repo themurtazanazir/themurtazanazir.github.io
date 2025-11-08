@@ -1,137 +1,274 @@
-/* Custom styles for improved typography and readability */
+/* Minimalistic Academic Profile - Warm Colors, No Fancy Effects */
 
 :root {
-  --md-text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --md-code-font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  /* Warm color palette inspired by old academic websites */
+  --warm-bg: #faf8f3;
+  --warm-paper: #fffef9;
+  --warm-text: #3e3020;
+  --warm-heading: #5c4a2e;
+  --warm-link: #8b6914;
+  --warm-link-hover: #b8860b;
+  --warm-border: #d4c4a8;
+  --warm-code-bg: #f5f0e6;
+  --warm-accent: #c17817;
+
+  /* Simple serif font for academic feel */
+  --md-text-font-family: Georgia, "Times New Roman", serif;
+  --md-code-font-family: "Courier New", Courier, monospace;
 }
 
-/* Improve body text readability */
+/* Override Material theme with warm background */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--warm-bg);
+  --md-default-fg-color: var(--warm-text);
+  --md-primary-fg-color: var(--warm-heading);
+  --md-accent-fg-color: var(--warm-accent);
+  --md-typeset-a-color: var(--warm-link);
+}
+
+/* Body and main content */
+body {
+  background-color: var(--warm-bg);
+  color: var(--warm-text);
+}
+
+.md-content {
+  background-color: var(--warm-paper);
+}
+
+/* Typography - Simple and readable */
 .md-typeset {
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--warm-text);
 }
 
 .md-typeset h1 {
-  font-weight: 700;
-  line-height: 1.3;
+  font-weight: 400;
+  font-size: 2em;
+  color: var(--warm-heading);
+  border-bottom: 1px solid var(--warm-border);
+  padding-bottom: 0.3em;
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 
 .md-typeset h2 {
-  font-weight: 600;
-  line-height: 1.4;
-  margin-top: 2rem;
-}
-
-.md-typeset h3 {
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-/* Better spacing for paragraphs */
-.md-typeset p {
-  margin-bottom: 1.2em;
-}
-
-/* Improve code block styling */
-.md-typeset pre {
-  border-radius: 8px;
-  margin: 1.5em 0;
-}
-
-.md-typeset code {
-  border-radius: 4px;
-  padding: 0.1em 0.4em;
-}
-
-/* Enhance tables */
-.md-typeset table:not([class]) {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Improve list styling */
-.md-typeset ul,
-.md-typeset ol {
-  margin-left: 0.5em;
-}
-
-.md-typeset li {
+  font-weight: 400;
+  font-size: 1.5em;
+  color: var(--warm-heading);
+  margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
 
-/* Better blockquote styling */
-.md-typeset blockquote {
-  border-left: 4px solid var(--md-primary-fg-color);
-  padding-left: 1rem;
-  margin: 1.5em 0;
-  font-style: italic;
-  opacity: 0.9;
+.md-typeset h3 {
+  font-weight: 400;
+  font-size: 1.2em;
+  color: var(--warm-heading);
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
 }
 
-/* Smooth transitions */
-a {
-  transition: all 0.2s ease;
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-weight: 400;
+  color: var(--warm-heading);
 }
 
-/* Improve admonitions */
-.md-typeset .admonition {
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+/* Links - Simple underline, no transitions */
+.md-typeset a {
+  color: var(--warm-link);
+  text-decoration: underline;
 }
 
-/* Footer styling */
-.md-footer {
-  margin-top: 3rem;
+.md-typeset a:hover {
+  color: var(--warm-link-hover);
 }
 
-/* Navigation improvements */
-.md-nav__item {
-  padding: 0.2em 0;
+/* Remove all transitions */
+* {
+  transition: none !important;
+  animation: none !important;
 }
 
-/* Better focus states for accessibility */
-a:focus,
-button:focus {
-  outline: 2px solid var(--md-primary-fg-color);
-  outline-offset: 2px;
+/* Paragraphs */
+.md-typeset p {
+  margin-bottom: 1em;
+  text-align: justify;
 }
 
-/* Math equations spacing */
-.md-typeset .arithmatex {
+/* Code blocks - Simple monospace styling */
+.md-typeset pre {
+  background-color: var(--warm-code-bg);
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+  padding: 1em;
   margin: 1em 0;
+  overflow-x: auto;
 }
 
-/* Improve image display */
+.md-typeset code {
+  background-color: var(--warm-code-bg);
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+}
+
+.md-typeset pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Tables - Simple borders */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+  box-shadow: none;
+  background-color: var(--warm-paper);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--warm-code-bg);
+  border: 1px solid var(--warm-border);
+  padding: 0.5em;
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) td {
+  border: 1px solid var(--warm-border);
+  padding: 0.5em;
+}
+
+/* Lists */
+.md-typeset ul,
+.md-typeset ol {
+  margin-left: 2em;
+}
+
+.md-typeset li {
+  margin-bottom: 0.3em;
+}
+
+/* Blockquotes - Simple left border */
+.md-typeset blockquote {
+  border-left: 3px solid var(--warm-border);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  color: var(--warm-heading);
+  background-color: transparent;
+}
+
+/* Remove shadows and rounded corners everywhere */
+.md-typeset .admonition {
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+  box-shadow: none;
+  background-color: var(--warm-code-bg);
+}
+
+/* Images - No border radius */
 .md-typeset img {
-  border-radius: 8px;
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
   max-width: 100%;
   height: auto;
 }
 
-/* Blog post meta information */
-.blog-post-meta {
-  color: var(--md-default-fg-color--light);
-  font-size: 0.85rem;
-  margin-bottom: 1.5rem;
+/* Header - Simple and clean */
+.md-header {
+  background-color: var(--warm-heading);
+  color: var(--warm-paper);
+  box-shadow: none;
+  border-bottom: 2px solid var(--warm-accent);
 }
 
-/* Tags styling */
-.md-tag {
-  border-radius: 12px;
-  padding: 0.2em 0.6em;
-  margin: 0.2em;
-  display: inline-block;
+.md-header__title {
+  color: var(--warm-paper);
+  font-weight: 400;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 76.1875em) {
-  .md-typeset {
-    font-size: 0.85rem;
-  }
+/* Navigation */
+.md-nav {
+  font-size: 0.9rem;
 }
 
-/* Print styles */
+.md-nav__link {
+  color: var(--warm-text);
+}
+
+.md-nav__link:hover {
+  color: var(--warm-link-hover);
+}
+
+.md-nav__link--active {
+  color: var(--warm-accent);
+  font-weight: 600;
+}
+
+/* Footer */
+.md-footer {
+  background-color: var(--warm-heading);
+  color: var(--warm-paper);
+  margin-top: 2em;
+  border-top: 2px solid var(--warm-accent);
+}
+
+.md-footer-meta {
+  background-color: var(--warm-heading);
+}
+
+/* Search */
+.md-search__input {
+  background-color: var(--warm-paper);
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+}
+
+/* Remove fancy focus states - simple outline */
+a:focus,
+button:focus,
+input:focus {
+  outline: 2px solid var(--warm-accent);
+  outline-offset: 0;
+}
+
+/* Horizontal rules */
+.md-typeset hr {
+  border: 0;
+  border-top: 1px solid var(--warm-border);
+  margin: 2em 0;
+}
+
+/* Math equations */
+.md-typeset .arithmatex {
+  margin: 1em 0;
+}
+
+/* Simple content wrapper */
+.md-content__inner {
+  padding: 1.5em;
+}
+
+/* Sidebar */
+.md-sidebar {
+  background-color: var(--warm-bg);
+}
+
+.md-sidebar--primary {
+  background-color: var(--warm-bg);
+}
+
+/* Remove all box shadows */
+* {
+  box-shadow: none !important;
+}
+
+/* Print styles - clean and simple */
 @media print {
   .md-header,
   .md-footer,
@@ -139,7 +276,22 @@ button:focus {
     display: none;
   }
 
+  body {
+    background-color: white;
+  }
+
   .md-typeset {
     font-size: 11pt;
+  }
+}
+
+/* Mobile - keep it simple */
+@media screen and (max-width: 76.1875em) {
+  .md-typeset {
+    font-size: 0.95rem;
+  }
+
+  .md-typeset p {
+    text-align: left;
   }
 }
