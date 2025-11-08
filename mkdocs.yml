@@ -1,4 +1,7 @@
 site_name: murtaza
+site_description: Building AI one tiny piece at a time
+site_author: Murtaza Nazir
+site_url: https://themurtazanazir.github.io/
 
 theme:
     name: 'material'
@@ -20,6 +23,16 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
+
+    features:
+      - navigation.tabs
+      - navigation.sections
+      - navigation.expand
+      - navigation.top
+      - search.suggest
+      - search.highlight
+      - content.code.copy
+      - content.code.annotate
 
 # Extensions
 markdown_extensions:
@@ -62,4 +75,38 @@ plugins:
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid/dist/mermaid.min.js 
+  - https://unpkg.com/mermaid/dist/mermaid.min.js
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/themurtazanazir/
+      name: GitHub
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/murtazanazir/
+      name: Twitter
+
+copyright: Copyright &copy; 2025 Murtaza Nazir
+
+nav:
+  - Home: index.md
+  - Linear Algebra:
+      - Introduction: linear_algebra/introduction.md
+      - Vectors & Linear Combinations: linear_algebra/vectors-linear-combinations.md
+      - Vector Spaces & Subspaces: linear_algebra/vector-spaces-and-subspaces.md
+  - Neural Networks:
+      - Overview: neural_networks/index.html
+      - Multi-Layer Perceptron:
+          - Overview: neural_networks/multiayer-perceptron/index.md
+          - Perceptron: neural_networks/multiayer-perceptron/perceptron.md
+          - Perceptron Convergence: neural_networks/multiayer-perceptron/perceptron-convergence-theorem.md
+          - Multi-Layer Perceptron: neural_networks/multiayer-perceptron/multi-layer-perceptron.md
+          - Improvements to MLP: neural_networks/multiayer-perceptron/improvements-to-mlp.md
+      - Convolutional Neural Networks:
+          - Introduction: neural_networks/convolutional_neural_networks/introduction.md
+          - Convolutions: neural_networks/convolutional_neural_networks/convolutions.md
+      - Transformer:
+          - Transformer: neural_networks/transformer/transformer.md 
