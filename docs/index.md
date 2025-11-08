@@ -2,7 +2,7 @@
 
 <p class="drop-cap">Hello! I'm a Machine Learning Engineer at Pibit.ai, working on AI agents for underwriting. My research interests lie in the interpretability of large language models. I've added a few notes on various topics—feel free to explore.</p>
 
-**Contact**: murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [Twitter](https://twitter.com/murtazanazir/)
+`murtaza.nazir [at] pibit.ai` | [GitHub](https://github.com/themurtazanazir/) | [Twitter](https://twitter.com/murtazanazir/)
 
 ## News
 
