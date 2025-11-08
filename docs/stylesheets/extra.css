@@ -135,7 +135,7 @@ body {
 
 /* Drop cap - manual class you can apply in HTML */
 .drop-cap::first-letter {
-  font-size: 3.2em;
+  font-size: 3.0em;
   line-height: 1;
   float: left;
   margin-right: 0.08em;
