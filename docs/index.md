@@ -41,6 +41,5 @@ Some of the popular and recent notes:
 
 Or checkout the complete sections:
 
-**[Linear Algebra](linear_algebra/introduction.md)** - Comprehensive coverage from fundamentals to advanced topics including Gaussian elimination, vector spaces, null spaces, rank, and invertibility. Features interactive visualizations and code examples in Julia.
-
-**[Neural Networks](neural_networks/multiayer-perceptron/index.md)** - In-depth exploration of neural architectures from perceptrons to transformers, covering convergence theorems, backpropagation, CNNs, and attention mechanisms.
+- **[Linear Algebra](linear_algebra/introduction.md)**
+- **[Neural Networks](neural_networks/multiayer-perceptron/index.md)**
