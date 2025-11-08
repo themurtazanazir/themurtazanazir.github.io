@@ -2,12 +2,12 @@
 
 :root {
   /* Very simple, clean colors */
-  --warm-bg: #fff8f0;
-  --warm-text: #3d3530;
+  --warm-bg: #fef6ec;
+  --warm-text: #4a3f35;
   --warm-link: #0066cc;
   --warm-link-hover: #0052a3;
-  --warm-border: #e8dfd6;
-  --warm-code-bg: #f9f6f2;
+  --warm-border: #e6d5c3;
+  --warm-code-bg: #f7f0e8;
 
   /* Times New Roman for classic academic look */
   --md-text-font-family: "Times New Roman", Times, serif;
@@ -129,7 +129,7 @@ body {
 
 /* Paragraphs */
 .md-typeset p {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
   text-align: left;
 }
 
