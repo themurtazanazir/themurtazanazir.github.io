@@ -1,0 +1,1672 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A complete description of mathematics that go in making a multi layered perceptron work.">
+      
+      
+        <meta name="author" content="Murtaza Nazir">
+      
+      
+        <link rel="canonical" href="https://themurtazanazir.github.io/neural_networks/multiayer-perceptron/multi-layer-perceptron/">
+      
+      
+        <link rel="prev" href="../perceptron-convergence-theorem/">
+      
+      
+        <link rel="next" href="../improvements-to-mlp/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>The Multi Layer Perceptron - Part I - murtaza</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="murtaza" class="md-header__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            murtaza
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Multi Layer Perceptron - Part I
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="murtaza" class="md-nav__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    murtaza
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Algebra
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Algebra
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vectors-linear-combinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vectors & Linear Combinations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vector-spaces-and-subspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Spaces & Subspaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Multi-Layer Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../perceptron-convergence-theorem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron Convergence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../improvements-to-mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Improvements to MLP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Convolutional Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/convolutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convolutions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Transformer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transformer/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../">← Multi-Layer Perceptron</a></p>
+<h1 id="the-multi-layer-perceptron">The Multi Layer Perceptron</h1>
+<p class="drop-cap">As we have seen, in the Basic [perceptron](<./perceptron.md>), that a perceptron can only classify the <em>Linearly Separable</em> Data. We had two different approaches to get around this problem:</p>
+
+<ol>
+<li><strong>The Higher Dimensions</strong>, which was discussed briefly and will be discussed in detail later.</li>
+<li><strong>The Multiple Layers</strong>, which we will discuss now.</li>
+</ol>
+<p>So the concept here is to add an intermediate layer of neurons between the input nodes and the output layer of neurons(as you might have noticed, we are starting to use the term <em>layer</em> quite a lot. You can make a drinking game out of it!). This additional layer will have input from the input nodes, and will have it's own weights(and biases!). Then the outputs generated by this layer will be input for the next layer and so on till the final output layer. So this network can learn more complex functions than just linear ones.</p>
+<p>Now the question is how we train this network?</p>
+<h1 id="2-training-the-mlp">2. Training the MLP</h1>
+<h2 id="21-introduction">2.1 Introduction</h2>
+<p>It is the same as with the simple perceptron. We predict the outputs on a given data. We change the weights for wrong answers, until all the outputs are correct(or until epochs run out!).</p>
+<p>The prediction phase is quite simple. We compute the outputs of intermediate layer and use that as input for the final output layer.</p>
+<p>But the updation of weights is what makes it a bit tricky. If an error has occured, we don't know which weights to change. The error might be in the weights of the first layer or in the final output layer. Since the updation of weights is more complex(or lengthy!) we divide the training into two parts:
+1. Forward Process, where we compute the outputs for the data to spot errors. It is also used in the Prediction Phase.
+2. Backward Process, or updation of weights. We will know why it is called <em>"Backward"</em>.</p>
+<h2 id="22-forward-process">2.2 Forward Process</h2>
+<p>This process is pretty straight forward, the intermediate layer has its own weights which connect the input nodes to its neurons. The intermediate layer can have any number of neurons. We will just calculate if each neuron will fire or not in that layer. That vector will be the output of that layer and the input for next layer which will finally generate the final outputs.</p>
+<p>It is note here that it is not necessary to have just have one intermediate layer but as many layers as we want and they will work the same as passing on their outputs as inputs for next layer until the final output is generated.</p>
+<p>The intermediate layers are called <strong>hidden layers</strong>. As we had seen in the simple Perceptron that an additional input bias node was required. So while using the outputs of a hidden layer as inputs for a next layer we again add a bias node of constant value(-1,say) to the layer but while computing the outputs of any hidden layer from it's previous layer, we ignore the bias unit, as it is always constant.</p>
+<p><img alt="" src="../Files/Pictures/MLP_structure.png" /></p>
+<p>Figure 1</p>
+<p>As you can see in the above network, a bias node is from input layer to hidden layer and another bias node from the hidden layer to output layer. There is no weight from the previous layer to the bias node of any layer as it is not computed but is constant.</p>
+<p>Let's say we have <span class="arithmatex">\(L\)</span> number of layers(not including the input layer but output layer is included). So <span class="arithmatex">\(L-1\)</span> layers are hidden layers. The input layer will have nodes as many as there are features in the data and the output layer will have as many neurons as the number of classes(or 1 if there are two classes or if we are using the network for regression). The rest of the network i.e all the hidden layers can have as many neurons as we want.</p>
+<p>Let:
+- <span class="arithmatex">\(n_i\)</span>: the number of neurons in <span class="arithmatex">\(i^{th}\)</span> layer.
+- <span class="arithmatex">\(a^{(i)}_j\)</span>: the output generated by <span class="arithmatex">\(j^{th}\)</span> neuron in <span class="arithmatex">\(i^{th}\)</span> layer.
+- <span class="arithmatex">\(w^{(i)}_{jk}\)</span>: weight connecting the <span class="arithmatex">\(j^{th}\)</span> neuron of <span class="arithmatex">\((i-1)^{th}\)</span> layer to <span class="arithmatex">\(k^{th}\)</span> neuron of <span class="arithmatex">\(i^{th}\)</span> layer.
+- <span class="arithmatex">\(g_{(i)}\)</span> is the activation functionof <span class="arithmatex">\(i^{th}\)</span> layer.</p>
+<p><em>Note: We can also use the term <span class="arithmatex">\(0^{th}\)</span> layer for the input layer. So <span class="arithmatex">\(n_0\)</span> is the number of input features. <span class="arithmatex">\(a^0_j=x_j\)</span> is the <span class="arithmatex">\(j^{th}\)</span> input node. <span class="arithmatex">\(a^0_0=x_0\)</span> is the bias node of input layer.</em></p>
+<p>We compute the activation of <span class="arithmatex">\(j^{th}\)</span> neuron in <span class="arithmatex">\(i^{th}\)</span> layer as:</p>
+<div class="arithmatex">\[a^{(i)}_j = g_{(i)}\bigg(\sum_{k=0}^{n_{i-1}} a^{(i-1)}_kw^{(i)}_{kj}\bigg)  \qquad \forall \ j \in [1,n_i] \tag{1}\]</div>
+<p>where <span class="arithmatex">\(g_{(i)}\)</span> is the activation of <span class="arithmatex">\(i^{th}\)</span> layer.</p>
+<p>Note: We did not compute for <span class="arithmatex">\(j=0\)</span> i.e we did not compute <span class="arithmatex">\(a^{(i)}_0\)</span> as that will be the bias node and has constant value.</p>
+<p>To make things a bit more simpler, we introduce another term, <span class="arithmatex">\(h^{(i)}_j\)</span>, where:</p>
+<div class="arithmatex">\[ h^{(i)}_j = \sum_{k=0}^{n_{i-1}} a^{(i-1)}_kw^{(i)}_{kj} \tag{2} \]</div>
+<p>So Equation 1 can be changed to:</p>
+<div class="arithmatex">\[ a^{(i)}_j = g_{(i)}\big(h^{(i)}_j\big) \tag{3} \]</div>
+<p>To get the final outputs,
+Repeat Equation 1 <span class="arithmatex">\(\forall i \in [1,L]\)</span> sequentially.</p>
+<p>We will see it in action later in implementation.</p>
+<h2 id="23-backward-process-updation-of-weights">2.3 Backward Process (Updation of weights)</h2>
+<h3 id="231-introduction">2.3.1 Introduction</h3>
+<p>Now that we have generated outputs, it is time to check them against the ground truth targets and make changes in weights to correct the errors made. But the problem is we don't know which weights made the error, especially in which layer was the error.</p>
+<p>Now even if we follow the basic rule of updating weights as in simple perceptron, we will compute error in each output neuron and update the weights using the learning rate and the inputs. But how to update weights of the layer before? We don't know the ground truth values for hidden layers. How do we compute error in these layers?</p>
+<h3 id="232-the-backpropagation-algorithm">2.3.2 The Backpropagation Algorithm</h3>
+<h4 id="2321-introduction">2.3.2.1 Introduction</h4>
+<p>The Backpropagation Algorithm is the core of Multi Layer Neural Networks. It works on the principle of <em>gradient descent</em> and minimizing error.</p>
+<p>If you recall from the basic perceptron, we updated weights as:</p>
+<div class="arithmatex">\[ w_{ij} \leftarrow w_{ij} - \eta (y_j-t_j)x_i \]</div>
+<p>Here we are doing the same but for each layer, but instead of using <span class="arithmatex">\((y_j-t_j)\)</span> we will let the calculus decide the error in that hidden layer, as we don't know the ground truth targets for hidden layers(and that's why they are called so!) and <span class="arithmatex">\(x_i\)</span> was the input node for that weight, where as in layer <span class="arithmatex">\(l\)</span>, the input comes from the layer before (<span class="arithmatex">\(a^{(l-1)}_j\)</span>).</p>
+<p>So we can write for each layer,<span class="arithmatex">\(l\)</span>, we will update weights as:</p>
+<div class="arithmatex">\[ w^{(l)}_{jk} \leftarrow w^{(l)}_{jk} - \eta \delta^{(l)}_k a^{(l-1)}_j \tag{4} \]</div>
+<p>where <span class="arithmatex">\(\delta^{(l)}_k\)</span> is the error in <span class="arithmatex">\(k^{th}\)</span> neuron of <span class="arithmatex">\(l^{th}\)</span> layer.</p>
+<p>Please make sure it is the error in a neuron and not the total error in the network, which we will define now.</p>
+<h4 id="2322-the-network-error">2.3.2.2 The Network Error</h4>
+<p>Now to get around the problem of updating weights in hidden layers, we decide to formalize the error in the network and try to minimize it.</p>
+<p>As in Simple Perceptron, we had used the simple difference as our error function for each output neuron which was fine but now we would like to minimize the error of the network. There are multiple ways of doing it. We will see an example for that. But, for now let's say the total error in the network is <span class="arithmatex">\(E\)</span>.</p>
+<p>The error of the network has to be a function of final outputs and ground truth targets, that is how we will compute error.</p>
+<p>Actually we will have a <em>loss function</em> for each output neuron, which will be summed. Let the loss in <span class="arithmatex">\(i^{th}\)</span> neuron be a function <span class="arithmatex">\(\mathcal{L}(y_i,t_i)\)</span>.</p>
+<p>The total Error for an example will be the sum of loss functions in each final neuron. </p>
+<p>So,</p>
+<div class="arithmatex">\[ E = \sum_{i=1}^{n_{L}} \mathcal{L}(y_i,t_i) \tag{5} \]</div>
+<p>where <span class="arithmatex">\(y_i = a^{(L)}_i\)</span> is the output of <span class="arithmatex">\(i^{th}\)</span> output neuron in the final layer and <span class="arithmatex">\(t_i\)</span> is the corresponding true value.</p>
+<p>You can even go ahead and sum this error for every training example and call that the error of the network and try to minimize that but we will define this as our network error.</p>
+<h4 id="2323-computing-gradients">2.3.2.3 Computing Gradients</h4>
+<p>Now to minimize this error, we will use calculus, specifically differential calculus. We can compute the gradient of the error along each weight dimension in the network and try to minimize by changing weights along the minimizing gradient.</p>
+<p>So the gradient of the Error(<span class="arithmatex">\(E\)</span>) w.r.t a weight <span class="arithmatex">\(w^{(l)}_{jk}\)</span> in layer <span class="arithmatex">\(l\)</span> is:</p>
+<div class="arithmatex">\[ \frac{∂E}{∂w^{(l)}_{jk}} \]</div>
+<p>The negative of this gradient is the direction along which the Error is minimum along this weight dimension. Now we know what direction to change the weights in and for the <em>amount</em> we need to change we will use the learning rate.</p>
+<p>So weight update can also be defined for any weight from neuron <span class="arithmatex">\(p\)</span> of layer <span class="arithmatex">\((l-1)\)</span> to neuron <span class="arithmatex">\(q\)</span> of layer <span class="arithmatex">\(l\)</span>:</p>
+<div class="arithmatex">\[ w^{(l)}_{pq} \leftarrow w^{(l)}_{pq} - \eta \frac{∂E}{∂w^{(l)}_{pq}} \tag{6} \]</div>
+<p>Comparing Equation 4 and 6,</p>
+<div class="arithmatex">\[ \frac{∂E}{∂w^{(l)}_{pq}} = \delta^{(l)}_q a^{(l-1)}_p \tag{7} \]</div>
+<p>Now to compute the gradient of weights, we will use the chain rule:</p>
+<div class="arithmatex">\[ \frac{∂E}{∂w^{(l)}_{pq}} = \frac{∂E}{∂h^{(l)}_{q}}\frac{∂h^{(l)}_{q}}{∂w^{(l)}_{pq}} \tag{8} \]</div>
+<p>Recalling <a href="#Eq2">Equation 2</a>:</p>
+<div class="arithmatex">\[ \begin{align} h^{(l)}_q &amp;= \sum_{k=0}^{n_{l-1}} a^{(l-1)}_kw^{(i)}_{kq}\\ \implies \frac{∂h^{(l)}_{q}} {∂w^{(l)}_{pq}}&amp;= a^{(l-1)}_p \end{align} \tag{9} \]</div>
+<p>The above equation holds by the fact that it is a partial derivative and all other weights and outputs are constant and their differentiation is zero except the weight we are differentiating with.</p>
+<p>Using Equation 9 in 8:</p>
+<div class="arithmatex">\[ \frac{∂E}{∂w^{(l)}_{pq}} =  \frac{∂E}{∂h^{(l)}_{q}} a^{(l-1)}_p \tag{10} \]</div>
+<p>Comparing Equation 10 and 7:</p>
+<div class="arithmatex">\[ \delta^{(l)}_q =\frac{∂E}{∂h^{(l)}_{q}} \tag{11} \]</div>
+<p>The above equation is one of the most important equations in Backpropagation algorithm. It defines the error in <span class="arithmatex">\(q^{th}\)</span> neuron of <span class="arithmatex">\(l^{th}\)</span> layer. </p>
+<h4 id="2324-computing-gradients-final-layer">2.3.2.4 Computing Gradients (Final Layer)</h4>
+<p>Let's try to compute the weight updates for weights in final output layer.</p>
+<p>Using <a href="#Eq4">Equation 4</a> for the final layer:</p>
+<div class="arithmatex">\[
+w^{(L)}_{pq} \leftarrow w^{(L)}_{pq} - \eta \delta^{(L)}_qa^{(L-1)}_p
+\tag{12}\]</div>
+<p>Now let's compute <span class="arithmatex">\(\delta^{(L)}_q\)</span>(i.e error in <span class="arithmatex">\(q^{th}\)</span> neuron of final layer):</p>
+<p>From Equation 11:</p>
+<div class="arithmatex">\[
+\delta^{(L)}_q=\frac{∂E}{∂h^{(L)}_{q}} \tag{13}
+\]</div>
+<p>As we know the error is the sum of loss functions on each output neuron:</p>
+<div class="arithmatex">\[ E = \sum_{i=1}^{n_{L}} \mathcal{L}(y_i,t_i) \tag{14} \]</div>
+<p>where <span class="arithmatex">\(y_i = a^{(L)}_i\)</span>, the output of <span class="arithmatex">\(i^{th}\)</span> neuron in the final layer.</p>
+<p>Using <a href="#Eq3">Equation 3</a>:</p>
+<p>$$ E = \sum_{i=1}^{n_{L}} \mathcal{L}\big(g_{(L)}(h^{(L)}_i),t_i\big) \tag{15} $$
+where <span class="arithmatex">\(g_{(L)}\)</span> is the activation of final layer.</p>
+<p>Coming back to Equation 13:</p>
+<div class="arithmatex">\[ \begin{align} \delta^{(L)}_q&amp;= \frac{∂}{∂h^{(L)}_{q}} \bigg( \sum_{i=1}^{n_{L}}\mathcal{L}\big(g_{(L)} (h^{(L)}_i),t_i\big) \bigg)\\ &amp;= \sum_{i=1}^{n_{L}} \frac{∂}{∂h^{(L)}_{q}} \bigg( \mathcal{L}\big(g_{(L)} (h^{(L)}_i),t_i\big) \bigg) \tag{16} \end{align} \]</div>
+<p>Since it is a partial derivative, all other functions except for those of <span class="arithmatex">\(h^{(L)}_q\)</span> are considered constant and hence differentiation is zero. i.e:</p>
+<div class="arithmatex">\[ \frac{∂}{∂h^{(L)}_{q}} \bigg( \mathcal{L}\big(g_{(L)}(h^{(L)}_i),t_i\big) \bigg) = \begin{cases} g_{(L)}'(h^{(L)}_i)\ \mathcal{L}' \big(g_{(L)}(h^{(L)}_i),t_i\big) &amp; \text{if } i = q \\ 0 &amp; \text{if } i \neq q \end{cases} \tag{17} \]</div>
+<div class="arithmatex">\[ \begin{align} \implies \delta^{(L)}_q&amp;=g_{(L)}'\big(h^{(L)}_q\big)\ \mathcal{L}'\big(g_{(L)}(h^{(L)}_q),t_q\big) \\ &amp;=g_{(L)}'\big(h^{(L)}_q\big)\ \mathcal{L}'\big(y_q,t_q\big) \tag{18} \end{align} \]</div>
+<p>Equation 18 above calculates the error in neuron number <span class="arithmatex">\(q\)</span> in layer <span class="arithmatex">\(L\)</span>(the final layer).</p>
+<p>Using the above equation in Equation 13,</p>
+<div class="arithmatex">\[ w^{(L)}_{pq} \leftarrow w^{(L)}_{pq} -  \eta \Big[g_{(L)}'\big(h^{(L)}_q\big)\ \mathcal{L}'\big(y_q,t_q \big)\Big] a^{(L-1)}_p \tag{19}\]</div>
+<p>This looks very confusing at first, but have a look at the indices and you'll get the hang of it. Besides we will have an example for a specific loss function later.</p>
+<p>Also you might have noticed that we perform differentiation of the activation function, so our current activation function (the threshold function) is no good here as that is non-differentiable at 0. We will use some new activation functions later.</p>
+<h4 id="2325-computing-gradients-final-hidden-layer">2.3.2.5 Computing Gradients (Final Hidden Layer)</h4>
+<p>Now, that we have computed error in the final layer and updated weights, let's try updating weights in the final hidden layer (i.e 2nd last layer, <span class="arithmatex">\(L-1\)</span>). We will proceed the same as we did with the final output layer before.</p>
+<p>Again Using <a href="#Eq4">Equation 4</a> for the final hidden layer:</p>
+<div class="arithmatex">\[ w^{(L-1)}_{pq} \leftarrow w^{(L-1)}_{pq} - \eta \delta^{(L-1)}_qa^{(L-2)}_p \tag{20}\]</div>
+<p>Now let's compute <span class="arithmatex">\(\delta^{(L-1)}_q\)</span>(i.e error in <span class="arithmatex">\(q^{th}\)</span> neuron of final hidden layer):</p>
+<p>From <a href="#Eq11">Equation 11</a>:</p>
+<div class="arithmatex">\[ \delta^{(L-1)}_q=\frac{∂E}{∂h^{(L-1)}_{q}} \tag{21} \]</div>
+<p>Now this is where the chain rule comes to propagate the error,</p>
+<div class="arithmatex">\[
+\begin{align}
+\delta^{(L-1)}_q&amp;=\frac{∂E}{∂h^{(L-1)}_{q}}\\
+&amp;=\frac{∂E}{∂h^{(L)}_{i}}\frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}}\\
+&amp;\ \forall\  i \in [1,n_L]
+\tag{22}
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\delta^{(L-1)}_q=\sum_{i=1}^{n_L}\frac{∂E}{∂h^{(L)}_{i}}\frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}}
+\tag{23}
+\]</div>
+<p>Using <a href="#Eq13">Equation 13</a>,</p>
+<div class="arithmatex">\[ \delta^{(L-1)}_q=\sum_{i=1}^{n_L}\delta^{(L)}_i\frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}} \tag{24} \]</div>
+<p>Now let's compute <span class="arithmatex">\(\frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}}\)</span>, using <a href="#Eq2">Equation 2</a>:</p>
+<div class="arithmatex">\[ \frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}} = \frac{∂}{∂h^{(L-1)}_{q}} \Big( \sum_{k=0}^{n_{L-1}} a^{(L- 1)}_kw^{(L)}_{ki} \Big) \tag{25} \]</div>
+<p>Using <a href="#Eq3">Equation 3</a>,</p>
+<div class="arithmatex">\[ \begin{align} \frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}} &amp;= \frac{∂}{∂h^{(L-1)}_{q}} \Big(\sum_{k=0}^{n_{L-1}} g_{(L- 1)}\big(h^{(L-1)}_k\big)w^{(L)}_{ki} \Big)\\ &amp;=  \sum_{k=0}^{n_{L-1}} w^{(L)}_{ki} \frac{∂}{∂h^{(L-1)}_{q}} \Big(  g_{(L-1)}\big(h^{(L-1)}_k\big) \Big) \tag{26} \end{align} \]</div>
+<p>Again it is a partial derivative, so just the functions of <span class="arithmatex">\(h^{(L-1)}_q\)</span> are considered as variables, all others are constant and differentiate to Zero.</p>
+<div class="arithmatex">\[ \frac{∂}{∂h^{(L-1)}_{q}} \Big( g_{(L-1)}\big(h^{(L-1)}_k\big) \Big) = \begin{cases} g_{(L-1)}'\big(h^{(L- 1)}_k\big) &amp; \text{if } k = q \\ 0 &amp; \text{if } k \neq 0 \end{cases} \tag{27} \]</div>
+<div class="arithmatex">\[\implies \frac{∂(h^{(L)}_{i})}{∂h^{(L-1)}_{q}} =  w^{(L)}_{qi} \  g_{(L-1)}'\big(h^{(L-1)}_q\big)\tag{28} \]</div>
+<p>Since the Equations 25 - 28 could have worked for any layer <span class="arithmatex">\(l\)</span> and not just layer <span class="arithmatex">\(L-1\)</span>, we can also generalize the above result, for any layer <span class="arithmatex">\(l\)</span>, as:</p>
+<div class="arithmatex">\[ \frac{∂(h^{(l)}_{i})}{∂h^{(l-1)}_{q}} = w^{(l)}_{qi} \  g_{(l-1)}'\big(h^{(l-1)}_q\big)  \tag{29} \]</div>
+<p>The above equation is also important as we will see, in a moment.</p>
+<p>Using equation 29 in <a href="#Eq24">Equation 24</a>, we get:</p>
+<div class="arithmatex">\[\begin{align} \delta^{(L-1)}_q&amp;=\sum_{i=1}^{n_L}\delta^{(L)}_iw^{(L)}_{qi} g_{(L-1)}'\big(h^{(L-1)}_q\big)\\ &amp;= g_{(L-1)}'\big(h^{(L-1)}_q\big) \sum_{i=1}^{n_L}\delta^{(L)}_iw^{(L)}_{qi} \tag{30} \end{align} \]</div>
+<p>Now, coming back to <a href="#Eq20">Equation 20</a>:</p>
+<div class="arithmatex">\[ w^{(L-1)}_{pq} \leftarrow w^{(L-1)}_{pq} - \eta \delta^{(L-1)}_qa^{(L-2)}_p \tag{20} \]</div>
+<p>We can now update the weights of the final hidden layer as the error from the final layer has propagated to the final hidden layer.</p>
+<h4 id="2326-summarizing-the-important-points">2.3.2.6 Summarizing the important points.</h4>
+<p>Let's list all the important results that we derived uptill this point to avoid confusion.</p>
+<ol>
+<li>We update the weights of any layer <span class="arithmatex">\(l\)</span> as <a href="#Eq4">Equation 4</a>:</li>
+</ol>
+<div class="arithmatex">\[ w^{(l)}_{jk} \leftarrow w^{(l)}_{jk} - \eta \delta^{(l)}_k a^{(l-1)}_j \tag{4} \]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(\eta\)</span> is the learning rate.</li>
+<li><span class="arithmatex">\(a^{(l-1)}_j\)</span> is the output generated by <span class="arithmatex">\(j^{th}\)</span> neuron in the previous layer</li>
+<li>
+<p><span class="arithmatex">\(\delta^{(l)}_k\)</span> is the error generated in the <span class="arithmatex">\(k^{th}\)</span> neuron of <span class="arithmatex">\(l^{th}\)</span> layer explained below.</p>
+</li>
+<li>
+<p>The output of <span class="arithmatex">\(j^{th}\)</span> neuron in the <span class="arithmatex">\(i^{th}\)</span> layer is given by <a href="#Eq3">Equation 3</a>:</p>
+</li>
+</ul>
+<div class="arithmatex">\[ a^{(i)}_j = g_{(i)}\big(h^{(i)}_j\big) \tag{3} \]</div>
+<p>where:
+    * <span class="arithmatex">\(g_{(i)}\)</span> is the activation function of layer <span class="arithmatex">\(i\)</span>.
+    * <span class="arithmatex">\(h^{(i)}_j\)</span> is the summation output of the <span class="arithmatex">\(j^{th}\)</span> neuron of <span class="arithmatex">\(i^{th}\)</span> layer explained below.</p>
+<ol>
+<li>The summation output has been assigned a new term as it makes calculations easier and leads to definition of the error in a neuron. The summation output in <span class="arithmatex">\(j^{th}\)</span> neuron of <span class="arithmatex">\(i^{th}\)</span> layer is as <a href="#Eq2">Equation 2</a>:</li>
+</ol>
+<div class="arithmatex">\[ h^{(i)}_j = \sum_{k=0}^{n_{i-1}} a^{(i-1)}_kw^{(i)}_{kj} \tag{2} \]</div>
+<p>where:
+* <span class="arithmatex">\(a^{(i-1)}_k\)</span> is the output from the <span class="arithmatex">\(k^{th}\)</span> neuron of the previous layer <span class="arithmatex">\((i-1)^{th}\)</span> layer.
+*  <span class="arithmatex">\(w^{(i)}_{kj}\)</span> is the weight joining the <span class="arithmatex">\(k^{th}\)</span> neuron of previous (<span class="arithmatex">\((i-1)^{th}\)</span>) layer to the <span class="arithmatex">\(j^{th}\)</span> neuron of current (<span class="arithmatex">\(i^{th}\)</span>) layer.</p>
+<ol>
+<li>The error in <span class="arithmatex">\(q^{th}\)</span> neuron in <span class="arithmatex">\(l^{th}\)</span> layer is defined by <a href="#Eq11">Equation 11</a>:</li>
+</ol>
+<div class="arithmatex">\[ \delta^{(l)}_q =\frac{∂E}{∂h^{(l)}_{q}} \tag{11} \]</div>
+<p>where:
+* <span class="arithmatex">\(E\)</span> is the total error of the network.
+* <span class="arithmatex">\(h^{(l)}_q\)</span> is the summation output of <span class="arithmatex">\(q^{th}\)</span> neuron in <span class="arithmatex">\(l^{th}\)</span> layer.</p>
+<ol>
+<li>The derivative of summation output of <span class="arithmatex">\(i^{th}\)</span> neuron in the next (<span class="arithmatex">\(l^{th}\)</span>) layer w.r.t <span class="arithmatex">\(q^{th}\)</span> neuron in current (<span class="arithmatex">\((l-1)^{th}\)</span>) layer given in <a href="#Eq29">Equation 29</a>:</li>
+</ol>
+<div class="arithmatex">\[
+\frac{∂(h^{(l)}_{i})}{∂h^{(l-1)}_{q}} = 
+w^{(l)}_{qi}
+\cdot
+g_{(l-1)}'\big(h^{(l-1)}_q\big)
+\tag{29}
+\]</div>
+<p>where:
+* <span class="arithmatex">\(g_{(l-1)}'\big(h^{(l-1)}_q\big)\)</span> is the derivative of the activation function of layer <span class="arithmatex">\((l-1)\)</span> at <span class="arithmatex">\(h^{(l-1)}_q\)</span>, the summation output.</p>
+<h4 id="2327-computing-gradients-any-hidden-layer">2.3.2.7 Computing Gradients (Any hidden Layer)</h4>
+<p>Now, let's try to develop a generalized equation for the error in layer <span class="arithmatex">\(l\)</span>.</p>
+<p>We update the weights of any layer <span class="arithmatex">\(l\)</span> as <a href="#Eq4">Equation 4</a>:</p>
+<div class="arithmatex">\[ w^{(l)}_{jk} \leftarrow w^{(l)}_{jk} - \eta \delta^{(l)}_k a^{(l-1)}_j \tag{4} \]</div>
+<p>where:
+- <span class="arithmatex">\(\eta\)</span> is the learning rate.
+-  <span class="arithmatex">\(a^{(l-1)}_j\)</span> is the output generated by <span class="arithmatex">\(j^{th}\)</span> neuron in the previous layer
+-  <span class="arithmatex">\(\delta^{(l)}_k\)</span> is the error generated in the <span class="arithmatex">\(k^{th}\)</span> neuron of <span class="arithmatex">\(l^{th}\)</span> layer explained below.  </p>
+<p>Now we just need to compute the error <span class="arithmatex">\(\delta^{(l)}_k\)</span>:</p>
+<p>By <a href="#Eq11">Equation 11</a>:</p>
+<div class="arithmatex">\[ \delta^{(l)}_k =\frac{∂E}{∂h^{(l)}_{k}} \tag{31} \]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(E\)</span> is the total error of the network.</li>
+<li><span class="arithmatex">\(h^{(l)}_q\)</span> is the summation output of <span class="arithmatex">\(q^{th}\)</span> neuron in <span class="arithmatex">\(l^{th}\)</span> layer.</li>
+</ul>
+<div class="arithmatex">\[ \delta^{(l)}_k =\frac{∂E}{∂h^{(l+1)}_{i}}\cdot\frac{∂h^{(l+1)}_{i}}{∂h^{(l)}_{k}} \qquad \forall \ i \ \in  [1,n_{l+1}] \tag{32} \]</div>
+<p>doing it for all <span class="arithmatex">\(i\)</span>:</p>
+<div class="arithmatex">\[\implies \delta^{(l)}_k = \sum_{i=1}^{n_{l+1}}\Bigg[\frac{∂E}{∂h^{(l+1)}_{i}}\cdot\frac{∂h^{(l+1)}_{i}} {∂h^{(l)}_{k}}\Bigg] \tag{33} \]</div>
+<p>Using Equation 11,</p>
+<div class="arithmatex">\[\implies \delta^{(l)}_k = \sum_{i=1}^{n_{l+1}}\Bigg[ \delta^{(l+1)}_i \cdot \frac{∂h^{(l+1)}_{k}}{∂h^{(l)}_{k}} \Bigg] \tag{34} \]</div>
+<p>Now according to <a href="#Eq29">Equation 29</a>:</p>
+<div class="arithmatex">\[ \frac{∂(h^{(l)}_{i})}{∂h^{(l-1)}_{q}} = w^{(l)}_{qi} \cdot g_{(l-1)}'\big(h^{(l-1)}_q\big) \tag{35} \]</div>
+<p>Using above equation in Equation 34:</p>
+<div class="arithmatex">\[ \begin{align}\implies \delta^{(l)}_k &amp;= \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_i \cdot w^{(l+1)}_{ki} \cdot g_{(l)}'\big(h^{(l)}_k\big)\Big]\\ &amp;= g_{(l)}'\big(h^{(l)}_k\big) \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_i w^{(l+1)}_{ki} \Big] \tag{36} \end{align} \]</div>
+<p>Equation 36 above is the general way of how we <em>backpropagate</em> the error layer to layer. This is at the core of <strong>Backpropagation Algorithm</strong> which works at the heart of neural networks, not just MLP. </p>
+<p><strong>Note: It is advised to compute the error in each neuron of previous layer first and then update the weights of current layer as they are used to calculate the error of previous layer.</strong> </p>
+<h4 id="2328-the-activations">2.3.2.8 The Activations</h4>
+<p>As you can see in the Equation 36, that the activations we use should be differentiable at all points and the threshold activation was not differentiable at 0 and had derivative of 0 at all other points, making the error in every neuron to be zero, which isn't what we want. So we introduce a couple more activation functions. We will visualize each function and how they vary.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">plotly</span><span class="w"> </span><span class="kn">import</span> <span class="n">graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_activation</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+    <span class="c1">#compute the activation</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">)],</span>
+                    <span class="n">layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> activation&quot;</span><span class="o">.</span><span class="n">title</span><span class="p">()))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Our original threshold function was:</p>
+<div class="arithmatex">\[ g(x) = \begin{cases} 1 &amp; \text{if } x&gt;0\\ 0 &amp; \text{if } x \leq 0 \end{cases} \tag{37} \]</div>
+<p>It can be coded as:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">threshold</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># plot the threshold </span>
+<span class="n">plot_activation</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>1. The Sigmoidal Activation:</strong>
+It is an S shaped activation. This activation is given by:</p>
+<div class="arithmatex">\[ a = g(x) = \frac{1}{1+\exp(-\beta x)} \tag{38} \]</div>
+<p>where <span class="arithmatex">\(\beta\)</span> is a positive parameter, preferably 1.</p>
+<p>It's derivative is:</p>
+<div class="arithmatex">\[ g'(x) = g(x)\beta(1-g(x)) = \beta a(1-a) \tag{39} \]</div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plot_activation</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">)</span>
+</code></pre></div>
+<p>Let's compare the threshold and sigmoid together</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Threshold Activation&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigmoid Activation&quot;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">threshold</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">),</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">),</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>As we can see both the functions are almost the same, just that the sigmoid is more smooth at edges, making it differentiable. It can be used as a replacement for threshold. Although it will output values other than 0 and 1 for values close to zero.</p>
+<p><strong>2. The tanh activation:</strong>
+It is the similar to sigmoid but it outputs range between -1 and 1, instead of 0 and 1. It is not used much in the MLP. It is given by:</p>
+<div class="arithmatex">\[ a = g(x) = tanh(x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)} \tag{40} \]</div>
+<p>It's derivative is rather simple:</p>
+<div class="arithmatex">\[ g'(x) = 1-a^2 \tag{41} \]</div>
+<p>It is already defined in numpy as <code>np.tanh</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plot_activation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">)</span>
+</code></pre></div>
+<p>Let's compare all the functions in one go.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">threshold</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Threshold&quot;</span><span class="p">),</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Sigmoid&quot;</span><span class="p">),</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Tanh&quot;</span><span class="p">),</span>
+                   <span class="p">],</span>
+             <span class="n">layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>3. The Softmax Activation</strong>:
+This activation is given by:</p>
+<div class="arithmatex">\[ a_i = g(x_i) = \frac{\exp(x_i)}{\sum_{k=1}^{n_l}\exp(x_k)} \tag{42} \]</div>
+<p>As all the outputs in output nodes are independent of each other. The sigmoid layer may make more than one output neuron to fire. But sometimes we just want to classify a datapoint in just one class. That is where softmax is good. It sums up all the outputs to 1 and the maximum one is set to 1 and others to 0.</p>
+<p>Before computing its derivative, we have two cases
+1. Derivative w.r.t the summation of the node, i.e:</p>
+<div class="arithmatex">\[\frac{\partial (g(x_i))}{\partial x_i} \]</div>
+<ol>
+<li>Derivative w.r.t the summation of some other node, i.e:</li>
+</ol>
+<div class="arithmatex">\[\frac{\partial (g(x_i))}{\partial x_j} \]</div>
+<div class="arithmatex">\[ \frac{\partial (g(x_i))}{\partial x_i} = a_i(1-a_i) \tag{43} \]</div>
+<p>and </p>
+<div class="arithmatex">\[\frac{\partial (g(x_i))}{\partial x_j} = - a_ia_j \tag{44} \]</div>
+<p><strong>3. The Linear Activation</strong>
+This activation is given by:</p>
+<div class="arithmatex">\[g(x) = x \tag{45}\]</div>
+<p>This activation is used for regression purposes.</p>
+<h3 id="233-the-equations-in-mlp">2.3.3 The Equations in MLP</h3>
+<p>We saw the equations in the light of general cases. Let's now see them in an example to clear out the doubts if any. The activations will depend on the type of problem we are solving. For Regression problems <strong>we won't use any activation in the final layer</strong> as we need real values, <strong>but we will use sigmoid activation in hidden layers at all times</strong> for the concept of firing and non firing of neurons. For Classification we will use sigmoid for final layer as well. We can also use softmax for the final layer, if we just need to predict one class. Let's say we are currently using sigmoid in all cases.</p>
+<p>We haven't defined any Loss function for the final output neurons to compute <a href="#2.3.2.2-The-Network-Error">the network error</a>.
+We can use the simple difference between the outputs and ground truth as the Loss function, but for the network error we sum all the losses(errors) in the final output neurons,</p>
+<p>From <a href="#Eq5">Equation 5</a>,</p>
+<div class="arithmatex">\[ E = \sum_{i=1}^{n_{L}} \mathcal{L}(y_i,t_i) \tag{5} \]</div>
+<p>So if we use just the difference, it will be positive for some neurons and negative for some which may sum to zero or a very small number, meaning small network error which isn't the case. So we need to change the sign of all errors to the same before summing up. We can use absolute values but that has differentiation problems. Instead we can use the squares of difference as our loss function.</p>
+<p>So for neuron <span class="arithmatex">\(i\)</span> in the final output layer, the loss is</p>
+<div class="arithmatex">\[
+\mathcal{L}(y_i,t_i) = \frac{1}{2}(y_i-t_i)^2
+\tag{46}
+\]</div>
+<p>We have added the half at the front to make further calculations easier.</p>
+<p>It's derivative is:</p>
+<div class="arithmatex">\[ \mathcal{L}'\big(y_i,t_i\big) = y_i-t_i \tag{47} \]</div>
+<p>Now using  above equations, equation 5 becomes:</p>
+<div class="arithmatex">\[ E = \frac{1}{2}\sum_{i=1}^{n_{L}} (y_i-t_i)^2 \tag{48} \]</div>
+<p>Now let's compute the error in final layer.</p>
+<p>Recalling <a href="#Eq18">Equations 18</a>, </p>
+<div class="arithmatex">\[\implies  \delta^{(L)}_q=g_{(L)}'(h^{(L)}_q)\ \mathcal{L}'\big(y_q,t_q\big)  \tag{18}\]</div>
+<p>Since our activation is sigmoid and it's derivative is given in <a href="#39">Equation 39</a>.</p>
+<div class="arithmatex">\[\implies  \delta^{(L)}_q=\beta a^{(L)}_q(1-a^{(L)}_q)(y_q-t_q) \tag{49}\]</div>
+<p>Since, <span class="arithmatex">\(a^{(L)}_i = y_i\)</span></p>
+<div class="arithmatex">\[\implies  \delta^{(L)}_q=\beta^{(L)} (y_q-t_q)y_q(1-y_q) \tag{50}\]</div>
+<p>That is how we compute the error in the final layer.</p>
+<p>Now let's compute in any hidden layer.</p>
+<p>We know from <a href="#Eq36">Equation 36</a>,</p>
+<div class="arithmatex">\[\implies \delta^{(l)}_k = g_{(l)}'\big(h^{(l)}_k\big) \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_i w^{(l+1)}_{ki} \Big] \tag{36} \]</div>
+<p>Now since we are using sigmoid activation,</p>
+<div class="arithmatex">\[\implies \delta^{(l)}_k = \beta^{(l)} a^{(l)}_k(1-a^{(l)}_k) \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_i w^{(l+1)}_{ki} \Big] \tag{51} \]</div>
+<p>The equations will change with change in loss function as well as the activation function of each layer.</p>
+<p>Side Note: Another great Loss function for Classification is:</p>
+<div class="arithmatex">\[
+\mathcal{L}(y_i,t_i) = -t_i\log(y_i)
+\tag{52}
+\]</div>
+<h2 id="24-the-multi-layer-perceptron-algorithm">2.4 The Multi-Layer Perceptron Algorithm</h2>
+<h3 id="241-the-algorithm">2.4.1 The Algorithm</h3>
+<p>With the knowledge of Backpropagation Algorithm, we can now update weights. </p>
+<p><strong>We will consider the sum of squares of as our network error and sigmoid as the activation in every layer.</strong></p>
+<ol>
+<li>
+<p><strong>Initialization:</strong></p>
+<p>Initialize the weights for every neuron of every layer to small(positive and negative) random values.</p>
+</li>
+<li>
+<p><strong>Training:</strong></p>
+<ul>
+<li>============repeat===========:</li>
+<li>
+<p>for each input vector:</p>
+<ul>
+<li>
+<p><strong>forward phase:</strong></p>
+<ul>
+<li>
+<p>for each layer <span class="arithmatex">\(l\)</span> in the network:</p>
+<ul>
+<li>compute the activation of each neuron <span class="arithmatex">\(j\)</span> using:</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+&amp;h^{(l)}_j = \sum_{k=0}^{n_{l-1}}a^{(l-1)}_k
+w^{(l)}_{kj}\\
+&amp;a^{(l)}_j = g_{(l)}\big(h^{(l)}_j\big) = \frac{1}{1+\exp\big(-\beta h^{(l)}_j\big)}
+\end{align}
+\]</div>
+<p>where <span class="arithmatex">\(a^{0}_i = x_i\)</span>, i.e the input node</p>
+<p>and <span class="arithmatex">\(a^{(l)}_0 = -1\)</span>, the bias node for every layer.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>backward phase:</strong></p>
+</li>
+<li>compute the error at the output node <span class="arithmatex">\(j\)</span> using:
+      $$
+      \delta^{(L)}_j = \beta^{(L)}(y_j-t_j)y_j(1-y_j)
+      $$</li>
+<li>
+<p>for each layer <span class="arithmatex">\(l\)</span> in the network starting from the final hidden layer:</p>
+<ol>
+<li>
+<p>compute the error in the layer <span class="arithmatex">\(l\)</span> using</p>
+<div class="arithmatex">\[\delta^{(l)}_k =
+\beta^{(l)} a^{(l)}_k(1-a^{(l)}_k)
+\sum_{i=1}^{n_{l+1}}\Big(
+\delta^{(l+1)}_i
+w^{(l+1)}_{ki}
+\Big)
+\]</div>
+</li>
+<li>
+<p>update the every weight in the layer <span class="arithmatex">\((l+1)\)</span> using:</p>
+<div class="arithmatex">\[w^{(l+1)}_{pq} \leftarrow w^{(l+1)}_{pq} - \eta \delta^{(l+1)}_q a^{(l)}_p\\
+ \forall \ p \in [0,n_l] \text{  and  } q \in [1,n_{l+1}] 
+\]</div>
+</li>
+</ol>
+</li>
+<li>
+<p>finally update every weight of first hidden layer using:</p>
+<div class="arithmatex">\[w^{(1)}_{pq} \leftarrow w^{(1)}_{pq} - \eta \delta^{(1)}_q a^{(0)}_p\\
+      \forall \ p \in [0,n_0] \text{  and  } q \in [1,n_{1}] 
+ \]</div>
+<p>where <span class="arithmatex">\(a^{(0)}_i = x_i\)</span>, the input node.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>====until learning stops or epochs run out============</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note: In batch implementation, we should randomise the input so that we don't train on the same sequences for every iteration.</strong>
+3. <strong>Recall</strong>
+    - Use the forward phase in training section above.              </p>
+<h3 id="242-initialization-of-weights">2.4.2 Initialization of weights</h3>
+<p>The weights should be initialized to be small random numbers. It is because the sigmoid activation flattens at the large(positive and negative) values and the slope becomes closer zero and so it takes longer to train the network. The sigmoid starts flattening at input of 1, so that will be the max input and similarly -1 will be the minimum input.</p>
+<p>So for a neuron,</p>
+<div class="arithmatex">\[ \begin{align} &amp;-1 \leq h^{(l)}_i \leq 1\\ \implies &amp;-1 \leq \sum_{k=0}^{n_{l-1}}a^{(l-1)}_kw^{(l)}_{ki}\leq 1\\ \end{align} \tag{53} \]</div>
+<p>Now since we have to figure out all the weights, we will keep all the weights to be same and equal to <span class="arithmatex">\(w^{(l)}\)</span>.</p>
+<div class="arithmatex">\[ \implies -1 \leq w^{(l)}\sum_{k=0}^{n_{l-1}}a^{(l-1)}_k\leq 1\\ \tag{54} \]</div>
+<p>Note: <span class="arithmatex">\(w^{(l)}\)</span> is the general representation of every weight of layer <span class="arithmatex">\(l\)</span> and not the weight matrix of layer <span class="arithmatex">\(l\)</span>.</p>
+<p>We assume that all the inputs come from a stadard normal distribution <em>zero mean and unit variance</em>, i.e:</p>
+<div class="arithmatex">\[ \sigma^2 = \frac{1}{n_{l-1}}\sum_{i=0}^{n_{l-1}}\big(a^{(l-1)}_i - \mu^{(l-1)}\big)^2 \tag{55} \]</div>
+<p>where <span class="arithmatex">\(\mu^{(l)}\)</span> and <span class="arithmatex">\(\sigma^2\)</span> is the mean and variance of all output values in layer <span class="arithmatex">\(l\)</span>.</p>
+<p>Since mean is ZERO and variance is unity,</p>
+<div class="arithmatex">\[ \begin{align} &amp;\frac{1}{n_{l-1}}\sum_{i=0}^{n_{l-1}}\big(a^{(l)}_i\big)^2 = 1\\ \implies &amp;\sum_{i=0}^{n_{l- }}\big(a^{(l)}_i\big)^2 = n_{l-1} \tag{56}   \end{align} \]</div>
+<p>Using the above equation in Equation 54, we get:</p>
+<div class="arithmatex">\[\begin{align} &amp; \implies -1 \leq w^{(l)}\sqrt{n_{l-1}}\leq 1\\ &amp;\implies \frac{-1}{\sqrt{n_{l-1}}} \leq w^{(l)}  \leq \frac{1}{\sqrt{n_{l-1}}} \tag{57} \end{align} \]</div>
+<p>So we know how to initialize weights. However still weights from different initialization can have different effects on the outputs. You should try to train the network on different random seeds and figure out the best one.</p>
+<p>Also note that the above equation came from an assumption as well as approximation.</p>
+<p><strong>Also, as we know that it is better to have small inputs to a sigmoid to give better results, so <span class="arithmatex">\(\beta\)</span> should also be small(<span class="arithmatex">\(\beta \leq 3.0\)</span>).</strong></p>
+<h2 id="25-speeding-up-the-code">2.5 Speeding up the code</h2>
+<h3 id="251-speeding-up-the-forward-process">2.5.1 Speeding Up the  forward process</h3>
+<p>We can compute the activations of multiple examples at once using matrix operations. </p>
+<p>Let's say we have <span class="arithmatex">\(k\)</span> number of training examples and each example has <span class="arithmatex">\(m\)</span> features with <span class="arithmatex">\(n\)</span> types of outputs.</p>
+<p>Now we can store our inputs in a matrix where each row represents a training example and a column represents a feature.</p>
+<p>So our training example is like:</p>
+<p>$$X= \begin{bmatrix} x_{11} &amp; x_{12} &amp; x_{13} &amp; \cdots &amp; x_{1m} \ x_{21} &amp; x_{22} &amp; x_{23} &amp; \cdots &amp; x_{2m} \ x_{31} &amp; x_{32} &amp; x_{33} &amp; \cdots &amp; x_{3m} \ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \ x_{k1} &amp; x_{k2} &amp; x_{k3} &amp; \cdots &amp; x_{km} \ \end{bmatrix} \tag{58} $$
+The matrix shape is <span class="arithmatex">\(k \times m\)</span>.</p>
+<p>We will use <code>numpy</code> library to store inputs. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</code></pre></div>
+<p>Let's say we want to train the Logical-XOR function. So our input should look like:</p>
+<p>So our input should look like:</p>
+<div class="arithmatex">\[X= \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 0 \\ 1 &amp; 1 \\ \end{bmatrix} \]</div>
+<p>We can make it make it using <code>np.array</code> method:</p>
+<div class="highlight"><pre><span></span><code><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">X</span>
+</code></pre></div>
+<pre><code>array([[0, 0],
+       [0, 1],
+       [1, 0],
+       [1, 1]])
+</code></pre>
+<p>Now our input is ready, let's figure out how to store the target values. Each input has target values to denote which neuron to fire and which not to(1s and 0s). This type of output is for classification process.</p>
+<p>So with <span class="arithmatex">\(k\)</span> examples and <span class="arithmatex">\(n\)</span> output neurons, the target matrix should be <span class="arithmatex">\([t_{ij}]\)</span> which is the target for <span class="arithmatex">\(i^{th}\)</span> example and <span class="arithmatex">\(j^{th}\)</span> neuron.</p>
+<p>So,</p>
+<div class="arithmatex">\[ T=\begin{bmatrix} t_{11} &amp; t_{12} &amp; t_{13} &amp; \cdots &amp; t_{1n}\\ t_{21} &amp; t_{22} &amp; t_{23} &amp; \cdots &amp; t_{2n}\\ t_{31} &amp; t_{32} &amp; t_{33} &amp; \cdots &amp; t_{3n}\\ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\ t_{k1} &amp; t_{k2} &amp; t_{k3} &amp; \cdots &amp; t_{kn}\\ \end{bmatrix}\\ \text{where $t_{ij} \in \{0,1\}$}\tag{59} \]</div>
+<p>For binary outputs, like in our example, we can just use one output neuron, which will fire for one output and not fire for other which means <span class="arithmatex">\(n=1\)</span>.</p>
+<p>It is same for regression problems just instead of output being 1 or 0, it is real valued.</p>
+<p>So, </p>
+<div class="arithmatex">\[ T_{bin/reg} = \begin{bmatrix} t_1\\ t_2\\ \vdots \\ t_k \end{bmatrix}\tag{60} \]</div>
+<p>and in our example,</p>
+<div class="arithmatex">\[ T = \begin{bmatrix} 0\\ 1\\ 1\\ 0 \end{bmatrix}\tag{61} \]</div>
+<p>We can do it in numpy in the same way:</p>
+<div class="highlight"><pre><span></span><code><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]]);</span><span class="n">T</span>
+</code></pre></div>
+<pre><code>array([[0],
+       [1],
+       [1],
+       [0]])
+</code></pre>
+<p>Now since we have multiple layers and each have their own output(of zeroes and ones), we will have an <strong>activation matrix</strong> for each layer, where <span class="arithmatex">\([a^{(l)}_{ij}]\)</span> is the ouput for <span class="arithmatex">\(i^{th}\)</span> example from <span class="arithmatex">\(j^{th}\)</span> neuron in <span class="arithmatex">\(l^{th}\)</span> layer.</p>
+<p>Now since there will be many matrices, we will save them in a python <code>list</code>. It will be a list of numpy arrays.</p>
+<div class="arithmatex">\[A^{(l)} = \begin{bmatrix} a^{(l)}_{11} &amp; a^{(l)}_{12} &amp; a^{(l)}_{13} &amp; \cdots &amp; a^{(l)}_{1n_l}\\ a^{(l)}_{21} &amp;  a^{(l)}_{22} &amp; a^{(l)}_{23} &amp; \cdots &amp; a^{(l)}_{2n_l}\\ a^{(l)}_{31} &amp; a^{(l)}_{32} &amp; a^{(l)}_{33} &amp; \cdots &amp;  a^{(l)}_{3n_l}\\ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\ a^{(l)}_{k1} &amp; a^{(l)}_{k2} &amp; a^{(l)}_{k3} &amp; \cdots &amp; a^{(l)}_{kn_l}\\ \end{bmatrix} \\\tag{62} \]</div>
+<p>This matrix will be <span class="arithmatex">\(k \times n_l\)</span>.</p>
+<p>Or</p>
+<div class="arithmatex">\[A^{(l)} = g_{(l)}\Bigg(\begin{bmatrix} h^{(l)}_{11} &amp; h^{(l)}_{12} &amp; h^{(l)}_{13} &amp; \cdots &amp; h^{(l)}_{1n_l}\\ h^{(l)}_{21} &amp; h^{(l)}_{22} &amp; h^{(l)}_{23} &amp; \cdots &amp; h^{(l)}_{2n_l}\\ h^{(l)}_{31} &amp; h^{(l)}_{32} &amp; h^{(l)}_{33} &amp;  \cdots &amp; h^{(l)}_{3n_l}\\ \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\ h^{(l)}_{k1} &amp; h^{(l)}_{k2} &amp; h^{(l)}_{k3} &amp; \cdots &amp; h^{(l)}_{kn_l}\\ \end{bmatrix}\Bigg)\tag{63} \]</div>
+<p>where </p>
+<ul>
+<li><span class="arithmatex">\(g_{(l)}\)</span> is the activation of layer <span class="arithmatex">\(l\)</span>.</li>
+<li><span class="arithmatex">\(h^{(l)}_{pq} = \sum_{c=0}^{n_{l-1}}a^{(l-1)}_{pc}w^{(l)}_{cq}\)</span></li>
+</ul>
+<div class="arithmatex">\[ \implies A^{(l)} = g_{(l)}\big(H^{(l)}\big)\tag{64} \]</div>
+<div class="arithmatex">\[A^{(l)} = g_{(l)}\Bigg( \begin{bmatrix} \sum_{c=0}^{n_{l-1}}a^{(l-1)}_{1c}w^{(l)}_{c1} &amp;\sum_{c=0}^{n_{l- 1}}a^{(l-1)}_{1c}w^{(l)}_{c2} &amp;\cdots &amp;\sum_{c=0}^{n_{l-1}}a^{(l-1)}_{1c}w^{(l)}_{cn_{l}}\\\\ \sum_{c=0}^{n_{l- 1}}a^{(l-1)}_{2c}w^{(l)}_{c1} &amp;\sum_{c=0}^{n_{l-1}}a^{(l-1)}_{2c}w^{(l)}_{c2} &amp;\cdots &amp;\sum_{c=0}^{n_{l-1}}a^{(l- 1)}_{2c}w^{(l)}_{cn_{l}}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ \sum_{c=0}^{n_{l-1}}a^{(l-1)}_{kc}w^{(l)}_{c1} &amp;\sum_{c=0}^{n_{l-1}}a^{(l- 1)}_{kc}w^{(l)}_{c2} &amp;\cdots &amp;\sum_{c=0}^{n_{l-1}}a^{(l-1)}_{kc}w^{(l)}_{cn_{l}}\\ \end{bmatrix} \Bigg)\tag{65} \]</div>
+<p>The above matrix is a matrix multiplication of two matrices.</p>
+<div class="arithmatex">\[A^{(l)} = g_{(l)}\Bigg( \begin{bmatrix} a^{(l-1)}_{10} &amp; a^{(l-1)}_{11} &amp; \cdots &amp; a^{(l-1)}_{1n_{l-1}}\\  a^{(l- 1)}_{20} &amp; a^{(l-1)}_{21} &amp; \cdots &amp; a^{(l-1)}_{2n_{l-1}}\\  \vdots &amp; \vdots &amp; &amp; \vdots\\ a^{(l-1)}_{k0} &amp; a^{(l-1)}_{k1} &amp; \cdots &amp;  a^{(l-1)}_{kn_{l-1}} \end{bmatrix}  \times  \begin{bmatrix} w^{(l)}_{01} &amp; w^{(l)}_{02} &amp; \cdots &amp; w^{(l)}_{0n_l}\\ w^{(l)}_{11} &amp; w^{(l)}_{12} &amp; \cdots &amp; w^{(l)}_{1n_l}\\ \vdots &amp; \vdots &amp; &amp; \vdots\\ w^{(l)}_{n_{l-1}1}&amp; w^{(l)}_{n_{l-1}2} &amp; \cdots &amp;  w^{(l)}_{n_{l-1}n_l}\\ \end{bmatrix} \Bigg)\tag{66} \]</div>
+<p>The left matrix looks like an <strong>activation matrix</strong> for the previous layer with extra bias column at the front.</p>
+<p>We can generate a column of -1 using the <code>np.ones</code> method and then concatenate it with our matrix using <code>np.concatenate</code> to form this matrix. We can define an activation matrix with bias as of layert <span class="arithmatex">\(l\)</span> as:</p>
+<div class="arithmatex">\[ A^{(l)}_{bias}= \begin{bmatrix} a^{(l)}_{10} &amp; a^{(l)}_{11} &amp; \cdots &amp; a^{(l)}_{1n_{l}}\\  a^{(l- 1)}_{20} &amp; a^{(l)}_{21} &amp; \cdots &amp; a^{(l)}_{2n_{l}}\\  \vdots &amp; \vdots &amp; &amp; \vdots\\ a^{(l)}_{k0} &amp; a^{(l- 1)}_{k1} &amp; \cdots &amp; a^{(l)}_{kn_{l}} \end{bmatrix}\tag{67} \]</div>
+<p>and the right matrix of Equatio 66 is the <strong>weight matrix</strong> of layer <span class="arithmatex">\(l\)</span>, where <span class="arithmatex">\(w^{(l)}_{ij}\)</span> is the weight from <span class="arithmatex">\(i^{th}\)</span> node of layer <span class="arithmatex">\((l-1)\)</span> to <span class="arithmatex">\(j^{th}\)</span> node of layer <span class="arithmatex">\(l\)</span>.</p>
+<div class="arithmatex">\[ W^{(l)}= \begin{bmatrix} w^{(l)}_{01} &amp; w^{(l)}_{02} &amp; \cdots &amp; w^{(l)}_{0n_l}\\ w^{(l)}_{11} &amp; w^{(l)}_{12} &amp;  \cdots &amp; w^{(l)}_{1n_l}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ w^{(l)}_{n_{l-1}1}&amp; w^{(l)}_{n_{l-1}2} &amp; \cdots &amp; w^{(l)}_{n_{l-1}n_l}\\ \end{bmatrix}\tag{68} \]</div>
+<p>this is a <span class="arithmatex">\(\big((n_{l-1}+1) \times n_{l}\big)\)</span> matrix</p>
+<p>so we can say,</p>
+<div class="arithmatex">\[A^{(l)} = g_{(l)}\big(A^{(l-1)}_{bias} \times W^{(l)}\big)\tag{69}\]</div>
+<p>and $$A^{(l)}_{bias} = \begin{bmatrix}
+-1 &amp; A^{(l)}
+\end{bmatrix}\tag{70}
+$$</p>
+<p>where:
+- <span class="arithmatex">\(\times\)</span> is the matrix multiplication
+- <span class="arithmatex">\(\begin{bmatrix} M &amp; N \end{bmatrix}\)</span> is the horizontal concatenation of matrix <span class="arithmatex">\(M\)</span> and <span class="arithmatex">\(N\)</span>.
+- <span class="arithmatex">\(g_{(l)}\)</span> is the activation of layer <span class="arithmatex">\(l\)</span>.</p>
+<p>We will use the <code>np.matmul</code> function to perform a matrix multiplication and we will use the <strong>numpy broadcasting</strong> to compute activations.</p>
+<h3 id="252-speeding-up-the-backward-process">2.5.2 Speeding Up the backward process</h3>
+<p>Now that we have completed the forward process, let's remind of the backward equations.</p>
+<p>We update weights of any layer <span class="arithmatex">\(l\)</span> using:</p>
+<div class="arithmatex">\[ w^{(l)}_{pq} \leftarrow w^{(l)}_{pq} - \eta \delta^{(l)}_qa^{(l-1)}_p\tag{71} \]</div>
+<p>For <span class="arithmatex">\(k\)</span> examples, we can</p>
+<div class="arithmatex">\[ w^{(l)}_{pq} \leftarrow w^{(l)}_{pq} - \eta \sum_{i=1}^{k}\delta^{(l)}_{iq}a^{(l-1)}_{ip}\tag{72} \]</div>
+<p>We can turn it into a matrix operation as:</p>
+<div class="arithmatex">\[W^{(l)} \leftarrow  W^{(l)} - \eta \Delta W^{(l)} \tag{73} \]</div>
+<div class="arithmatex">\[ \Delta W^{(l)} =  \begin{bmatrix} \Delta w^{(l)}_{01} &amp; \Delta w^{(l)}_{02} &amp; \cdots &amp; \Delta w^{(l)}_{0n_l}\\ \Delta w^{(l)}_{11} &amp; \Delta w^{(l)}_{12} &amp; \cdots &amp; \Delta w^{(l)}_{1n_l}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ \Delta w^{(l)}_{n_{l-1}1} &amp;  \Delta w^{(l)}_{n_{l-1}2} &amp; \cdots &amp; \Delta w^{(l)}_{n_{l-1}n_l} \end{bmatrix} \tag{74} \]</div>
+<p>where <span class="arithmatex">\(\Delta w^{(l)}_{pq} = \sum_{i=1}^{k}\delta^{(l)}_{iq}a^{(l-1)}_{ip}\)</span></p>
+<div class="arithmatex">\[ \implies \Delta W^{(l)} =  \begin{bmatrix} \sum_{i=1}^{k}\delta^{(l)}_{i1}a^{(l-1)}_{i0} &amp; \sum_{i=1}^{k} \delta^{(l)}_{i2}a^{(l-1)}_{i0} &amp; \cdots &amp; \sum_{i=1}^{k}\delta^{(l)}_{in_l}a^{(l-1)}_{i0}\\\\ \sum_{i=1}^{k} \delta^{(l)}_{i1}a^{(l-1)}_{i1} &amp; \sum_{i=1}^{k}\delta^{(l)}_{i2}a^{(l-1)}_{i1} &amp; \cdots &amp; \sum_{i=1}^{k} \delta^{(l)}_{in_l}a^{(l-1)}_{i1}\\ \vdots &amp; \vdots &amp; &amp; \vdots\\ \sum_{i=1}^{k}\delta^{(l)}_{i1}a^{(l- 1)}_{in_{l-1}} &amp; \sum_{i=1}^{k}\delta^{(l)}_{i2}a^{(l-1)}_{in_{l-1}} &amp; \cdots &amp; \sum_{i=1}^{k} \delta^{(l)}_{in_l}a^{(l-1)}_{in_{l-1}} \end{bmatrix} \tag{75} \]</div>
+<p>The matrix above looks like a matrix multiplication, let's open it</p>
+<div class="arithmatex">\[\implies \Delta W^{(l)} = \begin{bmatrix} a^{(l-1)}_{10} &amp; a^{(l-1)}_{20} &amp; \cdots &amp; a^{(l-1)}_{k0}\\ a^{(l- 1)}_{11} &amp; a^{(l-1)}_{21} &amp; \cdots &amp; a^{(l-1)}_{k1}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a^{(l-1)}_{1n_{l-1}} &amp; a^{(l- 1)}_{2n_{l-1}} &amp; \cdots &amp; a^{(l-1)}_{kn_{l-1}}\\ \end{bmatrix} \times \begin{bmatrix} \delta^{(l)}_{11} &amp;  \delta^{(l)}_{12} &amp; \cdots &amp; \delta^{(l)}_{1n_l}\\ \delta^{(l)}_{21} &amp; \delta^{(l)}_{22} &amp; \cdots &amp;  \delta^{(l)}_{2n_l}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ \delta^{(l)}_{k1} &amp; \delta^{(l)}_{k2} &amp; \cdots &amp;  \delta^{(l)}_{kn_l}\\ \end{bmatrix} \tag{76} \]</div>
+<p>where <span class="arithmatex">\(\times\)</span> is the matrix multiplication.</p>
+<p>Using Equation 67,</p>
+<div class="arithmatex">\[\implies \Delta W^{(l)}= (A^{(l-1)}_{bias})^T \times \begin{bmatrix} \delta^{(l)}_{11} &amp; \delta^{(l)}_{12} &amp;  \cdots &amp; \delta^{(l)}_{1n_l}\\ \delta^{(l)}_{21} &amp; \delta^{(l)}_{22} &amp; \cdots &amp; \delta^{(l)}_{2n_l}\\ \vdots &amp;  \vdots &amp; &amp; \vdots \\ \delta^{(l)}_{k1} &amp; \delta^{(l)}_{k2} &amp; \cdots &amp; \delta^{(l)}_{kn_l}\\ \end{bmatrix} \Bigg) \tag{77} \]</div>
+<div class="arithmatex">\[ \implies W^{(l)} \leftarrow W^{(l)}- \eta \big( (A^{(l-1)}_{bias})^T \times \Delta^{(l)} \big) \tag{78} \]</div>
+<p>where,</p>
+<div class="arithmatex">\[ \Delta^{(l)} =  \begin{bmatrix} \delta^{(l)}_{11} &amp; \delta^{(l)}_{12} &amp; \cdots &amp; \delta^{(l)}_{1n_l} \\ \delta^{(l)}_{21} &amp; \delta^{(l)}_{22} &amp; \cdots &amp; \delta^{(l)}_{2n_l} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ \delta^{(l)}_{k1} &amp; \delta^{(l)}_{k2} &amp; \cdots &amp; \delta^{(l)}_{kn_l} \\ \end{bmatrix}\tag{79} \]</div>
+<p>It is called the <strong>error matrix</strong> of layer <span class="arithmatex">\(l\)</span>
+where <span class="arithmatex">\(\delta^{(l)}_{ij}\)</span> is the error in <span class="arithmatex">\(j^{th}\)</span> neuron of layer <span class="arithmatex">\(l\)</span> for <span class="arithmatex">\(i^{th}\)</span> training example.</p>
+<p>The matrix is <span class="arithmatex">\(\big(k \times n_l\big)\)</span>.</p>
+<p>For the final output layer,</p>
+<div class="arithmatex">\[ \Delta^{(L)} =  \begin{bmatrix} \delta^{(L)}_{11} &amp; \delta^{(L)}_{12} &amp; \cdots &amp; \delta^{(L)}_{1n_L} \\ \delta^{(L)}_{21} &amp; \delta^{(L)}_{22} &amp; \cdots &amp; \delta^{(L)}_{2n_L} \\ \vdots &amp; \vdots &amp; 7 \vdots \\  \delta^{(L)}_{k1} &amp; \delta^{(L)}_{k2} &amp; \cdots &amp; \delta^{(L)}_{kn_L} \\ \end{bmatrix}\tag{80} \]</div>
+<p>The matrix is <span class="arithmatex">\(\big(k \times n_L)\)</span>.</p>
+<p>We know from <a href="#18">Equations 18</a>, </p>
+<div class="arithmatex">\[\implies\delta^{(L)}_q=g_{(L)}'(h^{(L)}_q) \ \mathcal{L}'\big(y_q,t_q\big) \tag{18}\]</div>
+<p>for a training example, <span class="arithmatex">\(i\)</span>,</p>
+<div class="arithmatex">\[\implies  \delta^{(L)}_{iq}=g_{(L)}'(h^{(L)}_{iq}) \ \mathcal{L}'\big(y_{iq},t_{iq}\big) \tag{81}\]</div>
+<p>and for our chosen loss function, </p>
+<div class="arithmatex">\[ \mathcal{L}'\big(y_{iq},t_{iq}\big) = y_{iq} - t_{iq} \]</div>
+<p>Let's first compute the <span class="arithmatex">\(\Delta^{(L)}\)</span>,</p>
+<p>Using Equation 81,</p>
+<div class="arithmatex">\[ \Delta^{(L)}= \begin{bmatrix} (y_{11} - t_{11}) g_{(L)}'(h^{(L)}_{11}) &amp; (y_{12} - t_{12})  g_{(L)}'(h^{(L)}_{12}) &amp; \cdots &amp; (y_{1n_L} - t_{1n_L}) g_{(L)}'(h^{(L)}_{1n_L})\\\\ (y_{21} - t_{21})  g_{(L)}'(h^{(L)}_{21}) &amp; (y_{22} - t_{22}) g_{(L)}'(h^{(L)}_{22}) &amp; \cdots &amp; (y_{2n_L} - t_{2n_L})  g_{(L)}'(h^{(L)}_{2n_L})\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ (y_{k1} - t_{k1}) g_{(L)}'(h^{(L)}_{k1}) &amp; (y_{k2} -  t_{k2}) g_{(L)}'(h^{(L)}_{k2}) &amp; \cdots &amp; (y_{kn_L} - t_{kn_L}) g_{(L)}'(h^{(L)}_{kn_L})\\ \end{bmatrix}\tag{82} \]</div>
+<p>Opening up,</p>
+<div class="arithmatex">\[\implies \Delta^{(L)}= \begin{bmatrix} y_{11} - t_{11} &amp; y_{12} - t_{12} &amp; \cdots &amp; y_{1n_L} - t_{1n_L}\\ y_{21} - t_{21} &amp; y_{22} - t_{22} &amp; \cdots &amp; y_{2n_L} - t_{2n_L}\\ \vdots &amp; \vdots &amp; &amp; \vdots \\ y_{k1} - t_{k1} &amp;  y_{k2} - t_{k2} &amp; \cdots &amp; y_{kn_L} - t_{kn_L}\\ \end{bmatrix} * g_{(L)}'\Bigg( \begin{bmatrix} h^{(L)}_{11}  &amp;h^{(L)}_{12} &amp; \cdots &amp; h^{(L)}_{1n_L}\\ h^{(L)}_{21} &amp;h^{(L)}_{22} &amp; \cdots &amp; h^{(L)}_{2n_L}\\ \vdots &amp; \vdots  &amp; &amp; \vdots \\ h^{(L)}_{k1} &amp;h^{(L)}_{k2} &amp; \cdots &amp; h^{(L)}_{kn_L}\\ \end{bmatrix} \Bigg)\tag{83} \]</div>
+<p>since <span class="arithmatex">\(y_i = a^{(L)}_i\)</span>,</p>
+<div class="arithmatex">\[\implies \Delta^{(L)}= \begin{bmatrix} a^{(L)}_{11} - t_{11} &amp; a^{(L)}_{12} - t_{12} &amp; \cdots &amp; a^{(L)}_{1n_L} -  t_{1n_L}\\ a^{(L)}_{21} - t_{21} &amp; a^{(L)}_{22} - t_{22} &amp; \cdots &amp; a^{(L)}_{2n_L} - t_{2n_L}\\ \vdots &amp; \vdots &amp; &amp;  \vdots\\ a^{(L)}_{k1} - t_{k1} &amp; a^{(L)}_{k2} - t_{k2} &amp; \cdots &amp; a^{(L)}_{kn_L} - t_{kn_L}\\ \end{bmatrix} * g_{(L)}' \Bigg( \begin{bmatrix} h^{(L)}_{11} &amp;h^{(L)}_{12} &amp; \cdots &amp; h^{(L)}_{1n_L}\\ h^{(L)}_{21} &amp;h^{(L)}_{22} &amp;  \cdots &amp; h^{(L)}_{2n_L}\\ \vdots &amp; \vdots &amp; &amp; \vdots\\ h^{(L)}_{k1} &amp;h^{(L)}_{k2} &amp; \cdots &amp; h^{(L)}_{kn_L}\\ \end{bmatrix} \Bigg)\tag{84} \]</div>
+<div class="arithmatex">\[\implies \Delta^{(L)} = (A^{(L)} - T)*g_{(L)}'(H^{(L)})\tag{85} \]</div>
+<p><strong>where <span class="arithmatex">\(*\)</span> is the elementwise multiplication and not matrix multiplication.</strong></p>
+<p>Now let's compute <span class="arithmatex">\(\Delta^{(l)}\)</span>,</p>
+<p>Recalling <a href="#51">Equation 51</a>,</p>
+<div class="arithmatex">\[ \delta^{(l)}_k = \beta^{(l)} a^{(l)}_k(1-a^{(l)}_k) \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_i w^{(l+1)}_{ki} \Big] \tag{51} \]</div>
+<p>for training example <span class="arithmatex">\(j\)</span>,</p>
+<div class="arithmatex">\[ \delta^{(l)}_{jk} = \beta^{(l)} a^{(l)}_{jk}(1-a^{(l)}_{jk}) \sum_{i=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{ji} w^{(l+1)}_{ki} \Big] \tag{86} \]</div>
+<p>Using Equation 86,</p>
+<div class="arithmatex">\[ \Delta^{(l)} =  \begin{bmatrix} \beta^{(l)} a^{(l)}_{11}(1-a^{(l)}_{11}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{1c} w^{(l+1)}_{1c}  \Big] &amp; \cdots &amp; \beta^{(l)} a^{(l)}_{1n_l}(1-a^{(l)}_{1n_l}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{1c} w^{(l+1)}_{n_lc} \Big] \\\\  \beta^{(l)} a^{(l)}_{21}(1-a^{(l)}_{21}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{2c} w^{(l+1)}_{1c} \Big] &amp;  \cdots &amp; \beta^{(l)} a^{(l)}_{2n_l}(1- a^{(l)}_{2n_l}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{2c} w^{(l+1)}_{n_lc} \Big] \\ \vdots  &amp; &amp; \vdots  \\ \beta^{(l)} a^{(l)}_{k1}(1-a^{(l)}_{k1}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{kc} w^{(l+1)}_{1c} \Big] &amp; \cdots &amp; \beta^{(l)} a^{(l)}_{kn_l}(1-a^{(l)}_{kn_l}) \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{kc} w^{(l+1)}_{n_lc} \Big] \end{bmatrix} \tag{87} \]</div>
+<p>Using Equation 67,</p>
+<div class="arithmatex">\[\implies \Delta^{(l)}= \beta^{(l)} A^{(l)}*(I_1-A^{(l)})* \begin{bmatrix} \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{1c} w^{(l+1)}_{1c} \Big] &amp; \cdots &amp; \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{1c} w^{(l+1)}_{n_lc} \Big] \\\\ \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{2c} w^{(l+1)}_{1c} \Big] &amp; \ \cdots &amp; \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{2c} w^{(l+1)}_{n_lc} \Big] \\ \vdots &amp;  &amp; \vdots\\ \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{kc} w^{(l+1)}_{1c} \Big] &amp; \cdots &amp; \sum_{c=1}^{n_{l+1}}\Big[ \delta^{(l+1)}_{kc} w^{(l+1)}_{n_lc} \Big] \end{bmatrix} \tag{88} \]</div>
+<p>where <span class="arithmatex">\(I_1\)</span> is the matrix full of 1 of the same shape as <span class="arithmatex">\(A^{(l)}\)</span> and <span class="arithmatex">\(*\)</span> represents elementwise multiplication.</p>
+<p>the matrix on the right looks like a matrix multiplication of two matrices. Let's open it up.</p>
+<div class="arithmatex">\[ \Delta^{(l)}= \beta^{(l)} A^{(l)}*(I_1-A^{(l)})* \Bigg( \begin{bmatrix} \delta^{(l+1)}_{11} &amp;  \delta^{(l+1)}_{12} &amp; \cdots &amp; \delta^{(l+1)}_{1n_{l+1}}\\\\  \delta^{(l+1)}_{21} &amp; \delta^{(l+1)}_{22} &amp; \cdots &amp;  \delta^{(l+1)}_{2n_{l+1}}\\ \vdots &amp; \vdots &amp; &amp; \vdots\\ \delta^{(l+1)}_{k1} &amp; \delta^{(l+1)}_{k2} &amp; \cdots &amp;  \delta^{(l+1)}_{kn_{l+1}}\\ \end{bmatrix} \times \begin{bmatrix} w^{(l+1)}_{11}&amp;w^{(l+1)}_{21} &amp; \cdots &amp;  w^{(l+1)}_{n_l1}\\\\ w^{(l+1)}_{12}&amp;w^{(l+1)}_{22} &amp; \cdots &amp; w^{(l+1)}_{n_l2}\\ \vdots &amp; \vdots &amp; &amp; \vdots\\ w^{(l+1)}_{1n_{l+1}}&amp;w^{(l+1)}_{2n_{l+1}} &amp; \cdots &amp; w^{(l+1)}_{n_ln_{l+1}}\\ \end{bmatrix} \Bigg) \tag{89} \]</div>
+<p>Using Equation 68 and 79,</p>
+<div class="arithmatex">\[ \Delta^{(l)}= \beta^{(l)} A^{(l)}*(I_1-A^{(l)})* (\Delta^{(l+1)} \times (W^{(l+1)}_{biasless})^T) \tag{79} \]</div>
+<p>where 
+- <span class="arithmatex">\(*\)</span> is the elementwise multiplication 
+- <span class="arithmatex">\(\times\)</span> is the matrix multiplication.
+- <span class="arithmatex">\(W^{(l)}_{biasless}\)</span> is the weight matrix for <span class="arithmatex">\(l^{th}\)</span> layer without the weights from the bias nodes of previous layer.</p>
+<p>Side Note: We can produce a biasless weight matrix from a complete matrix by simple slicing.</p>
+<h2 id="26-code">2.6 Code</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer_sizes</span><span class="p">,</span><span class="n">random_state</span><span class="p">):</span>
+        <span class="c1">#save weights in a list of matrices</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">layer_sizes</span><span class="p">[</span><span class="n">l</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">))]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="c1"># keep beta = 1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">A_0</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">A_l</span> <span class="o">=</span> <span class="n">A_0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A_0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">weights</span><span class="p">:</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span>
+        <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">:</span>
+            <span class="n">A_lbias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">A_l</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)),</span><span class="n">A_l</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># add bias to input data</span>
+            <span class="n">H_l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A_lbias</span><span class="p">,</span><span class="n">weight</span><span class="p">)</span> <span class="c1"># compute the summation</span>
+            <span class="n">A_l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">H_l</span><span class="p">)</span> <span class="c1"># compute the activation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A_l</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">A_l</span> <span class="c1"># return the final output</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">):</span>
+        <span class="n">A_L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">delta_L</span> <span class="o">=</span> <span class="p">(</span><span class="n">A_L</span><span class="o">-</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">A_L</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">A_L</span><span class="p">))</span> <span class="c1"># beta = 0</span>
+        <span class="n">delta_l_next</span> <span class="o">=</span> <span class="n">delta_L</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="c1">#             print(i)</span>
+            <span class="n">A_l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#compute error for previous layer</span>
+            <span class="n">delta_l</span> <span class="o">=</span> <span class="n">A_l</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">A_l</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">delta_l_next</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">:,:])))</span>
+<span class="c1">#             A_0 A_1 A_2</span>
+<span class="c1">#             W_1 W_2</span>
+<span class="c1">#             0   1    2</span>
+            <span class="c1"># add bias output to output matrix</span>
+            <span class="n">A_lbias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">A_l</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)),</span><span class="n">A_l</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1">#update weights using the next errors</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A_lbias</span><span class="p">),</span><span class="n">delta_l_next</span><span class="p">)))</span>
+            <span class="c1"># change the next errors for next layer</span>
+            <span class="n">delta_l_next</span> <span class="o">=</span> <span class="n">delta_l</span>
+
+
+
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_data</span><span class="p">,</span><span class="n">input_target</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span><span class="n">layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,),</span> 
+              <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">save_weights</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">A_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_target</span><span class="p">)</span>
+        <span class="n">layer_sizes</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">)</span>
+        <span class="n">layer_sizes</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">A_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">n_outputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">layer_sizes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_outputs</span><span class="p">)</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_weights</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save_weights</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saved_weights</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+
+
+<span class="c1">#             print(&quot;epoch&quot;,e)</span>
+
+
+            <span class="c1"># shuffle the input so we don&#39;t train on same sequences</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="n">A_0</span><span class="o">=</span><span class="n">A_0</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+            <span class="n">A_L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">A_0</span><span class="p">)</span>
+<span class="c1">#             print(e)</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">%</span><span class="p">(</span><span class="n">epochs</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;epoch:&quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">A_L</span><span class="o">-</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out: </span><span class="si">{</span><span class="n">A_L</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1">#                 print(&quot;weights&quot;,*self.weights,sep=&#39;\n&#39;,end=&#39;\n\n&#39;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">save_weights</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saved_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">A_L</span><span class="o">-</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_data</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_data</span><span class="p">),</span><span class="n">weights</span><span class="p">)</span>
+        <span class="c1">#since this output is a realnumber(between 0 &amp; 1)</span>
+        <span class="c1"># we will have a threshold to predict its class for now 0.5</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">(</span><span class="n">output</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">confmat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_data</span><span class="p">,</span><span class="n">targets</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;returns the confusion matrix for binary classification&#39;&#39;&#39;</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_data</span><span class="p">))</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">tp</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">outputs</span><span class="o">==</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">tn</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">outputs</span><span class="o">==</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">outputs</span><span class="o">==</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="p">((</span><span class="n">T</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">outputs</span><span class="o">==</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">tp</span><span class="p">,</span><span class="n">fp</span><span class="p">],</span>
+                        <span class="p">[</span><span class="n">fn</span><span class="p">,</span><span class="n">tn</span><span class="p">]])</span>
+</code></pre></div>
+<p>Let's try to train the model for XOR data.</p>
+<div class="highlight"><pre><span></span><code><span class="n">XOR_inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">XOR_target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">m</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">XOR_inp</span><span class="p">,</span><span class="n">XOR_target</span><span class="p">,</span><span class="mi">5001</span><span class="p">,</span><span class="n">layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span><span class="n">learning_rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Error: 0.008145708816099705
+</code></pre>
+<p>Let's check the confusion matrix for this model</p>
+<div class="highlight"><pre><span></span><code><span class="n">m</span><span class="o">.</span><span class="n">confmat</span><span class="p">(</span><span class="n">XOR_inp</span><span class="p">,</span><span class="n">XOR_target</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>array([[2, 0],
+       [0, 2]])
+</code></pre>
+<p>As we can see all examples have been correctly classified. But it took almost 5000 iterations to do so.</p>
+<p>Let's see for AND data.</p>
+<div class="highlight"><pre><span></span><code><span class="n">AND_inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">AND_target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">m2</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">AND_inp</span><span class="p">,</span><span class="n">AND_target</span><span class="p">,</span><span class="n">layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span><span class="n">learning_rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">epochs</span><span class="o">=</span><span class="mi">5001</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">27</span><span class="p">)</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">confmat</span><span class="p">(</span><span class="n">AND_inp</span><span class="p">,</span><span class="n">AND_target</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Error: 0.0004818608199957538
+array([[1, 0],
+       [0, 3]])
+</code></pre>
+<p>We were able to classify this as well, but it took a lot of iterations to do so. So we can classify complex data with multilayer perceptrons, but they come with a computing cost and take a lot of iterations to classify even the linearly separable data.</p>
+<p>Let's check the decision boundary.</p>
+<div class="highlight"><pre><span></span><code><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="mi">500</span><span class="p">),</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="mi">500</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span><span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Decision Boundary for XOR Data&quot;</span><span class="p">,</span>
+                            <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 1&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 2&quot;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">yy</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span>
+        <span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+        <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
+            <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">m</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">XOR_inp</span><span class="p">,</span><span class="n">XOR_target</span><span class="p">,</span><span class="mi">5001</span><span class="p">,</span><span class="n">layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span><span class="n">learning_rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">save_weights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Error: 0.008145708816099705
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="mi">200</span><span class="p">),</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="mi">200</span><span class="p">))</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span><span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()],</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span> <span class="k">for</span> <span class="n">weights</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">saved_weights</span><span class="p">[::</span><span class="mi">50</span><span class="p">]]</span>
+
+<span class="n">nb_frames</span> <span class="o">=</span> <span class="mi">5001</span><span class="o">//</span><span class="mi">50</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">yy</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+            <span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span><span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">),],</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_frames</span><span class="p">)])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span><span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">))))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span><span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">))))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">T</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span><span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">))))</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">frame_args</span><span class="p">(</span><span class="n">duration</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="n">duration</span><span class="p">},</span>
+            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;fromcurrent&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s2">&quot;easing&quot;</span><span class="p">:</span> <span class="s2">&quot;linear&quot;</span><span class="p">},</span>
+        <span class="p">}</span>
+
+<span class="n">sliders</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">},</span>
+                <span class="s2">&quot;len&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">frame_args</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span>
+                        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="mi">50</span><span class="o">*</span><span class="n">k</span><span class="p">),</span>
+                        <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                    <span class="p">}</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">frames</span><span class="p">)</span>
+                <span class="p">],</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+
+<span class="c1"># Layout</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Change in Decision Boundary with Weight Update&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 1&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 2&quot;</span><span class="p">,</span>
+                  <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span> <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">],</span> <span class="n">autorange</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">aspectratio</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">1</span><span class="p">),),</span>
+         <span class="n">updatemenus</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;buttons&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_args</span><span class="p">(</span><span class="mi">50</span><span class="p">)],</span>
+                        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&amp;#9654;&quot;</span><span class="p">,</span> <span class="c1"># play symbol</span>
+                        <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="kc">None</span><span class="p">],</span> <span class="n">frame_args</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span>
+                        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;&amp;#9724;&quot;</span><span class="p">,</span> <span class="c1"># pause symbol</span>
+                        <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">},</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;buttons&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="p">}</span>
+         <span class="p">],</span>
+         <span class="n">sliders</span><span class="o">=</span><span class="n">sliders</span><span class="p">,</span>
+    <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Murtaza Nazir
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1101 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Mathematical proof of perceptron convergence theorem">
+      
+      
+        <meta name="author" content="Murtaza Nazir">
+      
+      
+        <link rel="canonical" href="https://themurtazanazir.github.io/neural_networks/multiayer-perceptron/perceptron-convergence-theorem/">
+      
+      
+        <link rel="prev" href="../perceptron/">
+      
+      
+        <link rel="next" href="../multi-layer-perceptron/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Perceptron Convergence Theorem - murtaza</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="murtaza" class="md-header__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            murtaza
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Perceptron Convergence Theorem
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="murtaza" class="md-nav__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    murtaza
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Algebra
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Algebra
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vectors-linear-combinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vectors & Linear Combinations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vector-spaces-and-subspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Spaces & Subspaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Multi-Layer Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron Convergence
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi-layer-perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../improvements-to-mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Improvements to MLP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Convolutional Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/convolutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convolutions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Transformer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transformer/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../">← Multi-Layer Perceptron</a></p>
+<h1 id="perceptron-convergence-theorem">Perceptron Convergence Theorem</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Perceptron Convergence Theorem is an important result as it proves the ability of a perceptron to achieve its result. This proof will be purely mathematical. There are some geometrical intuitions that need to be cleared first. This proof requires some prerequisites - <em>concept of vectors</em>, <em>dot product of two vectors</em>.
+We will use the <code>train</code> function that we developed in the <a href="/notes/perceptron" target="_blank">Mathematics Behind Perceptron </a> post. It will be included in a <code>utils.py</code> file which you can download <a href="/downloads/utils.py"> here</a>. Also, ignore the visualization code, if that seems too complex.</p>
+<h2 id="planes">Planes</h2>
+<p>Since, we know that a Perceptron classifies only linearly separable data with a linear hyper-plane, let's get some things clear about planes.</p>
+<p>The equation of an n-dimensional hyper plane is:</p>
+<div class="arithmatex">\[a_1x_1 + a_2x_2 + \dots + a_nx_n + d = 0 \tag{1}\]</div>
+<p>where \(x_1,x_2,\dots,x_n\) are orthogonal axes.</p>
+<p>Another way of describing a plane is in the form of a vector \(\mathbf{n} = (a_1,a_2, \dots , a_n)\) (which is normal to that plane) and a point(position vector) \(\mathbf{x_0}\) which resides on that plane.</p>
+<p>Now any vector between point, \(\mathbf{x_0}\), and any other general point \(\mathbf{x} = (x_1,x_2,\dots,x_n)\) on the plane is perpendicular to that plane, i.e:</p>
+<div class="arithmatex">\[\begin{align} \mathbf{n} \cdot \mathbf{(x-x_0)}&amp;=0 \\ \implies  (\mathbf{n} \cdot \mathbf{x}) - (\mathbf{n} \cdot \mathbf{x_0}) &amp;= 0\end{align} \tag{2}\]</div>
+<p>According to Eq. 1 and 2, using the dot product rule,</p>
+<div class="arithmatex">\[d = - \mathbf{n} \cdot \mathbf{x_0} \tag{3}\]</div>
+<p>The shortest distance(with sign) of the plane from the origin, \(p\) is given by:</p>
+<div class="arithmatex">\[p=\frac{d}{\lVert \mathbf{n} \rVert}\tag{4}\]</div>
+<p>If we divide Eq.1 by \(\lVert \mathbf{n} \rVert\), then,</p>
+<div class="arithmatex">\[ \frac{a_1x_1 + a_2x_2 + \dots + a_nx_n}{\lVert \mathbf{n} \rVert} = -\frac{d}{\lVert \mathbf{n} \rVert}\\ \implies \frac{\mathbf{n} \cdot \mathbf{x}}{\lVert \mathbf{n} \rVert} = -\frac{d}{\lVert \mathbf{n} \rVert} \]</div>
+<p>Using \(\frac{\mathbf{n}}{\lVert \mathbf{n} \rVert}=\hat{\mathbf{n}}\) and Eq. 4, we have</p>
+<div class="arithmatex">\[\hat{\mathbf{n}} \cdot \mathbf{x} = - p \tag{5}\]</div>
+<p>The above equation is called the <strong>Hessian Normal Form</strong> of a plane.</p>
+<p>In this form, we need a unit vector perpendicular to plane and the distance of the plane from the origin to define the plane.</p>
+<h3 id="planes-with-perceptron">Planes with Perceptron</h3>
+<p>The Perceptron prediction rule is as follows:</p>
+<div class="arithmatex">\[\sigma=g(h)=\begin{cases}1&amp;\text{if }h&gt;0 \\ 0&amp;\text{if }h\leq0 \\ \end{cases}\tag{6}\]</div>
+<p>and,</p>
+<div class="arithmatex">\[h=\sum_{i=0}^m{w_ix_i}\tag{7}\]</div>
+<p>where \(w_0\) is the threshold of the neuron and \(x_0\) can be any constant, except Zero (we use -1). </p>
+<p>The decison boundary is formed, when \(h=0\), so the equation of the decision hyper plane is:</p>
+<div class="arithmatex">\[\sum_{i=0}^m{w_ix_i}=0\tag{8}\]</div>
+<p>Comapring the above equation with the general equation of a plane (Eq. 1), the normal vector, which we will represent by \(\mathbf{w}\), is:</p>
+<div class="arithmatex">\[ \mathbf{n} = \mathbf{w} = (w_1,w_2,\dots,w_m) \tag{9}\]</div>
+<p>which means the constant term in the general equtaion, \(d\), will be:</p>
+<div class="arithmatex">\[ d = w_0x_0 \tag{10}\]</div>
+<p>which means the perpendicular distance of the plane from origin is,\(p\), (from Equation 4):</p>
+<div class="arithmatex">\[ p = \frac{w_0x_0}{\lVert \mathbf{w} \rVert} \tag{11}\]</div>
+<p>Now we have the perpendicular vector as well as the perpendicular distance. </p>
+<p>Let's see an example of the OR dataset</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">train</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># the dataset</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">T</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># fit the data</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Accuracy: 1.0
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">#plot decision boundaries, weight vector</span>
+
+<span class="n">inp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">fig</span>  <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+                            <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 1&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Input 2&quot;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Decision Boundary with Scatter&quot;</span><span class="p">,</span>
+                            <span class="n">autosize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                            <span class="n">annotations</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">ax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">arrowhead</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                             <span class="n">startarrowsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">axref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="n">ayref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">),</span>
+                                        <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Weight Vector </span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                             <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">),</span>
+                                        <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.07</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mf">0.14</span><span class="p">,</span><span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Distance, p&quot;</span><span class="p">,</span>
+                                             <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">textangle</span><span class="o">=-</span><span class="mi">40</span><span class="p">),</span>
+
+                                        <span class="p">],</span>
+                             <span class="n">shapes</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;path&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;M 0,0 L 0,0.04 L 0.18673,0.21764 L 0.22673,0.21764&quot;</span><span class="p">,</span>
+                                                     <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,),</span>
+
+
+    <span class="p">]</span>
+                            <span class="p">)</span>
+                <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="n">T</span><span class="o">==</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:][</span><span class="n">T</span><span class="o">==</span><span class="mi">1</span><span class="p">],</span><span class="n">name</span><span class="o">=</span> <span class="s2">&quot;Output: 1&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">][</span><span class="n">T</span><span class="o">==</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:][</span><span class="n">T</span><span class="o">==</span><span class="mi">0</span><span class="p">],</span><span class="n">name</span><span class="o">=</span> <span class="s2">&quot;Output: 1&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">inp1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">inp1</span><span class="p">)</span> <span class="o">+</span> <span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">name</span><span class="o">=</span> <span class="s2">&quot;Decision Boundary&quot;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>So we can represent the decision boundary with the weight vector and the bias term. </p>
+<p>The next step is to develop a comparison technique between two decision boundaries. The idea is to show that the decision boundary that our model is creating is close to the actual decision boundary. We will talk more about it in a moment.</p>
+<p>We can just compare the unit vectors of the two weight vectors and the constant bias terms to find if the decision boundaries are similar or even same.</p>
+<p>But this solution needs multiple comparisons, a vector comparison and a bias weight comparison. A better way is to consider this is to consider the bias weight as part of the weight vector. </p>
+<p>So, in our OR example, the data will be considered 3-dimensional, with the 3rd dimension being constant(we have chosen -1).</p>
+<p>For 3-dimensions, the decision boundary will be a plane, whose general equation is:</p>
+<div class="arithmatex">\[a_1x_1+a_2x_2+a_3x_3+d=0\]</div>
+<p>and expanding Equation 8 for our OR data set, equation of our decision boundary is:</p>
+<div class="arithmatex">\[w_1x_1+w_2x_2+w_0x_0=0\]</div>
+<p>As we we can see, our bias input \(x_0\) is the 3rd dimension in this equation, which is constant (-1) in our dataset. The constant term \(d\) is Zero.</p>
+<p>Since \(d=0\), for our decision boundary, it means the distance between the hyper-plane and the origin, \(p=\frac{d}{\lVert \mathbf{w} \rVert} = 0\). Which implies the plane always passes through the origin of that higher coordinate system. </p>
+<p>The above result can be generalized for any linearly separable n-dimensional data, that if we consider the bias inputs as part of the data, the resulting n+1 dimensional data will have its decision boundary passing through origin of the new coordinate system.</p>
+<p>The above fact stands because in the higher dimension, the constant term is Zero, and so the origin satisfies the new decision boundary.</p>
+<p>Let's try to verify this on our linearly separable OR-dataset. Our bias input is constant(-1). Let's plot the data along with the decision boundary represented by our weights (now including the threshold/bias weight as well).</p>
+<div class="highlight"><pre><span></span><code><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">*</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">*</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+
+<span class="c1">#scatter points</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="c1"># First input</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="c1"># second input</span>
+                <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="c1"># bias additional input</span>
+                 <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">T</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span><span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Data Point&quot;</span>
+                <span class="p">)</span>
+
+<span class="p">)</span>
+
+
+<span class="c1">#decision boundary</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">yy</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span><span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">colorscale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span>
+              <span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Decision Boundary&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1"># weight vector</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Cone</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">u</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">w</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sizemode</span><span class="o">=</span><span class="s2">&quot;scaled&quot;</span><span class="p">,</span>
+        <span class="n">sizeref</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weight Vector&quot;</span><span class="p">,</span> <span class="n">cmax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;rgb(0,0,0)&#39;</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;rgb(0,0,0)&#39;</span><span class="p">],]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">weights</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">weights</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weight Vector&quot;</span>
+    <span class="p">)</span>
+
+<span class="p">)</span>
+
+
+<span class="c1">#origin</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;diamond&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">scene</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Scene</span><span class="p">(</span>
+        <span class="n">camera</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">eye</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="mf">2.2</span>
+            <span class="p">),</span>
+            <span class="n">up</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">dragmode</span><span class="o">=</span><span class="s2">&quot;turntable&quot;</span><span class="p">,</span>
+        <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Input 1&quot;</span><span class="p">,</span>
+            <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">],</span>
+        <span class="p">),</span>
+        <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Input 2&quot;</span><span class="p">,</span>
+            <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">],</span>
+
+        <span class="p">),</span>
+        <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Bias Input&quot;</span><span class="p">,</span>
+            <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">700</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>If you look through the top of the bias axis, you can see the data points are same as they were in the 2D figure, and the weight vector looks the same as well. And the moment you rotate the above figure you can see this new higher dimensional decision boundary also classifies the data and infact passes through the previous decision boundary(the lower dimensional). Further more, you can also see that this plane has also passed through the origin of the coordinate axis. </p>
+<p>With this intuition in mind, we can conclude that a higher dimensional decision boundary achieves the same goal, and to represent this higher dimensional hyper-plane, we just need the weight vector(which includes the bias weight as well!), since we already know it's distance from the origin will be Zero. </p>
+<p>Now that we have established, that only the complete weight vector(it's unit vector) defines the decision hyper-plane, two same vectors(or vectors in the same direction), will define the same hyper plane.</p>
+<h1 id="the-proof">The Proof</h1>
+<p>The Perceptron Convergence theorem proved by Rosenblatt in 1962, states that:</p>
+<p><em><strong>"given a linearly separable data, the perceptron will converge to a solution within \(R/ \gamma^2\) iterations, where \(\gamma\) is the distance between the separating hyperplane and the closest datapoint to it."</strong></em></p>
+<p>However there are some assumptions about it:
+1. The data should be linearly separable.
+2. For every input vector \(x\), \(\lVert \mathbf{x} \rVert\) is bound by some constant R. In our proof we will assume \(\lVert \mathbf{x} \rVert \leq R\).
+3. Also the learning rate is chosen to be 1.</p>
+<p>Now to the proof,</p>
+<p>We know that the data is linearly separable, which means there exists a set of weights which represent the the seperating hyperplane. Let's say these weights are \(\mathbf{w^*}\).</p>
+<p>Our learning algorithm tries to find some vector \( \mathbf{w} \) that is parallel to \( \mathbf{w^*} \). To see if the vectors are parallel we use the inner product (also called the dot product) \( \mathbf{w^*} \cdot \mathbf{w} \).</p>
+<p>So,</p>
+<div class="arithmatex">\[ \mathbf{w^*} \cdot \mathbf{w} = \lVert \mathbf{w^*}\rVert \   \lVert \mathbf{w}\rVert \cos\theta \tag{12}\]</div>
+<p>now if two vectors are parallel the angle is \(0\), and \(\cos{0}=1\) and so the inner product is maximum. <strong>If we show that after each update \(\mathbf{w^*} \cdot \mathbf{w}\) increases, we have shown that the perceptron converges.</strong> However we need to be a bit more careful as \(\mathbf{w^*} \cdot \mathbf{w}\) can also increase if \(\lVert \mathbf{w} \rVert\) increases, we also need to check the length of \(\mathbf{w}\) doesn't increase too much.</p>
+<p>Keeping all that in mind, let's move on.</p>
+<p>Suppose at the \(i^{th}\) iteration of the algorithm, the network sees a particular input vector \(\mathbf{x}\) that has a target(ground truth) \(t\), and the output(prediction) was \(y\). </p>
+<p>Now, if the output was wrong, then</p>
+<div class="arithmatex">\[(t-y)(\mathbf{w^{(i-1)}} \cdot \mathbf{x}) &lt; 0 \tag{13}\]</div>
+<p>To see this result clearly, look at a few examples:</p>
+<p>e.g, if the target was 1 and output was 0, then,</p>
+<div class="arithmatex">\[t-y = 1\]</div>
+<p>and </p>
+<div class="arithmatex">\[\begin{align}\mathbf{w^{(i-1)}} \cdot \mathbf{x} &lt; 0\\ \implies (t-y)(\mathbf{w^{(i-1)}} \cdot \mathbf{x}) &lt; 0 \end{align} \]</div>
+<p>or if the target was 0 and output was 1, then,</p>
+<div class="arithmatex">\[t-y=-1\]</div>
+<p>and </p>
+<div class="arithmatex">\[\begin{align}\mathbf{w^{(i-1)}} \cdot \mathbf{x} &gt; 0 \\ \implies (t-y)(\mathbf{w^{(i-1)}} \cdot \mathbf{x}) &lt; 0\end{align}\]</div>
+<p>Now that there is error, the weights need to be updated according to the perceptron updation rule,</p>
+<div class="arithmatex">\[ \mathbf{w^{(i)}} = \mathbf{w^{(i-1)}} - \eta (y-t)\mathbf{x} \tag{14}\]</div>
+<p>Note: <em>Please clear it that the above equations have been generalised as \(\mathbf{w^{(i)}}\) is not a single weight, but a vector of weights to a neuron from the input nodes at \(i^{th}\) iteration and \(\mathbf{x}\) is not a single input but the input vector(including the bias input), \(y\) and \(t\) are output and target of a single neuron and the symbol \(\cdot\) represents inner product of two vectors.</em></p>
+<p>Coming back to above equation, our proof assumes the learning rate of 1 and let's use \(t-y\) instead of \(y-t\)(which changed sign, ofcourse!).</p>
+<div class="arithmatex">\[\implies \mathbf{w^{(i)}} = \mathbf{w^{(i-1)}} + (t-y)\mathbf{x} \tag{15}\]</div>
+<p>Now to show that \(w^* \cdot w\) increases with iterations, using Equation 15,</p>
+<div class="arithmatex">\[ \begin{align} \mathbf{w^*} \cdot \mathbf{w^{(i)}} &amp;= \mathbf{w^*} \cdot (\mathbf{w^{(i-1)}} + (t-y)\mathbf{x})\\ &amp;= \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + \mathbf{w^*} \cdot (t-y)\mathbf{x}\\ &amp;= \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + (t-y)(\mathbf{w^*} \cdot \mathbf{x})\\ \end{align} \tag{16} \]</div>
+<p>This is where we take a break  and think what \(\mathbf{w^*} \cdot \mathbf{x}\) represents.</p>
+<p>If you have any idea about the signed distance of a point \(\mathbf{x}\) from a hyper-plane(which passes through origin) with coefficient vector \(\mathbf{a}\) is:</p>
+<div class="arithmatex">\[\begin{align} D = \frac{\mathbf{a} \cdot \mathbf{x}}{\lVert \mathbf{a} \rVert} \\ \implies D \lVert \mathbf{a} \rVert = \mathbf{a} \cdot \mathbf{x} \end{align} \tag{17}\]</div>
+<p>Similarly \(\mathbf{w^*} \cdot \mathbf{x}\) represents \(\lVert \mathbf{w^*} \rVert\) times the <em>signed</em> distance between the point \(\mathbf{x}\) and the plane represented by our vector \(\mathbf{w^*}\) (which is the correct decision boundary)</p>
+<p>By signed distance, I mean the sign regarding to what side of the plane the data point lies. Now if we have made an error and misclassified the point, then \((t-y)\) will be the opposite the sign of the sign of the distance given by the correct boundary. Give it a little thought, work out on different cases, you'll get it.</p>
+<p>So \((t-y)(\mathbf{w^*} \cdot \mathbf{x})\) represents \(\lVert \mathbf{w^*} \rVert\) times the <em>magnitude</em> of distance between the point \(\mathbf{x}\) and the plane represented by our vector \(\mathbf{w^*}\) (which is the correct decision boundary). And the smallest distance between the correct decision boundary and any datapoint is \(\gamma\).</p>
+<p>So,</p>
+<div class="arithmatex">\[(t-y)\mathbf{w^*} \cdot \mathbf{x} \geq \gamma \lVert \mathbf{w^*} \rVert \tag{18}\]</div>
+<p>Using the above equation in Equation 16,</p>
+<div class="arithmatex">\[ \mathbf{w^*} \cdot \mathbf{w^{(i)}} \geq \mathbf{w^*} \cdot \mathbf{w^{(i-1)}} + \gamma \lVert \mathbf{w^*} \rVert \tag{19} \]</div>
+<p>where \(\gamma\) is the minimum distance between the optimal hyperplane defined by \(\mathbf{w^*}\) and the closest datapoint to it.</p>
+<p>Now according to above equation, \(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\) always increases by at least \(\gamma\) and we initialize the weights to be small random numbers(positive and negative), so after \(i\) iterations</p>
+<div class="arithmatex">\[\mathbf{w^*} \cdot \mathbf{w^{(i)}} \geq i\gamma \lVert \mathbf{w^*} \rVert \tag{20}\]</div>
+<p>So we have proved that \(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\) increases as iterations increase.</p>
+<p>Since the R.H.S of the above equation is positive,</p>
+<div class="arithmatex">\[\lvert \mathbf{w^*} \cdot \mathbf{w^{(i)}} \rvert \geq i\gamma \lVert \mathbf{w^*} \rVert \tag{21}\]</div>
+<p>Also we use <strong>Cauchy–Schwarz inequality</strong>,</p>
+<div class="arithmatex">\[ \lvert \mathbf{w^*}  \cdot \mathbf{w^{(i)}} \rvert \leq \lVert \mathbf{w^*} \rVert \ \lVert \mathbf{w^{(i)}} \rVert \tag{22} \]</div>
+<p>Using Equations 21 and 22,</p>
+<div class="arithmatex">\[\begin{align} &amp; i\gamma \lVert \mathbf{w^*} \rVert \leq \lvert \mathbf{w^*} \cdot \mathbf{w^{(i)}} \rvert \leq \lVert \mathbf{w^*} \rVert \ \lVert \mathbf{w^{(i)}} \rVert \\ \implies &amp; i\gamma \lVert \mathbf{w^*} \rVert \leq \lVert \mathbf{w^*} \rVert \ \lVert \mathbf{w^{(i)}} \rVert \end{align} \tag{22}\]</div>
+<p>\(\lVert \mathbf{w^*} \rVert\) is positive and can be cancelled without affecting the inequality.</p>
+<div class="arithmatex">\[ i\gamma \leq \lVert \mathbf{w^{(i)}} \rVert \tag{23} \]</div>
+<p>Here we have put a lower limit to \(\lVert \mathbf{w^{(i)}}\rVert\). Now we have to make sure that \(\lVert \mathbf{w^{(i)}} \rVert\) does not increase too much. </p>
+<p>For that we will use the Equation 15 and square the norm on both sides and use the Vector addition rules:
+$$ \begin{align} \lVert \mathbf{w^{(i)}}\rVert ^2 &amp;= \lVert \mathbf{w^{(i-1)}} + (t-y)\mathbf{x} \rVert ^2\ &amp;= \lVert \mathbf{w^{(i-1)}}\rVert ^2 + (t-y)^2 \lVert \mathbf{x}\rVert ^2 + 2(t-y)\mathbf{w^{(i-1)}} \cdot \mathbf{x}  \tag{24} \end{align} $$</p>
+<p>Now using Perceptron rule, assumption 2(i.e, \( \lVert \mathbf{x} \rVert \) is bound by some constant \( R \)) and Equation 13 repectively, we have</p>
+<div class="arithmatex">\[\begin{align}(t-y)^2 = 1\\  \lVert \mathbf{x} \rVert \leq R\\  (t-y)(\mathbf{w^{(i-1)}} \cdot \mathbf{x}) &lt; 0 \end{align} \tag{25}\]</div>
+<p>Remember, the last equation here is when the output is incorrect.</p>
+<p>So using the above equations (25):</p>
+<div class="arithmatex">\[(t-y)^2 \lVert \mathbf{x}\rVert ^2 + 2(t-y)\mathbf{w^{(i-1)}} \cdot \mathbf{x} \leq R\]</div>
+<p>Using the above equation in Equation 24,</p>
+<div class="arithmatex">\[ \lVert \mathbf{w^{(i)}}\rVert ^2 \leq \lVert \mathbf{w^{(i-1)}}\rVert ^2 + R \tag{26} \]</div>
+<p>Which shows \(\lVert \mathbf{w^{(i)}}\rVert ^2\) does not increase more than what the input data is bound by. If we normalize the input before training, then the data will be bound by 1.</p>
+<p>Now according to Equation 26, after i iterations,</p>
+<div class="arithmatex">\[ \lVert \mathbf{w^{(i)}}\rVert ^2 \leq iR \tag{27} \]</div>
+<p>Here we have put an upper limit on \(\lVert \mathbf{w^{(i)}}\rVert\).</p>
+<p>We have shown that \(\mathbf{w^*} \cdot \mathbf{w^{(i)}}\) increases by atleast \(i\gamma \lVert \mathbf{w^*}\rVert\) and \(\lVert \mathbf{w^{(i)}}\rVert\) does not increase more than \(iR\). Which means the angle between the vectors is decreasing and so the predicting decision boundary is getting close to the actual decision boundary, and after certain weight updates, the algorithm will converge to the actual boundary.</p>
+<p>Using Equation 23 and 27,</p>
+<div class="arithmatex">\[i\gamma \leq \lVert \mathbf{w^{(i)}}\rVert  \leq \sqrt{iR}\\ \implies i \leq \frac{R}{\gamma^2} \tag{28}\]</div>
+<p>So within \(R/\gamma^2\) iterations, the algorithm must have converged.</p>
+<p>We have shown that if the data is linearly separable, then the algorithm will converge, and the time it will take is a function distance between the separating hyperplane and the nearest point. This is actually called <strong>margin</strong>.</p>
+<p><strong><em>Note: The perceptron stops learning as soon as it gets all the data correctly classified, and so there is no guarantee that it will find the largest margin, just that if there is a separator, it will find it.</em></strong></p>
+<p>Note: By weight update we mean just update weight when the algorithm makes an error and so only those weight updates count to the iterations. We do not count the examples which the algorithm classifies correctly.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Murtaza Nazir
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

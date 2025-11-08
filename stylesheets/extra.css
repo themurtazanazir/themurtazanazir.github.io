@@ -1,0 +1,272 @@
+/* Ultra-minimal academic style - like Ilya/Karpathy websites */
+
+:root {
+  /* Very simple, clean colors */
+  --warm-bg: #fef6ec;
+  --warm-text: #4a3f35;
+  --warm-link: #0066cc;
+  --warm-link-hover: #0052a3;
+  --warm-border: #e6d5c3;
+  --warm-code-bg: #f7f0e8;
+
+  /* Claude-style serif font stack */
+  --md-text-font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --md-code-font-family: ui-monospace, "Courier New", Courier, monospace;
+}
+
+/* Override Material theme */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--warm-bg);
+  --md-default-fg-color: var(--warm-text);
+  --md-typeset-a-color: var(--warm-link);
+}
+
+/* Hide everything except content */
+.md-header {
+  display: none;
+}
+
+.md-sidebar--primary {
+  display: none;
+}
+
+.md-sidebar--secondary {
+  display: none;
+}
+
+.md-footer {
+  display: none;
+}
+
+/* Body */
+body {
+  background-color: var(--warm-bg);
+  color: var(--warm-text);
+}
+
+/* Main content - simple and centered */
+.md-content {
+  margin-left: 0;
+  max-width: 48rem;
+  margin: 0 auto;
+  background-color: var(--warm-bg);
+}
+
+.md-main__inner {
+  margin-top: 0;
+}
+
+.md-container {
+  max-width: none;
+}
+
+.md-main {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Typography - simple and small */
+.md-typeset {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--warm-text);
+}
+
+.md-typeset h1 {
+  font-weight: 600;
+  font-size: 1.5em;
+  color: var(--warm-text);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border: none;
+  padding: 0;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  font-size: 1.2em;
+  color: var(--warm-text);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  border: none;
+  padding: 0;
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--warm-text);
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--warm-text);
+}
+
+/* Links - simple blue underline */
+.md-typeset a {
+  color: var(--warm-link);
+  text-decoration: none;
+}
+
+.md-typeset a:hover {
+  color: var(--warm-link-hover);
+  text-decoration: underline;
+}
+
+/* Remove all transitions and animations */
+* {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Paragraphs */
+.md-typeset p {
+  margin-bottom: 0.3em;
+  text-align: justify;
+}
+
+/* Drop cap - manual class you can apply in HTML */
+.drop-cap::first-letter {
+  font-size: 3.0em;
+  line-height: 1;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.02em;
+  font-weight: 400;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Code blocks */
+.md-typeset pre {
+  background-color: var(--warm-code-bg);
+  border: 1px solid var(--warm-border);
+  border-radius: 0;
+  padding: 0.8em;
+  margin: 1em 0;
+  overflow-x: auto;
+}
+
+.md-typeset code {
+  background-color: var(--warm-code-bg);
+  border: none;
+  border-radius: 0;
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+}
+
+.md-typeset pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Lists - simple */
+.md-typeset ul,
+.md-typeset ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.md-typeset li {
+  margin-bottom: 0.3em;
+}
+
+/* Tables */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+  border: 1px solid var(--warm-border);
+  margin: 1em 0;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--warm-code-bg);
+  border: 1px solid var(--warm-border);
+  padding: 0.5em;
+  font-weight: 600;
+  text-align: left;
+}
+
+.md-typeset table:not([class]) td {
+  border: 1px solid var(--warm-border);
+  padding: 0.5em;
+}
+
+/* Blockquotes */
+.md-typeset blockquote {
+  border-left: 3px solid var(--warm-border);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  color: #666;
+}
+
+/* Images */
+.md-typeset img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+}
+
+/* Horizontal rules - minimal */
+.md-typeset hr {
+  border: 0;
+  border-top: 1px solid var(--warm-border);
+  margin: 2em 0;
+}
+
+/* Content padding */
+.md-content__inner {
+  padding: 2.5em 1em;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Remove all box shadows */
+* {
+  box-shadow: none !important;
+}
+
+/* Strong text */
+.md-typeset strong {
+  font-weight: 600;
+}
+
+/* Emphasis */
+.md-typeset em {
+  font-style: italic;
+}
+
+/* Remove decorations from admonitions */
+.md-typeset .admonition {
+  border: 1px solid var(--warm-border);
+  background-color: var(--warm-code-bg);
+  margin: 1em 0;
+  padding: 0.8em;
+}
+
+/* Print */
+@media print {
+  .md-typeset {
+    font-size: 11pt;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset {
+    font-size: 14px;
+  }
+
+  .md-content__inner {
+    padding: 1.5em 1em;
+  }
+}

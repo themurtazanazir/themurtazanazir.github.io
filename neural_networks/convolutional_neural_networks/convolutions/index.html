@@ -1,0 +1,1242 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A description of mathematics of Convolution operation in terms of signal processing">
+      
+      
+        <meta name="author" content="Murtaza Nazir">
+      
+      
+        <link rel="canonical" href="https://themurtazanazir.github.io/neural_networks/convolutional_neural_networks/convolutions/">
+      
+      
+        <link rel="prev" href="../introduction/">
+      
+      
+        <link rel="next" href="../../transformer/transformer/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Convolutions - murtaza</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="murtaza" class="md-header__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            murtaza
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convolutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="murtaza" class="md-nav__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    murtaza
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Algebra
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Algebra
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vectors-linear-combinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vectors & Linear Combinations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vector-spaces-and-subspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Spaces & Subspaces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Multi-Layer Perceptron
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/perceptron-convergence-theorem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perceptron Convergence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/multi-layer-perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi-Layer Perceptron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/improvements-to-mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Improvements to MLP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convolutional Neural Networks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Convolutional Neural Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convolutions
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Transformer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transformer/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../../">← Neural Networks</a></p>
+<h1 id="convolutions">Convolutions</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Convolution operation(denoted by <span class="arithmatex">\(*\)</span>) is one of the most important, if not the most important technique in Signal Processing. It gives us the idea of how a linear invariant system converts an input signal to an output signal. From now on, we will refer to <em>digital</em> signal as simply signal.</p>
+<p>Let's first introduce some terminology:</p>
+<ol>
+<li><strong>Input Signal<span class="arithmatex">\((x[n])\)</span>:</strong> As the name suggests, it is a signal that acts as an input to a system.</li>
+<li><strong>Output System<span class="arithmatex">\((y[n])\)</span>:</strong> The output that the system generates by acting over the input signal.</li>
+<li><strong>Impulse:</strong> An impulse is a signal that is zero everywhere except at a single point.</li>
+<li><strong>Delta function<span class="arithmatex">\((\delta [n])\)</span>:</strong> It is an impulse with value unity at sample number 0 and zero at every other sample number. It is a <em>normalized</em> impulse, also called <strong>unit impulse</strong>.</li>
+</ol>
+<div class="arithmatex">\[\delta [n] = \begin{cases} 1 &amp; n=0\\ 0 &amp; \text{otherwise}\end{cases} \tag{1}\]</div>
+<ol>
+<li><strong>Impulse response<span class="arithmatex">\((h[n])\)</span>:</strong> The output of a system when a delta function<span class="arithmatex">\((\delta [n])\)</span> is give as input.</li>
+</ol>
+<p>The impulse response of a system defines the system. Different systems will have different impulse responses.</p>
+<p>Now, how to obtain an output from a system for an input signal? We use what is called a Decomposition technique.</p>
+<p><strong>Decomposition:</strong> Break the input signal into smaller units. Pass those units through the system to get corresponding outputs. Add those outputs to get the final output signal.</p>
+<p>There are two main decompositions in signal processing: Fourier Decomposition and Impulse Decomposition. When impulse decomposition is done, it can be described by a mathematical operation called <strong>convolutions</strong>(denoted <span class="arithmatex">\(*\)</span>).</p>
+<p>We do an <em>impulse decomposition</em>, i.e we decompose our input signal in multiple impulses and then pass those impulses through the system to produce corresponding outputs. The outputs are added to generate the final output signal.</p>
+<h2 id="impulse-as-a-delta-function">Impulse as a delta function</h2>
+<p>Any impulse function can be represented as a <em>shifted and scaled</em> delta function. e.g: An impulse, say <span class="arithmatex">\(a[n]\)</span> with zeroes everywhere except at sample no. 2, has a value of -1.3. This impulse can be represented as</p>
+<p><img alt="Fig 1" src="../Figures/1.conv/Fig1.png" /></p>
+<p>In the abpve figure, the LHS is an impulse <span class="arithmatex">\(a[n]\)</span> of -1.3 at sample number 2 and the RHS is a standard delta <span class="arithmatex">\(\delta [n]\)</span> i.e impulse of unity at sample number 0.</p>
+<p>Now, we can represent this impulse <span class="arithmatex">\(a[n]\)</span> as a scaled and shifted <span class="arithmatex">\(\delta [n]\)</span> as:</p>
+<div class="arithmatex">\[a[n] = -1.3\ \delta[n-2]\]</div>
+<p>Similarly any impulse <span class="arithmatex">\(b[n]\)</span> which has value <span class="arithmatex">\(u\)</span> and sample number <span class="arithmatex">\(p\)</span>, i.e</p>
+<div class="arithmatex">\[b[n] = \begin{cases}u &amp; n=p\\0 &amp; \text{otherwise} \end{cases}\]</div>
+<p>then,</p>
+<div class="arithmatex">\[b[n] = u\ \delta[n-p] \tag{2}\]</div>
+<h2 id="output-of-an-impulse">Output of an Impulse</h2>
+<p>Now if <span class="arithmatex">\(a[n]\)</span> is passed through a system with impulse response <span class="arithmatex">\(h[n]\)</span>, what will be the output? Well <span class="arithmatex">\(h[n]\)</span> is the output when the input is <span class="arithmatex">\(\delta [n]\)</span>. What could be output when input is <span class="arithmatex">\(-1.3 \delta[n-2]\)</span>?
+<img alt="Fig 2" src="../Figures/1.conv/Fig2.png" /></p>
+<p>The output is shifted and scaled by the same amount as the delta function is to form the input impulse. These are the properties of <em>homogeneity</em> and <em>shift invariance</em>.</p>
+<p>So if we know the impulse response of any system, we know the output of any impulse.</p>
+<p>With the information of how outputs to impulses are produced, let's revisit how do we produce output to a complete signal by Impulse Decomposition, which is mathematically equivalent to convolution of input signal and impulse response.</p>
+<p>First we decompose the input signal into impulses which can be viewed as shifted and scaled delta functions. These shifted and scaled delta functions produced similar shifted and scaled impulse responses as outputs. These outputs are finally synthesized(added) to produce the final output.</p>
+<p>This whole operation is called convolution of impulse response <span class="arithmatex">\(h[n]\)</span> and input signal <span class="arithmatex">\(x[n]\)</span> and is denoted as:</p>
+<div class="arithmatex">\[y[n] = x[n] * h[n] \tag{3}\]</div>
+<blockquote>
+<p><strong>Note:</strong> <span class="arithmatex">\(*\)</span> is not multiplication, it is convolution. </p>
+</blockquote>
+<p>So, to know impulse response of a system, we know output of <em>any</em> input signal. It is something that <em>defines</em> the system.</p>
+<p>This impulse response is sometimes called a <em>kernel</em>. And the output as <em>feature map</em>.</p>
+<h2 id="dimensions">Dimensions</h2>
+<p>Let's say our input signal has <span class="arithmatex">\(m\)</span> number of samples and the kernel has <span class="arithmatex">\(k\)</span> number of samples, then output signal(the convolution of input signal and the kernel, will be <span class="arithmatex">\(m+k-1\)</span>.</p>
+<p><strong>Note: When we say a signal has <span class="arithmatex">\(s\)</span> samples, it means we <em>know</em> these <span class="arithmatex">\(s\)</span> samples. The signal actually continues from <span class="arithmatex">\(-\infty\)</span> to <span class="arithmatex">\(+\infty\)</span>. We assume every signal(be that input, kernel or output) has values of zero anywhere outside of those <span class="arithmatex">\(s\)</span> samples.</strong></p>
+<p>If an input signal has, say, <span class="arithmatex">\(200\)</span> samples, and a kernel is <span class="arithmatex">\(20\)</span> samples long, then we have to shift and scale the kernel for each impulse as that impulse is shifted and scaled from the delta function. Now for the first impulse of input(i.e sample 0), the kernel will be scaled but not shifted and thus will contribute to output signal from sample 0 to sample 19 (because kernel is 20 samples long). For second impulse of input (i.e sample no. 1), the kernel will shift 1 step and will be scaled as well, and thus will contribute to output signal from sample 1 to sample 20. The intersecting output contrbutions at a given sample are added. Similarly at <span class="arithmatex">\(m^{th}\)</span> impulse of input(i.e at sample no. <span class="arithmatex">\(m-1\)</span>), the kernel will be shifted <span class="arithmatex">\(m-1\)</span> places (and scaled as well) and thus will contribute to output signal from  sample no. <span class="arithmatex">\(m-1\)</span> to sample no. <span class="arithmatex">\(m+20-1\)</span> i.e <span class="arithmatex">\(m+k-1\)</span>. </p>
+<h2 id="example">Example</h2>
+<p>Let's see an example to make things more clear. Let's say we have an input of 9 samples and a kernel of 4 samples. We will store these in <code>numpy</code> arrays.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">input_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.05</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="o">-</span><span class="mf">1.4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7</span><span class="p">])</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+</code></pre></div>
+<p>Now input is 9 samples long(<span class="arithmatex">\(m=9\)</span>) and kernel is 4 samples long (<span class="arithmatex">\(k=4\)</span>) so output will be <span class="arithmatex">\(m+k-1 = 9+4-1 = 12\)</span> samples long.</p>
+<ol>
+<li>Let's start with creating an output array of 12 values with each element equal to zero.</li>
+<li>We will then extend our kernels to be of the same size as our outputs and then shift and scale the kernels. </li>
+<li>Finallly we will add them to our output signal.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simple_convolve</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple way of convolving two signals.</span>
+<span class="sd">    input_signal: numpy array containing the input signal.</span>
+<span class="sd">    kernel: numpy array containing the kernel.&quot;&quot;&quot;</span>
+
+    <span class="n">output_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_signal</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_signal</span><span class="p">)):</span>
+
+        <span class="n">shifted_kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output_signal</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">))))</span>
+        <span class="n">scaled_shifted_kernel</span> <span class="o">=</span> <span class="n">input_signal</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">shifted_kernel</span>
+
+        <span class="c1">#add the scaled and shifted kernel to the output</span>
+        <span class="n">output_signal</span><span class="o">+=</span><span class="n">scaled_shifted_kernel</span>
+
+    <span class="k">return</span> <span class="n">output_signal</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">output_signal</span> <span class="o">=</span> <span class="n">simple_convolve</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">);</span><span class="n">output_signal</span>
+</code></pre></div>
+<pre><code>array([ 1.1  ,  0.55 , -1.38 ,  1.095, -0.185, -2.63 , -1.06 , -0.32 ,
+        0.72 ,  0.15 , -0.21 ,  0.14 ])
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">text_color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span>
+<span class="n">back_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">33</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">33</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">33</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="k">for</span> <span class="n">subplot</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">output_signal</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Input Signal&#39;</span><span class="p">,</span> <span class="s1">&#39;Kernel&#39;</span><span class="p">,</span> <span class="s1">&#39;Output Signal&#39;</span><span class="p">)):</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))))</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))),</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))),</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">back_color</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">subplot</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sample Number&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">text_color</span><span class="p">)</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">back_color</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../Figures/1.conv/Fig3.png" /></p>
+<p>The process can be shown graphically as:</p>
+<p><img alt="" src="../Figures/1.conv/Anim1.mp4" /> </p>
+<p>The key take away from the above graphic is this frame:</p>
+<p><img alt="" src="../Figures/1.conv/Fig4.png" /></p>
+<p>These are the contributions of each shifted and scaled kernels to the final output signal. This figure shows how each impulse from the input signal changes the kernel and then these changes are added to the final output.</p>
+<blockquote>
+<p>Note: The kernel is in <font color="orange">orange color</font>, the <font color="cyan">cyan color</font> is just extensions of zeros to make it the same size as that of the output signal.</p>
+</blockquote>
+<h2 id="convolution-is-commutative">Convolution is commutative</h2>
+<p>Let's again convolve the input signal with kernel.</p>
+<div class="highlight"><pre><span></span><code><span class="n">output1</span> <span class="o">=</span> <span class="n">simple_convolve</span><span class="p">(</span><span class="n">input_signal</span><span class="o">=</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">);</span> <span class="n">output1</span>
+</code></pre></div>
+<pre><code>array([ 1.1  ,  0.55 , -1.38 ,  1.095, -0.185, -2.63 , -1.06 , -0.32 ,
+        0.72 ,  0.15 , -0.21 ,  0.14 ])
+</code></pre>
+<p>Now let's now reverse the input_signal and the kernel.</p>
+<div class="highlight"><pre><span></span><code><span class="n">output2</span> <span class="o">=</span> <span class="n">simple_convolve</span><span class="p">(</span><span class="n">input_signal</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">input_signal</span><span class="p">);</span> <span class="n">output2</span>
+</code></pre></div>
+<pre><code>array([ 1.1  ,  0.55 , -1.38 ,  1.095, -0.185, -2.63 , -1.06 , -0.32 ,
+        0.72 ,  0.15 , -0.21 ,  0.14 ])
+</code></pre>
+<p>As you can see, both the outputs are same. This is an important property of convolution that is put to use, i.e:</p>
+<div class="arithmatex">\[a[n]*b[n] = b[n]*a[n] \tag{4}\]</div>
+<p>The result of convolution is always same, no matter the order of the signals. This operation is commutative.</p>
+<p>Now, what does this mean in Signal Processing?
+It means we can exchange the impulse response and the input signal to generate the same output, but that does not make any sense physically as the impulse response of a system is fixed and cannot be altered. It is what <em>defines</em> the system. So changing the impulse response means to changing the system completely.</p>
+<p>So basically, for signal processing, it does not have any special meaning. It is simply a mathematical tool that can be leveraged to implement convolution operation.</p>
+<h2 id="the-formula">The formula?</h2>
+<p>Now we have implemented convolution, but what if we need to know just what the, say, 8th element of the convolved output signal is? Our current implementation will calculate that by computing the whole output signal and then giving us the output. This method is slow and if the input signal is hundreds of thousands(or even millions) of points, it will take a huge amount of time to do that, only to return one element.</p>
+<p>So what we need is a mathematical formula of what convolution is.</p>
+<div class="arithmatex">\[(a*b)[n] = ?\]</div>
+<p>This is what we need to find out. For that let's recall the important take away from the animation we saw earlier. I'll add the x axis at each figure, we will need it.</p>
+<p><img alt="" src="../Figures/1.conv/Fig5.png" /></p>
+<p>Now the output signal is the sum of all these signals. These signals are added at their corresponding samples. So the 8th element of the output signal is the sum of all 8th elements in each of these signals.</p>
+<p>Now, after observations, you can tell that the 8th elements of most of these signals is zero (in <font color="cyan">cyan</font>). These were the extensions to make the kernel longer. And these zeros don't contribute anything to the final sum. This is how our calculation gets fast, we only only sum values from those signals, which were not extensions.</p>
+<p>So, for element 8, only <span class="arithmatex">\(x[5]h[n-5], x[6]h[n-6], x[7]h[n-7] \text{ and  }x[8]h[n-8]\)</span> contributes (because only these signals are <font color="orange"> orange </font> at sample number 8).</p>
+<p>So we can say,</p>
+<div class="arithmatex">\[y[8] = x[5]h[n-5] + x[6]h[n-6] + x[7]h[n-7] + x[8]h[n-8]; \qquad \text{for }n=8\]</div>
+<p>Substituting <span class="arithmatex">\(n=8\)</span>,</p>
+<div class="arithmatex">\[y[8] = x[5]h[3] + x[6]h[2] + x[7]h[1] + x[8]h[0]\]</div>
+<p>It can be written as,</p>
+<div class="arithmatex">\[\begin{align} y[8] &amp;= x[8-3]h[3] + x[8-2]h[2] + x[8-1]h[1] + x[8-0]h[0] \\ \implies y[8] &amp;= \sum_{k=0}^{3}x[8-k]h[k] \end{align}\]</div>
+<p>This means 4 samples of kernel are multiplied with 4 samples of input.</p>
+<p>Let's look at output sample 6. This value comes from the sum of all the <font color="orange"> orange </font> samples at sample number 6 in the above figure.</p>
+<p>so,</p>
+<div class="arithmatex">\[y[6] = x[3]h[n-3] + x[4]h[n-4] + x[5]h[n-5] + x[6]h[n-6]; \qquad \text{for }n=6\]</div>
+<div class="arithmatex">\[y[6] = x[3]h[3] + x[4]h[2] + x[5]h[1] + x[6]h[0]\]</div>
+<p>Again, it can be written as:</p>
+<div class="arithmatex">\[\begin{align} y[6] &amp;= x[6-3]h[3] + x[6-2]h[2] + x[6-1]h[1] + x[6-0]h[0] \\ \implies y[6] &amp;= \sum_{k=0}^3 x[6-k]h[k]\end{align}\]</div>
+<p>Generalizing, for a kernel of size <span class="arithmatex">\(n_k\)</span>, running from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(n_k-1\)</span></p>
+<div class="arithmatex">\[y[i] = (x*h)[i] = \sum_{k=0}^{n_k-1}x[i-k]h[k] \tag{5}\]</div>
+<p>This equation is called <strong>convolution sum</strong>. It let's us calculate the output at any point independent of other output points. As <span class="arithmatex">\(k\)</span> runs from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(n_k-1\)</span>, each sample from the kernel, <span class="arithmatex">\(h[k]\)</span> is multiplied with corresponding input samples <span class="arithmatex">\(x[i-k]\)</span> and then summed up to form the output at sample <span class="arithmatex">\(i\)</span>.</p>
+<p><img alt="" src="../Figures/1.conv/Fig6.png" /></p>
+<p>As you can see in the above figure, the kernel is flipped and multiplied with the corresponding input elements (white). These products are then summed up to form the final output(white in ouput).</p>
+<h2 id="padding">Padding</h2>
+<p>Coming back to Eq. 5, let's see how we can generate, <span class="arithmatex">\(y[0]\)</span> and <span class="arithmatex">\(y[11]\)</span>.</p>
+<div class="arithmatex">\[y[i] = (x*h)[i] = \sum_{j=0}^{n_k-1}x[i-j]h[j] \tag{5}\]</div>
+<p>For <span class="arithmatex">\(i=0\)</span> and <span class="arithmatex">\(n_k=4\)</span>,</p>
+<div class="arithmatex">\[\begin{align}y[0] = (x*h)[0] &amp;= \sum_{j=0}^{3}x[0-j]h[j] \\ &amp;=x[0]h[0] + x[-1]h[1] + x[-2]h[2] + x[-3]h[3] \end{align}\]</div>
+<p>For <span class="arithmatex">\(i=11\)</span> and <span class="arithmatex">\(n_k=4\)</span>,</p>
+<div class="arithmatex">\[\begin{align}y[11] = (x*h)[11] &amp;= \sum_{j=0}^{3}x[11-j]h[j] \\ &amp;=x[11]h[0] + x[10]h[1] + x[9]h[2] + x[8]h[3] \end{align}\]</div>
+<p>In both these equations, we have some inputs, which are not part of our original input signal. Our original signal has sample number 0 to 8. So what would <span class="arithmatex">\(x[-3]\)</span>, <span class="arithmatex">\(x[2]\)</span>, <span class="arithmatex">\(x[-1]\)</span> and <span class="arithmatex">\(x[9]\)</span>, <span class="arithmatex">\(x[10]\)</span>, <span class="arithmatex">\(x[11]\)</span> mean?</p>
+<p>Actually the input signal (as well as output and kernel), all are present at all samples. It is just they are zero (i.e no signal). And they don't contribute to the convolution and hence are not saved. (Besides, we cannot save infinite numbers in a computer, can we?). But, as it turns out we need some of these zero points, for our outputs. Specifically, we need <span class="arithmatex">\(n_k-1\)</span> points on both sides of an input signal. So we just extend our signal with zeros for these samples. This is what we call <strong>padding</strong>. Padding is a technique where we add a bunch of zeros to a signal where the signal does not exist.</p>
+<p><img alt="" src="../Figures/1.conv/Anim2.mp4" /></p>
+<p>The above animation shows how the flipped kernel moves along the input signal. At each stop it multiplies the elements of the kernel and that of the input signal which overlap with the kernel. These products are summed up to form the corresponding output sample. Look at this animation and the equation 5. Make sure you understand both. Practice a bit on paper. <strong>Remember, the kernel is flipped.</strong> </p>
+<p>The <font color="cyan">cyan</font> points in the input signal in above animation are the <em>padding</em> of that signal. The far left and far right data points of the output signal are based on incomplete information, because some of the inputs are padded. We say that the kernel is not fully immersed in the input signal while computing these points. If the kernel is <span class="arithmatex">\(n_k\)</span> samples long, then the <span class="arithmatex">\(n_k-1\)</span> samples of the ouput signal on both sides are based on less information. The farther elements of these <span class="arithmatex">\(n_k-1\)</span> elements (on both sides) are based on lesser information than the closer ones to the center. So the extreme points in the output signal are usually not used. Another way to do this is to control the padding. If we intitially pad the the signal less than <span class="arithmatex">\(n_k-1\)</span> points on both sides, it is equivalent of ignoring the outputs that would have formed because of these points.</p>
+<p>With that in mind, let's write the code for simple convolution using this method. We will control the padding as well.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">conv</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs convolution of input and kernel with padding.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    `input_signal`: iterable containing the input signal.</span>
+
+<span class="sd">    `kernel`: iterable contatining the kernel.</span>
+
+<span class="sd">    `padding`: int, the amount of zero padding to be done in each sides of the input signal.</span>
+<span class="sd">               Default is `len(kernel)-1`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c1"># default padding is the full padding</span>
+
+    <span class="n">padded_inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span><span class="n">padding</span><span class="p">)</span>
+    <span class="n">output_signal</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="c1">#traverse through the input signal until kernel overlaps with the end point</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">padded_inp</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+        <span class="c1"># perform convolution sum.</span>
+        <span class="n">current_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">padded_inp</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kernel</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="c1">#kernel is flipped.</span>
+        <span class="n">output_signal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_out</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">output_signal</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">output3</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">input_signal</span><span class="o">=</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">);</span> <span class="n">output3</span>
+</code></pre></div>
+<pre><code>array([ 1.1  ,  0.55 , -1.38 ,  1.095, -0.185, -2.63 , -1.06 , -0.32 ,
+        0.72 ,  0.15 , -0.21 ,  0.14 ])
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">output4</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">input_signal</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">input_signal</span><span class="p">);</span> <span class="n">output4</span>
+</code></pre></div>
+<pre><code>array([ 1.1  ,  0.55 , -1.38 ,  1.095, -0.185, -2.63 , -1.06 , -0.32 ,
+        0.72 ,  0.15 , -0.21 ,  0.14 ])
+</code></pre>
+<p>As you can see, the commutative property still holds up.</p>
+<p>Let's look at some examples,</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">ceil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;mathtext.fontset&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;cm&quot;</span>
+
+<span class="n">input_color</span> <span class="o">=</span> <span class="s2">&quot;orange&quot;</span>
+<span class="n">kernel_color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+<span class="n">output_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">axes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots a 1 x 3 grid of input signal, kernel and output signal</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    `input_signal`: iterable, containing the input signal.</span>
+
+<span class="sd">    `kernel`: iterable, containing the impulse response of a system.</span>
+
+<span class="sd">    `input_name`: [optional] str, name for the input signal. It will be displayed in parenthesis. Can include latex as well.</span>
+
+<span class="sd">    `kernel_name`: [optional] str, name for kernel. Will be displayed in parenthesis. Can include latex as well.</span>
+
+<span class="sd">    `padding`: [optional] int, padding to be used for convolution.</span>
+
+<span class="sd">    `fig_size`: [optional] tuple(int, int), containing width and height of the figure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p_flag</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1">#flag is set if padding is None</span>
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">p_flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">output_signal</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="p">)</span>
+
+    <span class="n">init_color</span><span class="p">,</span> <span class="n">final_color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">unusable_colors</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">final_color</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">final_color</span><span class="o">-</span><span class="n">init_color</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">padding</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="n">fig_size</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">back_color</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">input_signal</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">output_signal</span><span class="p">)]))</span>
+
+    <span class="n">input_name</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;Input Signal $x[n]$ (</span><span class="si">{</span><span class="n">input_name</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">input_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;Input Signal $x[n]$&quot;</span>
+    <span class="n">kernel_name</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;Kernel $h[n]$ (</span><span class="si">{</span><span class="n">kernel_name</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">kernel_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">r</span><span class="s2">&quot;Kernel $h[n]$&quot;</span>
+
+
+    <span class="k">if</span> <span class="n">output_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_name</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;Output Signal $y[n] = x[n] * h[n]$&quot;</span><span class="o">+</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Padding: </span><span class="si">{</span><span class="sa">f</span><span class="s1">&#39;full(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">)&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p_flag</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">padding</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span><span class="n">label_color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">output_signal</span><span class="p">),</span> <span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">kernel_name</span><span class="p">,</span> <span class="n">output_name</span><span class="p">),</span> 
+                                                 <span class="p">(</span><span class="n">input_color</span><span class="p">,</span> <span class="n">kernel_color</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">unusable_colors</span><span class="p">))</span> <span class="o">+</span>\
+                                                  <span class="p">[</span><span class="n">output_color</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output_signal</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">padding</span><span class="p">)</span><span class="o">+</span><span class="n">unusable_colors</span><span class="p">),</span> <span class="p">(</span><span class="n">input_color</span><span class="p">,</span> <span class="n">kernel_color</span><span class="p">,</span> <span class="n">output_color</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))),</span><span class="n">data</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="n">back_color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> 
+                   <span class="n">yticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ceil</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ceil</span><span class="p">((</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">15</span><span class="p">))),</span> <span class="n">xticks</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">())),</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">())),</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">)</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tight_layout</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span><span class="n">axes</span>
+</code></pre></div>
+<p>Let's use a new input signal. A sine with a negative ramp.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">input_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">0.3</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p>Let's try to invert this signal using a known inverter kernel.</p>
+<div class="highlight"><pre><span></span><code><span class="n">inverter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+<span class="n">inverter</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">inverter</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">input_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\sin {\left(</span><span class="si">{}</span><span class="s2">^n/_3\right)} - 0.3 n$&quot;</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;Inverter&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="" src="../Figures/1.conv/Fig7.png" /></p>
+<p>Look at the output. The signal has been inverted but not at the end points. This is because while computing these points, the kernel was not fully immersed into input signal because of the padding. These extreme output points are not usable and hence are to be ignored. Another way is to not compute them at all, i.e reduce the padding. Our current kernel is 31 samples long, and so the padding will be 30 samples on each side. Let's try padding of just 15 samples.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">inverter</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> 
+             <span class="n">input_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\sin {\left(</span><span class="si">{}</span><span class="s2">^n/_3\right)} - 0.3 n$&quot;</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;Inverter&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="" src="../Figures/1.conv/Fig8.png" /></p>
+<p>Much better. But remember there are still extreme points which are based on less information. It is just they are based on <em>comparatively</em> more information than the ones before them. If we want only those points which are based on complete information, then we have to set the padding to be zero. The redder samples are based on lesser information.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">inverter</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+             <span class="n">input_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\sin {\left(</span><span class="si">{}</span><span class="s2">^n/_3\right)} - 0.3 n$&quot;</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;Inverter&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><img alt="" src="../Figures/1.conv/Fig9.png" /></p>
+<p>Notice the difference in sizes of output signal for each padding. We had mentioned earlier that if an input signal is <span class="arithmatex">\(m\)</span> samples long and a kernel is <span class="arithmatex">\(k\)</span> sampes long then the output signal will be <span class="arithmatex">\(m+k-1\)</span> signals long. This is actually true for full padding.</p>
+<p>For padding <span class="arithmatex">\(p\)</span>,</p>
+<div class="arithmatex">\[o =  m + 2p - k + 1 \tag{6}\]</div>
+<p>For full padding, <span class="arithmatex">\(p=k-1\)</span>,</p>
+<div class="arithmatex">\[\begin{align}o_{full} &amp;= m + 2(k-1) -k +1 \\ &amp;= m + k -1 \end{align}\]</div>
+<p>There is another padding, called <em>same</em> padding. It keeps the input and output size the same.</p>
+<p>For same padding, <span class="arithmatex">\(o=m\)</span>,</p>
+<div class="arithmatex">\[ m = m + 2p - k +1 \\ \implies p_{same} = \frac{k-1}{2} \tag{7}\]</div>
+<p>Let's try another kernel. A known high pass filter. Since our input signal consists of a sine function and a linear function, we would like to just keep the higher frequency part(i.e the sine part). The linear part should be removed.</p>
+<div class="highlight"><pre><span></span><code><span class="n">highpass_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.23</span><span class="p">,</span><span class="mf">0.23</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="mf">0.23</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">highpass_filter</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_all</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">paddings</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">input_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">)):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.gridspec</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSpec</span>    
+
+    <span class="n">axes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">paddings</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">input_signal</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">input_signal</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">fig_size</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">back_color</span><span class="p">)</span>
+    <span class="n">input_ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[(</span><span class="nb">len</span><span class="p">(</span><span class="n">paddings</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">kernel_ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[(</span><span class="nb">len</span><span class="p">(</span><span class="n">paddings</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span><span class="n">input_name</span><span class="o">=</span><span class="n">input_name</span><span class="p">,</span> <span class="n">kernel_name</span><span class="o">=</span><span class="n">kernel_name</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">input_ax</span><span class="p">,</span><span class="n">kernel_ax</span><span class="p">],</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">out_ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">paddings</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">out_ax</span><span class="p">],</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">paddings</span><span class="p">)):</span>
+        <span class="n">out_ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">sharex</span><span class="o">=</span><span class="n">out_ax</span><span class="p">)</span>
+        <span class="n">out_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Padding: </span><span class="si">{</span><span class="n">paddings</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">paddings</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="sa">f</span><span class="s1">&#39;full (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">)&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">plot_signals</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">paddings</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">out_ax</span><span class="p">],</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">output_name</span><span class="o">=</span><span class="n">out_name</span><span class="p">,</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code><span class="n">plot_all</span><span class="p">(</span><span class="n">input_signal</span><span class="p">,</span> <span class="n">highpass_filter</span><span class="p">,</span> <span class="n">input_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$$\sin {\left(</span><span class="si">{}</span><span class="s2">^n/_3\right)} - 0.3 n$$&quot;</span><span class="p">,</span> <span class="n">paddings</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,(</span><span class="nb">len</span><span class="p">(</span><span class="n">highpass_filter</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="c1">#zero, same and full</span>
+         <span class="n">kernel_name</span><span class="o">=</span><span class="s2">&quot;High Pass Filter&quot;</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+</code></pre></div>
+<img alt="" src="../Figures/1.conv/Fig10.png" /></p>
+<h2 id="properties-of-convolution">Properties of Convolution</h2>
+<h3 id="1-delta-function-delta-n">1. Delta Function <span class="arithmatex">\(\delta [n]\)</span></h3>
+<ul>
+<li>It is the identity function for convolution. Just like <span class="arithmatex">\(0\)</span> is for addition (<span class="arithmatex">\(a+0=a\)</span>) or like <span class="arithmatex">\(1\)</span> is for multiplication (<span class="arithmatex">\(a \times 1 = a\)</span>), similarly:</li>
+</ul>
+<div class="arithmatex">\[ x[n] * \delta[n] = x[n] \tag{7}\]</div>
+<ul>
+<li>If the delta function is scaled, then the output is also scaled:</li>
+</ul>
+<div class="arithmatex">\[x[n] * k\delta [n] = kx[n] \tag{8}\]</div>
+<p>So it can be used as an amplifier or as an attenuator. We can even invert a signal like we did above by setting <span class="arithmatex">\(k=-1\)</span> and can do much more with this simple property.</p>
+<ul>
+<li>If the delta function is shifted by an amount, the output function is also shifted by the same amount:</li>
+</ul>
+<div class="arithmatex">\[x[n] * \delta[n+d] = x[n+d] \tag{9}\]</div>
+<h3 id="2-commutative-property">2. Commutative Property</h3>
+<p>It does not matter which signal is convolved with which signal, (or which signal is slided over which signal, provided padding is appropriate), the result will be the same.</p>
+<div class="arithmatex">\[a[n] * b[n] = b[n] * a[n] \tag{10}\]</div>
+<p>This property doesn't mean anything in the signal processing physically. It is just a convenient tool for mathematics and certain implementations.</p>
+<h3 id="3-associative-property">3. Associative Property</h3>
+<div class="arithmatex">\[ (a[n] * b[n]) * c[n] = a[n] * (b[n] * c[n]) \tag{11}\]</div>
+<p>It provides idea how cascaded systems work. Suppose, we have two kernels, <span class="arithmatex">\(h_1[n]\)</span> and <span class="arithmatex">\(h_2[n]\)</span>, and we apply them respectively:</p>
+<div class="arithmatex">\[y[n] = (x[n]*h_1[n])*h_2[n]\]</div>
+<p>Now by associative property,</p>
+<div class="arithmatex">\[y[n] = x[n] * (h_1[n]*h_2[n])\]</div>
+<p>Let's say <span class="arithmatex">\(h_1[n]* h_2[n] = H[n]\)</span>, then:</p>
+<div class="arithmatex">\[y[n] = x[n] * H[n]\]</div>
+<p>So if we are convolving a signal with <span class="arithmatex">\(n\)</span> kernels one after another, we can equivalently convolve the signal with the convolution of all these kernels with each other. It means a cascaded system can be replaced by a single system. The impulse response is the convolution of all the impulse responses of individual systems.</p>
+<h3 id="4-distributive-property">4. Distributive Property</h3>
+<div class="arithmatex">\[ a[n] * b[n] + a[n] * c[n] = a[n] * (b[n] + c[n]) \tag{12}\]</div>
+<p>It provides idea of how parallel systems work. If <span class="arithmatex">\(n\)</span> systems share the common input and their outputs are finally added (or subtracted), we can repalce it with a single system with impulse response being the addition (or subtraction) of individual impulse responses  of the systems.</p>
+<h2 id="correlation">Correlation</h2>
+<p>Correlation is another operation that is somewhat similar to convolution. Correlation uses two signals and produces an output called the <em>cross correlation</em> of the two input signals. If a signal is correlated with itself, the output is called <em>autocorrelation</em>.</p>
+<p>The main difference between calculating the output of correlation from that of convolution is that the <strong>kernel is not flipped</strong>.</p>
+<p>If convolution, <span class="arithmatex">\(y[n]\)</span>, of <span class="arithmatex">\(a[n]\)</span> and <span class="arithmatex">\(b[n]\)</span> is:</p>
+<div class="arithmatex">\[y[n] = a[n] * b[n]\]</div>
+<p>then the correlation, <span class="arithmatex">\(c[n]\)</span>, of <span class="arithmatex">\(a[n]\)</span> and <span class="arithmatex">\(b[n]\)</span> is:</p>
+<div class="arithmatex">\[c[n] = a[n] * b[-n]\]</div>
+<p>The formula for correlation will be:</p>
+<div class="arithmatex">\[c[i] = \sum_{j=0}^{n_k-1}a[i+j]b[j] \tag{13}\]</div>
+<p>for a kernel that runs from sample number <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(n_k-1\)</span>.</p>
+<p>Correlation, unlike convolution, is not commutative. The order matters. We cannot interchange the signals and expect the same cross-correlation. The second signal, which is moved along the first signal is called a target signal, <span class="arithmatex">\(t[n]\)</span>. It is called so because correlation is a technique of <em>pattern recognition</em>. The amplitude of the output signal at any point is a measure of how much the input signal resembles the target signal at that point.</p>
+<p>It means a peak in the cross-correlation will mean a high resemblance, while a negative peak means the opposite.</p>
+<p>Let's see a quick example of it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pattern</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="n">pattern</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="o">-</span><span class="n">pattern</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">50</span><span class="p">)))</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">))</span><span class="o">*</span><span class="mf">0.2</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">+</span> <span class="n">noise</span> <span class="c1"># add some noise</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">f</span> <span class="o">=</span> <span class="n">plot_all</span><span class="p">(</span><span class="n">input_signal</span><span class="o">=</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="n">pattern</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="c1"># we send in the reversed kernel because it is correlation</span>
+            <span class="n">paddings</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+</code></pre></div>
+<p><img alt="" src="../Figures/1.conv/Fig11.png" /></p>
+<p>The above plot shows how different paddings for correlation can have spikes at different points for the same pattern, ex: in zero padding, the peak is at the corresponding sample number when the pattern <em>starts</em>. In <em>same</em> padding, the peak occurs at the same sample number as the <em>middle</em> of the pattern. In full padding, the peak occurs at the sample number when the pattern <em>ends</em>. Notice the negative peak for an opposite pattern.</p>
+<p>Also, the kernel(pattern) is reversed, as we sent it that way, so that the convolution function will reverse it again making it a <em>correlation</em>.</p>
+<p>In correlation a target signal goes along the input signal, multiplying the corresponding elements and summing them up. Now if the target signal happens to <em>coincide</em> with that portion of the input signal, it will only generate positive values which will sum up to a bigger number than the surrounding points. Convolution does the same, except it flips the kernel first, so in a way, convolution is matching the <em>reverse of the kernel</em> in the input signal.</p>
+<blockquote>
+<p><strong>Note: Convolution and Correlation seem very similar, but they are very different operations when it comes to the Signal Processing. Convolution is related to how linear systems produce outputs while correlation is used for pattern matching in signals. It is just that their math is very similar.</strong></p>
+</blockquote>
+<p>I think this is a good stopping point. Although we only covered one dimensional signals, this gave us a good idea into how and what convolution as well as correlation is and does. We will next start how we can convolve in higher dimensional spatial signal, like pictures and other data. Since ConvNets are mostly used on image data, we will introduce those concepts in the next one along with the basic idea of how convolutions work.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Steven W. Smith. <a href="https://www.amazon.com/Scientist-Engineers-Digital-Signal-Processing/dp/0966017633"><em>The Scientist and Engineer's Guide to Digital Signal Processing.</em></a></li>
+<li>I. Goodfellow, Y. Bengio and A. Courville. <a href="https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618/ref=sr_1_1?ie=UTF8&amp;qid=1472485235&amp;sr=8-1&amp;keywords=deep+learning+book"><em>Deep Learning.</em></a></li>
+<li><a href="https://lpsa.swarthmore.edu/Convolution/Convolution.html">https://lpsa.swarthmore.edu/Convolution/Convolution.html</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Murtaza Nazir
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
