@@ -1,90 +1,59 @@
-<style>
-.home-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    text-align: center;
-    padding: 2rem;
-}
+# Murtaza Nazir
 
-.profile-pic {
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 2rem;
-    display: block;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+**Building AI one tiny piece at a time**
 
-.home-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
+---
 
-.home-subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    opacity: 0.8;
-}
+## About
 
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
+I am a researcher interested in artificial intelligence, machine learning, and deep learning. This website contains my notes and explorations in these areas, particularly focusing on the mathematical foundations and practical implementations of neural network architectures.
 
-.social-links a {
-    font-size: 2rem;
-    transition: transform 0.2s;
-    opacity: 0.7;
-}
+## Research Interests
 
-.social-links a:hover {
-    transform: scale(1.1);
-    opacity: 1;
-}
+- Deep Learning and Neural Networks
+- Linear Algebra and Mathematical Foundations
+- Computer Vision and Convolutional Neural Networks
+- Natural Language Processing and Transformers
 
-.intro-section {
-    margin-top: 3rem;
-    text-align: left;
-    line-height: 1.8;
-}
+## Notes and Writings
 
-.intro-section h2 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-</style>
+### Linear Algebra
 
-<div class="home-container">
-    <img src="./img/photo.jpg" alt="Murtaza Nazir" class="profile-pic"/>
+Fundamental mathematical concepts underlying machine learning:
 
-    <h1 class="home-title">Murtaza Nazir</h1>
-    <p class="home-subtitle">Building AI one tiny piece at a time.</p>
+- [Introduction to Linear Algebra](linear_algebra/introduction.md)
+- [Vectors and Linear Combinations](linear_algebra/vectors-linear-combinations.md)
+- [Vector Spaces and Subspaces](linear_algebra/vector-spaces-and-subspaces.md)
 
-    <div class="social-links">
-        <a href="https://github.com/themurtazanazir/" target="_blank" title="GitHub">
-            :fontawesome-brands-github:
-        </a>
-        <a href="https://twitter.com/murtazanazir/" target="_blank" title="Twitter">
-            :fontawesome-brands-twitter:
-        </a>
-    </div>
+### Neural Networks
 
-    <div class="intro-section">
-        <h2>Welcome</h2>
-        <p>
-            This is my personal space where I explore and document my journey through artificial intelligence,
-            machine learning, and deep learning. Here you'll find notes on linear algebra, neural networks,
-            and various AI concepts that I'm learning and implementing.
-        </p>
+Comprehensive notes on neural network architectures and training:
 
-        <h2>Topics</h2>
-        <p>
-            📐 <strong>Linear Algebra</strong> - Foundations of machine learning mathematics<br/>
-            🧠 <strong>Neural Networks</strong> - From perceptrons to transformers
-        </p>
-    </div>
-</div>
+**Multi-Layer Perceptron:**
 
+- [Overview](neural_networks/multiayer-perceptron/index.md)
+- [The Perceptron](neural_networks/multiayer-perceptron/perceptron.md)
+- [Perceptron Convergence Theorem](neural_networks/multiayer-perceptron/perceptron-convergence-theorem.md)
+- [Multi-Layer Perceptron](neural_networks/multiayer-perceptron/multi-layer-perceptron.md)
+- [Improvements to MLP](neural_networks/multiayer-perceptron/improvements-to-mlp.md)
+
+**Convolutional Neural Networks:**
+
+- [Introduction to CNNs](neural_networks/convolutional_neural_networks/introduction.md)
+- [Convolutions](neural_networks/convolutional_neural_networks/convolutions.md)
+
+**Transformers:**
+
+- [Transformer Architecture](neural_networks/transformer/transformer.md)
+
+## Contact
+
+For questions or collaboration, feel free to reach out:
+
+- Email: contact@example.com
+- GitHub: [themurtazanazir](https://github.com/themurtazanazir/)
+- Twitter: [@murtazanazir](https://twitter.com/murtazanazir/)
+
+---
+
+*Last updated: January 2025*
