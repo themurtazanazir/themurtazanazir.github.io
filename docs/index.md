@@ -38,5 +38,9 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 **[Neural Networks](neural_networks/multiayer-perceptron/index.md)** - In-depth exploration of neural architectures from perceptrons to transformers, covering convergence theorems, backpropagation, CNNs, and attention mechanisms.
 
+Some of the popular and recent notes:
+
 - [Transformers](neural_networks/transformer/transformer.md) - Attention-based architecture
 - [Convolutional Neural Networks](neural_networks/convolutional_neural_networks/introduction.md) - Image processing networks
+
+Or checkout the complete sections above for all notes.
