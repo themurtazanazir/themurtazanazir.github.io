@@ -130,7 +130,7 @@ body {
 /* Paragraphs */
 .md-typeset p {
   margin-bottom: 0.3em;
-  text-align: left;
+  text-align: justify;
 }
 
 /* Drop cap - manual class you can apply in HTML */
