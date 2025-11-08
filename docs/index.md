@@ -14,6 +14,8 @@
 
 **April 2023** - Promoted to Senior Data Scientist at Perfios.
 
+**March 2023** - Excited to share that Karza Technologies has been acquired by Perfios!
+
 **August 2021** - Started as Data Scientist at Karza Technologies in Mumbai.
 
 **July 2021** - Graduated with B.Tech in Computer Science from National Institute of Technology, Srinagar.
