@@ -16,6 +16,8 @@
 
 **July 2021** - Graduated with B.Tech in Computer Science from National Institute of Technology, Srinagar.
 
+**August 2017** - Started B.Tech in Computer Science at National Institute of Technology, Srinagar.
+
 ## Notes
 
 [Linear Algebra](linear_algebra/introduction.md) - vectors, spaces, transformations
