@@ -36,8 +36,8 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 Some of the popular and recent notes:
 
-- [Transformers](neural_networks/transformer/transformer.md) - Attention-based architecture
-- [Convolutional Neural Networks](neural_networks/convolutional_neural_networks/introduction.md) - Image processing networks
+- [Transformers](neural_networks/transformer/transformer.md)
+- [Convolutional Neural Networks](neural_networks/convolutional_neural_networks/introduction.md)
 
 Or checkout the complete sections:
 
