@@ -1,8 +1,5 @@
 /* Ultra-minimal academic style - like Ilya/Karpathy websites */
 
-/* Import Computer Modern fonts */
-@import url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css');
-
 :root {
   /* Very simple, clean colors */
   --warm-bg: #fef6ec;
@@ -12,9 +9,9 @@
   --warm-border: #e6d5c3;
   --warm-code-bg: #f7f0e8;
 
-  /* Computer Modern (LaTeX default) for classic academic look */
-  --md-text-font-family: "Computer Modern Serif", serif;
-  --md-code-font-family: "Computer Modern Typewriter", monospace;
+  /* Claude-style serif font stack */
+  --md-text-font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --md-code-font-family: ui-monospace, "Courier New", Courier, monospace;
 }
 
 /* Override Material theme */
@@ -70,9 +67,9 @@ body {
 
 /* Typography - simple and small */
 .md-typeset {
-  font-family: "Computer Modern Serif", serif !important;
-  font-size: 16px;
-  font-weight: 450;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
+  font-size: 17px;
+  font-weight: 400;
   line-height: 1.6;
   color: var(--warm-text);
 }
@@ -144,7 +141,7 @@ body {
   margin-right: 0.08em;
   margin-top: 0.08em;
   font-weight: 400;
-  font-family: "Computer Modern Serif", serif;
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /* Code blocks */
