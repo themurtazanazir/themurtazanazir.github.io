@@ -68,7 +68,8 @@ body {
 /* Typography - simple and small */
 .md-typeset {
   font-family: "Times New Roman", Times, serif !important;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 450;
   line-height: 1.6;
   color: var(--warm-text);
 }
