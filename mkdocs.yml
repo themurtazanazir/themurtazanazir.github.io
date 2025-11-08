@@ -69,7 +69,7 @@ nav:
       - Vectors & Linear Combinations: linear_algebra/vectors-linear-combinations.md
       - Vector Spaces & Subspaces: linear_algebra/vector-spaces-and-subspaces.md
   - Neural Networks:
-      - Overview: neural_networks/index.html
+      - Overview: neural_networks/index.md
       - Multi-Layer Perceptron:
           - Overview: neural_networks/multiayer-perceptron/index.md
           - Perceptron: neural_networks/multiayer-perceptron/perceptron.md
