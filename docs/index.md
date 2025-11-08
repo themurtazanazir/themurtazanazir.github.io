@@ -8,7 +8,7 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 **October 2025** - Our paper [Better Language Model Inversion by Compactly Representing Next-Token Distributions](https://arxiv.org/abs/2506.17090) has been accepted at NeurIPS 2025.
 
-**June 2025** - Joined [Pibit.ai](https://pibit.ai) as a Machine Learning Engineer.
+**June 2025** - Joined Pibit.ai as a Machine Learning Engineer.
 
 **May 2024** - Won IdeaFest innovation competition at Perfios.
 
@@ -18,7 +18,7 @@ murtaza.nazir [at] pibit.ai | [GitHub](https://github.com/themurtazanazir/) | [T
 
 **March 2023** - Excited to share that Karza Technologies has been acquired by Perfios!
 
-**August 2021** - Started as Data Scientist at Karza Technologies in Mumbai.
+**August 2021** - Started as Data Scientist at Karza Technologies.
 
 **July 2021** - Graduated with B.Tech in Computer Science from NIT Srinagar.
 
