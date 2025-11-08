@@ -10,9 +10,7 @@ tags:
 
 # 3 Improvements for the network
 
-## 3.1 Introduction
-
-As you can see, the network takes a lot of time to train. Sometimes the network may not converge at all even after a lot of iterations. It is because the error get's stuck at a local minima. Since we update the weights from all the examples at the same time, the error follows the direction of the steepest gradient. But the steepest gradrient may lead to a local minima and so no number of iterations will help it overcome that minima. These are problems with the gradient descent algorithm and hence apply to every model that uses it not just the MLP. Now there are ways around it:
+<p class="drop-cap">As you can see, the network takes a lot of time to train. Sometimes the network may not converge at all even after a lot of iterations. It is because the error get's stuck at a local minima. Since we update the weights from all the examples at the same time, the error follows the direction of the steepest gradient. But the steepest gradrient may lead to a local minima and so no number of iterations will help it overcome that minima. These are problems with the gradient descent algorithm and hence apply to every model that uses it not just the MLP. Now there are ways around it:</p>
 
 ##### 1. Changing Learning Rate:
 

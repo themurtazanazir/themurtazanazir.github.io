@@ -7,9 +7,7 @@ description: This post provides an introduction to the vector sapces and subspac
 
 # Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility
 
-### Introduction
-
-This article will dive deep into **Vector Spaces, Subspaces, Column Spaces, Null Space, Span, Rank, Invertibility** and much more.  
+<p class="drop-cap">This article will dive deep into <strong>Vector Spaces, Subspaces, Column Spaces, Null Space, Span, Rank, Invertibility</strong> and much more.</p>  
 
 ### Vector Spaces
 

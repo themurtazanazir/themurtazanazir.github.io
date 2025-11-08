@@ -14,8 +14,8 @@ tags:
 [← Multi-Layer Perceptron](index.md)
 
 # Mathematics Behind Perceptron
-## Introduction
-This is actually a notebook made by me during the internet shutdown in Kashmir (since 5th Aug 2019). This notebook, and others, are heavily inspired by <a href="https://www.amazon.in/dp/1466583282/ref=cm_sw_r_cp_apa_i_TAKcEbNSD9Y57" target="_blank"> Machine Learning: An Algorithmic Perspective </a> . This notebook is essentially the notes of chapter 3 of this book. I highly recommend this book for the basic understanding of Machine Learning Algorithms. This post covers mathematics, implementation of the basic perceptron algorithm. I would suggest to practice on the code for perceptron. Although stay away from the visualization code, if that seems too complex.
+
+<p class="drop-cap">This is actually a notebook made by me during the internet shutdown in Kashmir (since 5th Aug 2019). This notebook, and others, are heavily inspired by <a href="https://www.amazon.in/dp/1466583282/ref=cm_sw_r_cp_apa_i_TAKcEbNSD9Y57" target="_blank"> Machine Learning: An Algorithmic Perspective </a> . This notebook is essentially the notes of chapter 3 of this book. I highly recommend this book for the basic understanding of Machine Learning Algorithms. This post covers mathematics, implementation of the basic perceptron algorithm. I would suggest to practice on the code for perceptron. Although stay away from the visualization code, if that seems too complex.</p>
 
 # Hebb's Rule
 

@@ -13,11 +13,9 @@ coll: lin_alg
 
 [← Home](../index.md)
 
-# Vectors, Linear Combinations, Eliminations 
+# Vectors, Linear Combinations, Eliminations
 
-### Introduction
-
-The whole field of linear algebra, as the name suggests, is based on linear combinations of different "things". We will get to know what these "things" are. How can we represent the different combinations and what these different combinations represent, if they represent anything. We will basically work with vectors and then with matrices. So let's begin. 
+<p class="drop-cap">The whole field of linear algebra, as the name suggests, is based on linear combinations of different "things". We will get to know what these "things" are. How can we represent the different combinations and what these different combinations represent, if they represent anything. We will basically work with vectors and then with matrices. So let's begin.</p> 
 
 ## Vectors
 
