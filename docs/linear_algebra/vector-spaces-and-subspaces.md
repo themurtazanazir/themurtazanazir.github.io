@@ -3,11 +3,11 @@ title: Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility
 description: This post provides an introduction to the vector sapces and subspaces. It goes on to define column space and null space. With that it defines rank, and inveribility.
 ---
 
+[← Home](../index.md)
+
 # Introduction to Vector Spaces and Sub Spaces, Rank and Invertibility
 
-### Introduction
-
-This article will dive deep into **Vector Spaces, Subspaces, Column Spaces, Null Space, Span, Rank, Invertibility** and much more.  
+<p class="drop-cap">This article will dive deep into <strong>Vector Spaces, Subspaces, Column Spaces, Null Space, Span, Rank, Invertibility</strong> and much more.</p>  
 
 ### Vector Spaces
 
@@ -832,4 +832,3 @@ We got a row of zeros for the matrix, which means this matrix is not full row ra
 I think this is a good stopping point. I would recommend practicing for everything that we have covered here. Next up we will try to explain Independence, basis and dimensions of subspaces.
 
 
-{% include linalg/2.spaces/plot1.html %}

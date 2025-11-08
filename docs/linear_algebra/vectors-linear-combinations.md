@@ -11,13 +11,11 @@ hasplot: true
 coll: lin_alg
 ---
 
+[← Home](../index.md)
 
+# Vectors, Linear Combinations, Eliminations
 
-# Vectors, Linear Combinations, Eliminations 
-
-### Introduction
-
-The whole field of linear algebra, as the name suggests, is based on linear combinations of different "things". We will get to know what these "things" are. How can we represent the different combinations and what these different combinations represent, if they represent anything. We will basically work with vectors and then with matrices. So let's begin. 
+<p class="drop-cap">The whole field of linear algebra, as the name suggests, is based on linear combinations of different "things". We will get to know what these "things" are. How can we represent the different combinations and what these different combinations represent, if they represent anything. We will basically work with vectors and then with matrices. So let's begin.</p> 
 
 ## Vectors
 
@@ -873,10 +871,7 @@ $$ PA = LU$$
 
 This is a good stopping point in basics. We will next see what does the infinite solutions mean, how we represent them. What are vector spaces and subspaces, rank, invertibility and more.
 
-{% include linalg/1.basics/plot1.html %}
 
 
-{% include linalg/1.basics/plot2.html %}
 
 
-{% include linalg/1.basics/plot3.html %}

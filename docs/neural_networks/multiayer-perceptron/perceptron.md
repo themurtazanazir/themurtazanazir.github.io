@@ -10,10 +10,12 @@ tags:
   - feedforward
   - networks
 ---
- 
+
+[← Multi-Layer Perceptron](index.md)
+
 # Mathematics Behind Perceptron
-## Introduction
-This is actually a notebook made by me during the internet shutdown in Kashmir (since 5th Aug 2019). This notebook, and others, are heavily inspired by <a href="https://www.amazon.in/dp/1466583282/ref=cm_sw_r_cp_apa_i_TAKcEbNSD9Y57" target="_blank"> Machine Learning: An Algorithmic Perspective </a> . This notebook is essentially the notes of chapter 3 of this book. I highly recommend this book for the basic understanding of Machine Learning Algorithms. This post covers mathematics, implementation of the basic perceptron algorithm. I would suggest to practice on the code for perceptron. Although stay away from the visualization code, if that seems too complex.
+
+<p class="drop-cap">This is actually a notebook made by me during the internet shutdown in Kashmir (since 5th Aug 2019). This notebook, and others, are heavily inspired by <a href="https://www.amazon.in/dp/1466583282/ref=cm_sw_r_cp_apa_i_TAKcEbNSD9Y57" target="_blank"> Machine Learning: An Algorithmic Perspective </a> . This notebook is essentially the notes of chapter 3 of this book. I highly recommend this book for the basic understanding of Machine Learning Algorithms. This post covers mathematics, implementation of the basic perceptron algorithm. I would suggest to practice on the code for perceptron. Although stay away from the visualization code, if that seems too complex.</p>
 
 # Hebb's Rule
 
@@ -643,7 +645,6 @@ fig = px.scatter(x=X[:,0], y=X[:,1], color=T.astype("str"), size=[8]*X.shape[0],
 fig.show()
 ```
 
-{% include perceptron/plot_1.html %}
 
 
 Now let's see what the weights represent.
@@ -693,7 +694,6 @@ fig.add_trace(go.Scatter(x=inp1,y=(-(weights[1,0]*inp1) + weights[0,0])/weights[
 fig.show()
 ```
 
-{% include perceptron/plot_2.html %}
 
 
 a more sophisticated  decision boundary
@@ -731,7 +731,6 @@ fig.show()
 ```
 
 
-{% include perceptron/plot_3.html %}
 
 
 all the points above this line will cause the fire of the current neuron, and all the below won't.
@@ -863,7 +862,6 @@ fig.update_layout(
 fig.show()
 
 ```
-{% include perceptron/plot_4.html %}
 
 As you can see, the decision boundary was initially in the right spot but with reversed thresholds, and with changing epochs it flipped.
 
@@ -1073,7 +1071,6 @@ fig.show()
 ```
 
 
-{% include perceptron/plot_5.html %}
 
 
 There is no line we can draw to separate the two classes. Let's see how the perceptron behaves.
@@ -1199,7 +1196,6 @@ fig.show()
 
 ```
 
-{% include perceptron/plot_6.html %}
 
 as you can see, the perceptron fails to find a linear boundary and dangles between the two sides. So even a simple function like XOR cannot be learned by the perceptron. This discovery halted the neural network development for at least 20 years. There is an obvious solution though(Multiple layers, but we'll get to that at its own time!).
 
@@ -1255,7 +1251,6 @@ fig.update_layout(
 )
 ```
 
-{% include perceptron/plot_7.html %}
 
 
 we can now easily see a plane separating the two kinds, just by lifting one point into the third dimension. Also if you rotate the figure to see the input2 and input1 as the y-axis and x-axis, you can see the exact same plot as before. 
@@ -1430,7 +1425,6 @@ fig.show()
 ```
 
 
-{% include perceptron/plot_8.html %}
 
 
 

@@ -1,11 +1,12 @@
----
-title: Multi-Layer Perceptron
-description: A Series of posts on the Multi-Layer Perceptrons. Build one from scratch. 
-tags: 
- - neural networks
- - perceptron
- - perceptron convergence theorem
- - backpropagation
----
+[← Neural Networks](../index.md)
 
-{% include lists.md %}
+# Multi-Layer Perceptron
+
+Notes on multi-layer perceptrons, from basic perceptrons to training with backpropagation.
+
+## Contents
+
+- [Perceptron](perceptron.md) - The basic building block
+- [Perceptron Convergence Theorem](perceptron-convergence-theorem.md) - Theoretical guarantees
+- [Multi-Layer Perceptron](multi-layer-perceptron.md) - Stacking perceptrons
+- [Improvements to MLP](improvements-to-mlp.md) - Optimization techniques

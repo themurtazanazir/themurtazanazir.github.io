@@ -7,37 +7,16 @@ theme:
     name: 'material'
     logo: 'img/logo.svg'
     palette:
-
-    # Light mode
-    - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: white
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-
-    # Dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode
-
+      primary: brown
+      accent: deep orange
     features:
-      - navigation.tabs
-      - navigation.sections
-      - navigation.expand
-      - navigation.top
-      - search.suggest
-      - search.highlight
       - content.code.copy
-      - content.code.annotate
 
 # Extensions
 markdown_extensions:
   - footnotes
-  # - attr_list
+  - attr_list
   - pymdownx.arithmatex:
       generic: true
   # - pymdownx.superfences
@@ -58,7 +37,8 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
   - toc:
-      permalink: true
+      permalink: false
+      toc_depth: 0
 
 plugins:
   - search
@@ -80,15 +60,6 @@ extra_javascript:
 extra_css:
   - stylesheets/extra.css
 
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/themurtazanazir/
-      name: GitHub
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/murtazanazir/
-      name: Twitter
-
 copyright: Copyright &copy; 2025 Murtaza Nazir
 
 nav:
@@ -98,7 +69,7 @@ nav:
       - Vectors & Linear Combinations: linear_algebra/vectors-linear-combinations.md
       - Vector Spaces & Subspaces: linear_algebra/vector-spaces-and-subspaces.md
   - Neural Networks:
-      - Overview: neural_networks/index.html
+      - Overview: neural_networks/index.md
       - Multi-Layer Perceptron:
           - Overview: neural_networks/multiayer-perceptron/index.md
           - Perceptron: neural_networks/multiayer-perceptron/perceptron.md

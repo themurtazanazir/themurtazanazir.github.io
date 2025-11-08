@@ -15,11 +15,12 @@ tags:
   - layers
 hasplot: true
 ---
+
+[← Multi-Layer Perceptron](index.md)
+
 # The Multi Layer Perceptron
 
-# 1. Introduction
-
-As we have seen, in the Basic [[perceptron]], that a perceptron can only classify the *Linearly Separable* Data. We had two different approaches to get around this problem:
+<p class="drop-cap">As we have seen, in the Basic [[perceptron]], that a perceptron can only classify the <em>Linearly Separable</em> Data. We had two different approaches to get around this problem:</p>
 
 1. **The Higher Dimensions**, which was discussed briefly and will be discussed in detail later.
 2. **The Multiple Layers**, which we will discuss now.
@@ -446,7 +447,6 @@ def threshold(x):
 # plot the threshold 
 plot_activation(threshold)
 ```
-{% include mlp/plot1.html %}
 
 **1. The Sigmoidal Activation:**
 It is an S shaped activation. This activation is given by:
@@ -470,7 +470,6 @@ def sigmoid(x,beta=1):
 plot_activation(sigmoid)
 ```
 
-{% include mlp/plot2.html %}
 
 
 Let's compare the threshold and sigmoid together
@@ -488,7 +487,6 @@ fig.update_layout(showlegend=False)
 fig.show()
 ```
 
-{% include mlp/plot3.html %}
 
 
 As we can see both the functions are almost the same, just that the sigmoid is more smooth at edges, making it differentiable. It can be used as a replacement for threshold. Although it will output values other than 0 and 1 for values close to zero.
@@ -510,7 +508,6 @@ plot_activation(np.tanh)
 ```
 
 
-{% include mlp/plot4.html %}
 
 Let's compare all the functions in one go.
 
@@ -527,7 +524,6 @@ fig.show()
 ```
 
 
-{% include mlp/plot5.html %}
 
 
 **3. The Softmax Activation**:
@@ -1184,7 +1180,6 @@ fig.show()
 ```
 
 
-{% include mlp/plot6.html %}
 
 
 
@@ -1279,6 +1274,5 @@ fig.show()
 ```
 
 
-{% include mlp/plot7.html %}
 
 
