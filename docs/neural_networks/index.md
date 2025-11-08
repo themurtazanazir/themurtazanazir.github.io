@@ -1,3 +1,5 @@
+[← Home](../index.md)
+
 # Neural Networks
 
 Notes on various neural network architectures and concepts.

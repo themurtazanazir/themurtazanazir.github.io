@@ -11,7 +11,7 @@ hasplot: true
 coll: lin_alg
 ---
 
-
+[← Home](../index.md)
 
 # Vectors, Linear Combinations, Eliminations 
 

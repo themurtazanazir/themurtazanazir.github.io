@@ -17,6 +17,10 @@ coll: neural_network
 img: conv.png
 ---
 
+[← Neural Networks](../index.md)
+
+# Convolutional Neural Networks
+
 ## Introduction
 
 On September 30, 2012, Alex Krizhevsky competed in the [ImageNet Large Scale Visual Recognition Challenge](http://image-net.org/challenges/LSVRC/2012/). His submission achieved a top-5 error rate of 15.3%. The runner up had an error rate of 26.1% giving a huge 10.8 points lead. What was so special about this model? He will go on to publish his model architechture and techniques in his paper, **AlexNet**. This would revolutionize the Deep Learning community that had been dormant for long. At the time of writing this(April 2020), AlexNet paper has been cited about 60,833 times. The one of the most important feature, among others, was that it was a Convolutional Neural Network.
