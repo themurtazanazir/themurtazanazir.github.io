@@ -47,7 +47,7 @@ body {
 /* Main content - simple and centered */
 .md-content {
   margin-left: 0;
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
   background-color: var(--warm-bg);
 }
@@ -61,7 +61,7 @@ body {
 }
 
 .md-main {
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
 }
 
@@ -226,7 +226,7 @@ body {
 /* Content padding */
 .md-content__inner {
   padding: 2.5em 1em;
-  max-width: 42rem;
+  max-width: 48rem;
   margin: 0 auto;
 }
 
