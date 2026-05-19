@@ -1,0 +1,1355 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Mathematics behind CTC loss — the forward-backward algorithm and gradients for sequence learning.">
+      
+      
+        <meta name="author" content="Murtaza Nazir">
+      
+      
+        <link rel="canonical" href="https://themurtazanazir.github.io/neural_networks/ctc/ctc/">
+      
+      
+        <link rel="prev" href="../../transformer/transformer/">
+      
+      
+        <link rel="next" href="../../learning-with-binary-feedback/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Connectionist Temporal Classification - murtaza</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="murtaza" class="md-header__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            murtaza
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Connectionist Temporal Classification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="murtaza" class="md-nav__button md-logo" aria-label="murtaza" data-md-component="logo">
+      
+  <img src="../../../img/logo.svg" alt="logo">
+
+    </a>
+    murtaza
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear Algebra
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linear Algebra
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vectors-linear-combinations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectors & Linear Combinations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../linear_algebra/vector-spaces-and-subspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Spaces & Subspaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-Layer Perceptron
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Multi-Layer Perceptron
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perceptron
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/perceptron-convergence-theorem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perceptron Convergence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/multi-layer-perceptron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-Layer Perceptron
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../multiayer-perceptron/improvements-to-mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Improvements to MLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Convolutional Neural Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convolutional_neural_networks/convolutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Transformer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transformer/transformer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CTC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CTC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Connectionist Temporal Classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learning-with-binary-feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning with Binary Feedback
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../../">← Neural Networks</a></p>
+<h1 id="connectionist-temporal-classification">Connectionist Temporal Classification</h1>
+<p>Let's start with defining the problem.
+We want to compute the loss of a time-series output with a target of different length.</p>
+<p>We start by defining an alphabet <span class="arithmatex">\(A\)</span> where all the possible "letters" our data labels can have, e.g. <span class="arithmatex">\(A\)</span> can be all the alphanumeric letters of the English language or the phonemes of a certain language.</p>
+<p>We define a training unit as <span class="arithmatex">\((\mathbf{x}, \mathbf{z})\)</span> where <span class="arithmatex">\(\mathbf{x}\)</span> is the input (can be an image, audio) and <span class="arithmatex">\(\mathbf{z}\)</span> is the target sequence of letters from <span class="arithmatex">\(A\)</span>.</p>
+<p>We pass our input <span class="arithmatex">\(\mathbf{x}\)</span> through our network <span class="arithmatex">\((\mathcal{N}_w)\)</span> to produce our output, <span class="arithmatex">\(U\)</span>, a sequence of vectors for <span class="arithmatex">\(T\)</span> timesteps. The timesteps <span class="arithmatex">\(T\)</span> must be greater than or equal to length of <span class="arithmatex">\(\mathbf{z}\)</span>. Each vector in the sequence is of size <strong>one</strong> more than length of <span class="arithmatex">\(A\)</span>, i.e. <span class="arithmatex">\(\dim{U} = (\lvert A \rvert +1) \times T\)</span>.</p>
+<p>Why one extra for the size of vectors? That is because we add a special "letter" in our alphabet, called <em>blank,</em> which helps us in various places. So we alter our alphabet to be <span class="arithmatex">\(A^\prime = A \cup \{\textit{blank}\}\)</span>. So, <span class="arithmatex">\(\dim{U} = \lvert A^\prime \rvert \times T\)</span>.</p>
+<p>A CTC network has a softmax output layer with number of units equal to <span class="arithmatex">\(\lvert A^\prime \rvert\)</span>.</p>
+<div class="arithmatex">\[
+Y = \text{softmax}(U, \text{axis}=2)
+\]</div>
+<p>Together these outputs define the probabilities of all possible ways of aligning all possible label sequences. The total probability of any one label sequence can be found by summing the probabilities of its different alignments.</p>
+<div class="arithmatex">\[
+\begin{equation}
+p(\mathbf{l} \mid \mathbf{x}) = \sum_{\pi \in \Pi(\mathbf{l})} p(\pi\mid \mathbf{x})
+\end{equation}
+\]</div>
+<p>where <span class="arithmatex">\(\Pi(\mathbf{l})\)</span> is the set of all possible alignments of <span class="arithmatex">\(\mathbf{l}\)</span>.</p>
+<p>The probability of an alignment is just the product of its "letters" at corresponding times.</p>
+<div class="arithmatex">\[
+\begin{equation}
+p(\pi|\mathbf{x}) = \prod_{t=1}^T y_{\pi_t}^t
+\end{equation}
+\]</div>
+<h2 id="inference">Inference</h2>
+<p>Now with this probability matrix <span class="arithmatex">\(Y\)</span> we have multiple ways of selecting a path through the time to choose as output. A simple way is to choose the "letter" at each timestep which has the highest probability. This is called <em>greedy decoding.</em></p>
+<p>Next we define a many-to-one mapping <span class="arithmatex">\(\mathcal{B}\)</span> to condense our output. We do this by simply removing all consecutive repeating letters and then removing all <em>blanks</em>. e.g.:</p>
+<p><span class="arithmatex">\(\mathcal{B}(a\text{-}ab\text{-}) = \mathcal{B}(\text{-}aa\text{-}ab) = ab\)</span></p>
+<p><span class="arithmatex">\(-\)</span> denotes the <em>blank</em> letter.</p>
+<p>If we use this mapping, then eq. 1 can be re-written as:</p>
+<div class="arithmatex">\[
+\begin{equation}
+p(\mathbf{l}\mid \mathbf{x}) = \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l})} p(\pi \mid \mathbf{x})
+\end{equation}
+\]</div>
+<p>which means <span class="arithmatex">\(\Pi\)</span> in eq. 1 equals <span class="arithmatex">\(\mathcal{B}^{-1}\)</span>.</p>
+<p>There are other ways to decode a probability matrix as greedy decoding does not guarantee the most probable label. Will cover that sometime else.</p>
+<h2 id="training">Training</h2>
+<p>For sample <span class="arithmatex">\((\mathbf{x}, \mathbf{z})\)</span>, we want to maximize the likelihood, <span class="arithmatex">\(p(\mathbf{z} \mid \mathbf{x})\)</span> and as is common, we instead minimize the negative log-likelihood, i.e. <span class="arithmatex">\(-\log{p(\mathbf{z} \mid \mathbf{x})}\)</span>.</p>
+<p>Regardless, we need to compute <span class="arithmatex">\(p(\mathbf{z} \mid \mathbf{x})\)</span> and from eq. 3, we want to compute</p>
+<div class="arithmatex">\[
+\sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l})} p(\pi \mid \mathbf{x})
+\]</div>
+<p>At first it seems very problematic as there can be many paths corresponding to a labelling. But we can utilize dynamic programming and compute it similar to the Viterbi algorithm. We call it <strong>the CTC Forward-Backward Algorithm</strong>.</p>
+<h3 id="the-ctc-forward-backward-algorithm">The CTC Forward-Backward Algorithm</h3>
+<p>The key idea is that "the sum over paths corresponding to a labelling can be broken down into an iterative sum over paths corresponding to prefixes of that labelling."</p>
+<p>Let's take an example.
+We have an image reading "did", and we have passed it through the network and we have the probability matrix for this sample <span class="arithmatex">\(Y\)</span>.
+Let's assume our alphabet is the English alphabet, and we output for 8 timesteps. The probability matrix looks like:</p>
+<p><img alt="Probability matrix" src="../prob_matrix.png" /></p>
+<p>The sum of each column is equal to 1.</p>
+<p>Now for any output seq, the probability of that sequence is just the product of the probability of individual letters at corresponding timesteps, e.g. <span class="arithmatex">\(p(\text{-aabbcza} \mid \mathbf{x}) = y_{\_}^1 y_a^2 y_a^3 y_b^4 y_b^5 y_c^6 y_z^7 y_a^8\)</span>. This shrinks to <code>abcza</code> and this alignment contributes that probability to this label.</p>
+<p>Now onto our problem: we need to sum the probabilities of all possible alignments (in 8 timesteps!) of the sequence "did". There are many alignments for this, such as "dddddiid", "dddiiidd", "diiiiiid" and many more. So if we make a regular-expression-ish form for our possible alignments, we can say like, the first "d" has to be at least once and can be at max 6 times, so let's write that as:</p>
+<p><code>d{1,6}</code></p>
+<p>Now the next part is tricky, "i" has to be at least once, but at max it depends on what the sequence length before it is — we will denote that as "sl", so "i" can be at max 7-sl, that becomes</p>
+<p><code>i{1, 7-sl}</code></p>
+<p>and then the last "d" also can be at least once at max whatever the remaining length is left, which is 8-sl,</p>
+<p><code>d{1, 8-sl}</code></p>
+<p>More generally, we can say a character can occur at least once and at maximum total length − length of letters after it − length of letters before it, which means</p>
+<p><code>d{1, 8-2-sl} i{1, 8-1-sl} d{1, 8-0-sl}</code></p>
+<p>But we haven't included blanks yet. Blanks are a bit tricky, they are used conditionally. If two same letters repeat consecutively in the label, a blank has to be placed between them there. They act as any other label, where they can occur a min of one time and a max of total length − num letters before − num letters after. But in other cases they may occur or not, so there the min can be zero as well. It can be like this:</p>
+<p><code>-{0, 8-3-sl} d{1, 8-2-sl} -{0, 8-2-sl} i{1, 8-1-sl} -{0, 8-1-sl} d{1, 8-0-sl} -{0, 8-0-sl}</code></p>
+<p>Since we know the order of labels is going to be <code>-d-i-d-</code>, we can pull the rows of these letters from probability matrix and stack them in this order.</p>
+<p><img alt="" src="../viterbi_matrix.png" /></p>
+<p>All the possible alignments can now be shown as a directed graph, like:</p>
+<p><img alt="" src="../viterbi_w_paths.png" /></p>
+<p>We have to start from blank or "d" at <span class="arithmatex">\(t_1\)</span> (highlighted in green) and end at blank or "d" at <span class="arithmatex">\(t_8\)</span> (highlighted in blue).</p>
+<p>Let's consider a single path in this graph:</p>
+<p><img alt="" src="../viterbi_single_path.png" /></p>
+<p>The path reads, "ddd-id--" and <span class="arithmatex">\(\mathcal{B}(\text{ddd-id--}) = \text{did}\)</span>.
+The probability of this path <span class="arithmatex">\(p(\text{ddd-id--} \mid \mathbf{x}) = y_d^1 y_d^2 y_d^3 y_{\_}^4 y_{i}^5 y_d^6 y_\_^7 y_\_^8\)</span>.</p>
+<p>Now to compute the sum of probabilities for all possible paths we introduce another quantity, <span class="arithmatex">\(\alpha_t(s)\)</span> called the <strong>forward variable</strong>.
+The idea is to recursively compute the sum of probabilities of all paths from starting positions to the node at <span class="arithmatex">\(t\)</span> time and <span class="arithmatex">\(s^{\text{th}}\)</span> "letter" in the graph.</p>
+<p>It is denoted as:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\alpha_t(s) = \sum_{\pi : \mathcal{B}(\pi_{1:t})=\mathbf{l}_{1:s}} \prod_{t^\prime = 1}^t y_{\pi_{t^\prime}}^{t^\prime}
+\end{equation}
+\]</div>
+<p>It can also be read as the sum of probabilities of all paths till time <span class="arithmatex">\(t\)</span> that lead to shrinking of label <span class="arithmatex">\(\mathbf{l}^\prime\)</span> to its <span class="arithmatex">\(s^{\text{th}}\)</span> index. <span class="arithmatex">\(\mathbf{l}^\prime\)</span> is the label with blanks added in between every letter and at the beginning and at the end. If <span class="arithmatex">\(\mathbf{l} = \text{did} \implies \mathbf{l}^\prime = \text{-d-i-d-}\)</span>.
+So basically</p>
+<div class="arithmatex">\[
+\begin{align*}
+\alpha_1(1) &amp;= y_\_^1\\
+\alpha_1(2) &amp;= y_d^1
+\end{align*}
+\]</div>
+<p>Because the probabilities of all paths leading up to the initial values is their own probabilities. But <span class="arithmatex">\(\alpha_2(2)\)</span> is the probability of all paths that lead to letter "first d" at time 2. That is possible from 2 ways, "-d" and "dd". So,</p>
+<div class="arithmatex">\[
+\begin{align*}
+\alpha_2(2) &amp;= y_\_^1 y_d^2 + y_d^1 y_d^2\\
+&amp;= \left(y_\_^1 + y_d^1\right) y_d^2\\
+&amp;= \left(\alpha_1(1) + \alpha_1(2)\right) y_{\mathbf{l}^\prime_2}^2
+\end{align*}
+\]</div>
+<p>Let's compute <span class="arithmatex">\(\alpha_3(2)\)</span>. All the paths that lead to "d" at timestep 3 are: "--d", "-dd", "ddd", all of which shrink to "d" (which is the point). The probability of all these paths is the sum of probabilities of each path, i.e.</p>
+<div class="arithmatex">\[
+\begin{align*}
+\alpha_3(2) &amp;= y_\_^1 y_\_^2 y_d^3 + y_\_^1 y_d^2 y_d^3 + y_d^1 y_d^2 y_d^3\\
+&amp;= (y_\_^1 y_\_^2 + y_\_^1 y_d^2 + y_d^1 y_d^2) y_d^3 \\
+&amp;= \left(\alpha_2(1) + \alpha_2(2)\right) y_d^3
+\end{align*}
+\]</div>
+<p>For a symbol <span class="arithmatex">\(s\)</span> at time <span class="arithmatex">\(t\)</span>, if <span class="arithmatex">\(\mathbf{l}_s^\prime\)</span> is not <em>blank</em>, or it has not repeated (i.e., <span class="arithmatex">\(\mathbf{l}^\prime_{s-2} \neq \mathbf{l}^\prime_s\)</span>), its paths can come from the blank above it (<span class="arithmatex">\(s-1\)</span>) or another symbol before the <em>blank</em> (<span class="arithmatex">\(s-2\)</span>) or its own symbol <span class="arithmatex">\(s\)</span>. But if <span class="arithmatex">\(s\)</span> is a blank or is a repeating symbol then it has to come from either itself, <span class="arithmatex">\(s\)</span>, or the symbol above it <span class="arithmatex">\(s-1\)</span>.</p>
+<p>Now we can define the recursion of <span class="arithmatex">\(\alpha_t(s)\)</span> like:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\alpha_t(s) =
+\begin{cases}
+\left(\alpha_{t-1}(s) + \alpha_{t-1}(s-1)\right) y_{\mathbf{l}^\prime_s}^t
+&amp; \text{if }\mathbf{l}^\prime_s = b \text{ or }\mathbf{l}^\prime_s = \mathbf{l}^\prime_{s-2}
+\\
+\left(\alpha_{t-1}(s) + \alpha_{t-1}(s-1) + \alpha_{t-1}(s-2)\right) y_{\mathbf{l}^\prime_s}^t &amp; \text{otherwise}
+\end{cases}
+\end{equation}
+\]</div>
+<p><img alt="Computing \(\alpha_5(4)\)" src="../alpha.png" /></p>
+<p>Another way of writing eq. 5, which is a bit helpful later:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\alpha_t(s) = \overline{\alpha}_t(s) y_{\mathbf{l}^\prime_s}^t
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\text{where} \quad
+\overline{\alpha}_t(s)=
+\begin{cases}
+\alpha_{t-1}(s) + \alpha_{t-1}(s-1)
+&amp; \text{if }\mathbf{l}^\prime_s = b \text{ or }\mathbf{l}^\prime_s = \mathbf{l}^\prime_{s-2}
+\\
+\alpha_{t-1}(s) + \alpha_{t-1}(s-1) + \alpha_{t-1}(s-2) &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>All the alphas coming in are summed up and multiplied by its own probability. We can clearly see that <span class="arithmatex">\(\alpha_t(s)\)</span> represents the probability of all paths that end up at that certain point. So the probability of the whole sequence is the sum of probabilities of all paths that end at the last "d" or last <em>blank</em>, so</p>
+<div class="arithmatex">\[
+\begin{equation}
+p(\mathbf{l} \mid \mathbf{x}) = \alpha_T(\lvert\mathbf{l}^\prime\rvert) + \alpha_T(\lvert\mathbf{l}^\prime\rvert - 1)
+\end{equation}
+\]</div>
+<p>Now similarly, we define a <strong>backward variable</strong>, <span class="arithmatex">\(\beta_t(s)\)</span> which computes the probability of all the paths that start from <span class="arithmatex">\((t, s)\)</span> to the end.</p>
+<div class="arithmatex">\[
+\begin{equation}
+\beta_t(s) = \sum_{\pi:\mathcal{B}(\pi_{t:T})=\mathbf{l}_{s:\lvert\mathbf{l}\rvert}}
+\prod_{t^\prime=t}^T y_{\pi_{t^\prime}}^{t^\prime}
+\end{equation}
+\]</div>
+<p>We can clearly see:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\beta_T(\lvert \mathbf{l}^\prime\rvert) &amp;= y^T_\_\\
+\beta_T(\lvert\mathbf{l}^\prime\rvert-1) &amp;= y^T_{\lvert\mathbf{l}\rvert}
+\end{align*}
+\]</div>
+<p>Now the recursive equation can be written as:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\beta_t(s) = \overline{\beta}_t(s) y_{\mathbf{l}^\prime_s}^t
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\text{where} \quad
+\overline{\beta}_t(s) =
+\begin{cases}
+\beta_{t+1}(s) + \beta_{t+1}(s+1) &amp; \text{if }\mathbf{l}^\prime_s = b \text{ or }\mathbf{l}^\prime_s = \mathbf{l}^\prime_{s-2}
+\\
+\beta_{t+1}(s) + \beta_{t+1}(s+1) + \beta_{t+1}(s+2) &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p><img alt="Computing \(\beta_5(4)\)." src="../beta.png" /></p>
+<p>Here we compute betas in the opposite direction (from all the nodes it can transition to) but they are summed up the same way as alphas and then multiplied with current probability.</p>
+<p>Since <span class="arithmatex">\(\beta_t(s)\)</span> is the probability of all paths from that point to the end, the probability of the whole label is the sum of betas of "-" and "d" at first time.</p>
+<div class="arithmatex">\[
+\begin{equation}
+p(\mathbf{l} \mid \mathbf{x}) = \beta_1(1) + \beta_1(2)
+\end{equation}
+\]</div>
+<p>Now let's look at why we computed both forward and backward variables (even though only one was sufficient to compute the total probability). We have the total probability directly in terms of last and first time steps. We would like to have a handy term for each time step, to compute the gradient easily.
+So let's look at what <span class="arithmatex">\(\alpha_t(s)\)</span> and <span class="arithmatex">\(\beta_t(s)\)</span> represent.</p>
+<p><img alt="" src="../paths.png" /></p>
+<p>If <span class="arithmatex">\(p_i\)</span> is the product of all the symbols along its path, then <span class="arithmatex">\(\alpha_t(s) = p_1 + p_2 + p_3 + p_4 + p_5\)</span> and <span class="arithmatex">\(\beta_t(s) = p_6 + p_7 + p_8 + p_9\)</span>.
+Note we have not shown all possible paths, this is just for demonstration purposes.
+Now what would be the probability of all paths <strong>going through <span class="arithmatex">\((s, t)\)</span>?</strong></p>
+<p>It would be:</p>
+<div class="arithmatex">\[
+\sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_t=\mathbf{l}^\prime_s} p(\pi \mid \mathbf{x}) = \frac{p_1 p_6 + p_1 p_7 + p_1 p_8 + p_1 p_9 + p_2 p_6 + \dots + p_5 p_9}{y^t_{\mathbf{l}^\prime_s}}
+\]</div>
+<p>We divide by <span class="arithmatex">\(y^t_{\mathbf{l}^\prime_s}\)</span> because both paths in the product include it so divide once.
+Continuing,</p>
+<div class="arithmatex">\[
+\begin{equation}
+\begin{aligned}
+\sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_t=\mathbf{l}^\prime_s} p(\pi \mid \mathbf{x}) &amp;= \frac{p_1(p_6 + p_7 + p_8 + p_9) + \dots + p_5(p_6 + p_7 + p_8 + p_9)}{y^t_{\mathbf{l}^\prime_s}}\\
+&amp;= \frac{\left(p_1 + p_2 + p_3 + p_4 + p_5\right)\left(p_6 + p_7 + p_8 + p_9\right)}{y^t_{\mathbf{l}^\prime_s}}\\
+\implies \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_t=\mathbf{l}^\prime_s} p(\pi \mid \mathbf{x}) &amp;= \frac{\alpha_t(s)\beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}
+\end{aligned}
+\end{equation}
+\]</div>
+<p>If we do this for all symbols at a timestep, we will get all possible paths, i.e.:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\begin{aligned}
+\sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l})} p(\pi \mid \mathbf{x}) &amp;= \sum_{s=1}^{\lvert \mathbf{l}^\prime \rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}\\
+\implies p(\mathbf{l} \mid \mathbf{x}) &amp;= \sum_{s=1}^{\lvert \mathbf{l}^\prime \rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}
+\end{aligned}
+\end{equation}
+\]</div>
+<p>This is the probability of a label in terms of a timestep <span class="arithmatex">\(t\)</span>.</p>
+<h3 id="loss">Loss</h3>
+<p>For a training set <span class="arithmatex">\(S\)</span>, we want to maximize the log probabilities of all the correct classifications in the training set. This means minimizing the objective function:</p>
+<div class="arithmatex">\[
+\begin{equation}
+O(S, \mathcal{N}_w) = - \sum_{\{\mathbf{x}, \mathbf{l}\} \in S} \ln(p(\mathbf{l}\mid \mathbf{x}))
+\end{equation}
+\]</div>
+<p>For a gradient-descent approach, we need to differentiate it with respect to network outputs. Since the training samples are independent, we can consider them separately:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\begin{aligned}
+\frac{\partial}{\partial y^t_k}O(\{(\mathbf{x}, \mathbf{l})\}, \mathcal{N}_w)  &amp;= - \frac{\partial}{\partial y^t_k}  \ln(p(\mathbf{l} \mid \mathbf{x})) \\
+&amp;= -\frac{1}{p(\mathbf{l} \mid \mathbf{x})}\frac{\partial}{\partial y^t_k} p(\mathbf{l} \mid \mathbf{x})
+\end{aligned}
+\end{equation}
+\]</div>
+<p>Let's compute <span class="arithmatex">\(\frac{\partial}{\partial y^t_k} p(\mathbf{l} \mid \mathbf{x})\)</span>. Noting that the same label (or blank) may be repeated several times for a single labelling <span class="arithmatex">\(\mathbf{l}\)</span>, we define the set of positions where label <span class="arithmatex">\(k\)</span> occurs as <span class="arithmatex">\(lab(\mathbf{l}, k) = \{s : \mathbf{l}^\prime_s = k\}\)</span>, which may be empty.</p>
+<div class="arithmatex">\[
+\begin{equation}
+\begin{aligned}
+\frac{\partial}{\partial y^t_k}p(\mathbf{l} \mid \mathbf{x}) &amp;= \frac{\partial}{\partial y^t_k} \sum_{s=1}^{\lvert \mathbf{l}^\prime \rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}} \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \frac{\partial}{\partial y^t_k} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}} \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \frac{\partial}{\partial y^t_k} \frac{\alpha_t(s) \beta_t(s)}{y^t_k} \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \frac{\partial}{\partial y^t_k} \frac{\overline{\alpha}_t(s) \overline{\beta}_t(s) (y^t_k)^2}{y^t_k} \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \frac{\partial}{\partial y^t_k} \overline{\alpha}_t(s) \overline{\beta}_t(s) (y^t_k) \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \overline{\alpha}_t(s) \overline{\beta}_t(s) \quad (\because \overline{\alpha}_t(s) \overline{\beta}_t(s) \text{ is constant.}) \\
+&amp;= \sum_{s \in lab(\mathbf{l}, k)} \frac{\alpha_t(s) \beta_t(s)}{(y^t_k)^2}\\
+&amp;= \frac{1}{(y^t_k)^2}\sum_{s \in lab(\mathbf{l}, k)}\alpha_t(s) \beta_t(s)
+\end{aligned}
+\end{equation}
+\]</div>
+<p>Plugging back in:</p>
+<div class="arithmatex">\[
+\begin{equation}
+\frac{\partial}{\partial y^t_k}O(\{(\mathbf{x}, \mathbf{l})\}, \mathcal{N}_w) = -\frac{1}{p(\mathbf{l} \mid \mathbf{x})}\frac{1}{(y^t_k)^2}\sum_{s \in lab(\mathbf{l}, k)}\alpha_t(s) \beta_t(s)
+\end{equation}
+\]</div>
+<p>Now, let's try to find the derivative w.r.t. unnormalized outputs <span class="arithmatex">\(u_t^k\)</span>.</p>
+<p>We know that <span class="arithmatex">\(y^t_k\)</span> is the softmaxed output of <span class="arithmatex">\(u^t_k\)</span> at each timestep, i.e.:</p>
+<div class="arithmatex">\[
+\begin{equation}
+y^t_k = \frac{e^{u^t_k}}{\sum_{k^\prime \in A^\prime}e^{u^t_{k^\prime}}}
+\end{equation}
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+\begin{equation}
+\frac{\partial y^t_k}{\partial u^t_{k^\prime}} =
+\begin{cases}
+y^t_k - (y^t_k)^2 &amp; \text{if }k^\prime = k \\
+-y^t_k y^t_{k^\prime} &amp; \text{otherwise}
+\end{cases}
+\end{equation}
+\]</div>
+<p>So,</p>
+<div class="arithmatex">\[
+\begin{equation}
+\begin{aligned}
+\frac{\partial}{\partial u^t_k}O(\{(\mathbf{x}, \mathbf{l})\}, \mathcal{N}_w) &amp;= \sum_{k^\prime \in A^\prime}  \frac{\partial O(\{(\mathbf{x}, \mathbf{l})\}, \mathcal{N}_w)}{\partial y^t_{k^\prime}} \frac{\partial y^t_{k^\prime}}{\partial u^t_{k}}\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} \frac{\partial y^t_{k}}{\partial u^t_{k}} + \sum_{k^\prime \in A^\prime-\{k\}}  \frac{\partial O}{\partial y^t_{k^\prime}} \frac{\partial y^t_{k^\prime}}{\partial u^t_{k}}\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} (y^t_k - (y^t_k)^2) + \sum_{k^\prime \in A^\prime-\{k\}}  \frac{\partial O}{\partial y^t_{k^\prime}} (-y^t_{k^\prime} y^t_k)\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} y^t_k  - \sum_{k^\prime \in A^\prime}  \frac{\partial O}{\partial y^t_{k^\prime}} (y^t_{k^\prime} y^t_k)\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} y^t_k  - \sum_{k^\prime \in A^\prime} (y^t_{k^\prime} y^t_k) \frac{-1}{p(\mathbf{l} \mid \mathbf{x}) (y^t_{k^\prime})^2} \sum_{s \in lab(\mathbf{l}, k^\prime)} \alpha_t(s) \beta_t(s)\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} y^t_k  + \frac{y^t_k}{p(\mathbf{l} \mid \mathbf{x})} \sum_{k^\prime \in A^\prime}  \frac{1}{ y^t_{k^\prime}} \sum_{s \in lab(\mathbf{l}, k^\prime)} \alpha_t(s) \beta_t(s)\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} y^t_k  + \frac{y^t_k}{p(\mathbf{l} \mid \mathbf{x})} \sum_{s=1}^{\lvert \mathbf{l}^\prime \rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}\\
+&amp;= \frac{\partial O}{\partial y^t_{k}} y^t_k  + \frac{y^t_k}{p(\mathbf{l} \mid \mathbf{x})} p(\mathbf{l} \mid \mathbf{x})\\
+&amp;= \frac{-1}{p(\mathbf{l} \mid \mathbf{x})}\frac{1}{y^t_k}\sum_{s \in lab(\mathbf{l}, k)}\alpha_t(s) \beta_t(s)   + y^t_k\\
+&amp;= y^t_k - \frac{1}{y^t_k Z_t} \sum_{s \in lab(\mathbf{l}, k)} \alpha_t(s)\beta_t(s)
+\end{aligned}
+\end{equation}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+Z_t = \sum_{s=1}^{\lvert\mathbf{l}^\prime\rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}
+\]</div>
+<p>In the above equation, we performed:</p>
+<div class="arithmatex">\[
+\sum_{k^\prime \in A^\prime}  \frac{1}{ y^t_{k^\prime}} \sum_{s \in lab(\mathbf{l}, k^\prime)} \alpha_t(s) \beta_t(s)
+= \sum_{s=1}^{\lvert \mathbf{l}^\prime \rvert} \frac{\alpha_t(s) \beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}
+\]</div>
+<p>This statement is true because <span class="arithmatex">\(\alpha \beta\)</span> is zero for any symbol not part of the label.</p>
+<p>Eq. 19 is the error signal.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Murtaza Nazir
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
+      
+    
+  </body>
+</html>
