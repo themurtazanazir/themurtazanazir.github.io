@@ -80,4 +80,7 @@ nav:
           - Introduction: neural_networks/convolutional_neural_networks/introduction.md
           - Convolutions: neural_networks/convolutional_neural_networks/convolutions.md
       - Transformer:
-          - Transformer: neural_networks/transformer/transformer.md 
+          - Transformer: neural_networks/transformer/transformer.md
+      - CTC:
+          - Connectionist Temporal Classification: neural_networks/ctc/ctc.md
+      - Learning with Binary Feedback: neural_networks/learning-with-binary-feedback.md 
