@@ -10,6 +10,8 @@ tags:
   - reinforcement
 ---
 
+[← Neural Networks](index.md)
+
 # Learning with Binary Feedback
 
 Assume we do not have access to the ground truth of a dataset. But we have a system which tells us whether a prediction was correct or incorrect. Can we learn using just this feedback?
