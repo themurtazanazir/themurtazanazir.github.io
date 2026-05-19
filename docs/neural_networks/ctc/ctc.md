@@ -287,11 +287,13 @@ We divide by $y^t_{\mathbf{l}^\prime_s}$ because both paths in the product inclu
 Continuing,
 
 $$
-\begin{align*}
+\begin{equation}
+\begin{aligned}
 \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_t=\mathbf{l}^\prime_s} p(\pi \mid \mathbf{x}) &= \frac{p_1(p_6 + p_7 + p_8 + p_9) + \dots + p_5(p_6 + p_7 + p_8 + p_9)}{y^t_{\mathbf{l}^\prime_s}}\\
 &= \frac{\left(p_1 + p_2 + p_3 + p_4 + p_5\right)\left(p_6 + p_7 + p_8 + p_9\right)}{y^t_{\mathbf{l}^\prime_s}}\\
 \implies \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_t=\mathbf{l}^\prime_s} p(\pi \mid \mathbf{x}) &= \frac{\alpha_t(s)\beta_t(s)}{y^t_{\mathbf{l}^\prime_s}}
-\end{align*}
+\end{aligned}
+\end{equation}
 $$
 
 If we do this for all symbols at a timestep, we will get all possible paths, i.e.:
