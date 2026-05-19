@@ -38,6 +38,8 @@ Some of the popular and recent notes:
 
 - [Transformers](neural_networks/transformer/transformer.md)
 - [Convolutional Neural Networks](neural_networks/convolutional_neural_networks/introduction.md)
+- [Connectionist Temporal Classification (CTC)](neural_networks/ctc/ctc.md)
+- [Learning with Binary Feedback](neural_networks/learning-with-binary-feedback.md)
 
 Or checkout the complete sections:
 
